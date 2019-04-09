@@ -33,29 +33,71 @@ class BoatManager
 
     public function getListBoats()
     {
+        $boats = [];
+
+        $q = $this->db->prepare('SELECT * FROM boat');
+        $q->execute();
+        while ($data = $q->fetch(\PDO::FETCH_ASSOC)) {
+            $boats[] = new Boat($data);
+        }
+
+        return $boats;
     }
 
     public function getOwnerBoat($idUser)
     {
-        $q = $this->db->prepare('SELECT * FROM boat WHERE id ='.$idUser);
+        $q = $this->db->prepare('SELECT * FROM boat WHERE id =' . $idUser);
         $q->execute();
         $data = $q->fetch(\PDO::FETCH_ASSOC);
-        return $data;
+
+        return new Boat($data);
     }
 
     public function chooseBoats($capacity)
     {
+        $boats = [];
+
+        $q = $this->db->prepare('SELECT * FROM  boat WHERE capacity = :capacity');
+        $q->execute(array(
+            ":capacity" => $capacity
+        ));
+        while ($data = $q->fetch(\PDO::FETCH_ASSOC)) {
+            $boats[] = new Boat($data);
+        }
+
+        return $boats;
     }
 
     public function deleteBoat($id)
     {
+        $q = $this->db->prepare('DELETE FROM boat WHERE id =' . $id);
+        $q->execute();
+    }
+
+    public function getBoatByName($name)
+    {
+        $q = $this->db->prepare('SELECT * FROM boat WHERE name = :name');
+        $q->execute(array(":name" => $name));
+
+        return new Boat($q->fetch(\PDO::FETCH_ASSOC));
     }
 
     public function addBoat($idUser, $name, $capacity)
     {
+        $q = $this->db->prepare('INSERT INTO boat (id_user, name, capacity) VALUE (:idUser, :name, :capacity)');
+        $q->execute(array(
+            ":idUser" => $idUser,
+            ":name" => $name,
+            ":capacity" => $capacity
+        ));
     }
 
-    public function updateBoat($name, $capacity)
+    public function updateBoat($id, $newName, $capacity)
     {
+        $q = $this->db->prepare('UPDATE boat SET name = :name, capacity = :capacity WHERE id =' . $id);
+        $q->execute(array(
+            ":name" => $newName,
+            ":capacity" => $capacity
+        ));
     }
 }

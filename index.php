@@ -6,3 +6,4 @@ use model\BoatManager;
 use model\User;
 use model\UserManager;
 use controller\BoatController;
+

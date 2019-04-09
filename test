@@ -14,3 +14,37 @@ $boat = new Boat($data);
 var_dump($boat);
 --------------------------------------------RETURN BOAT AND THIS User---------------------------------------------------
 
+
+-----------------------------------------------------RETURN BOAT LIST---------------------------------------------------
+$boatController = BoatController::getInstance();
+$boats = $boatController->getListBoat();
+
+IN VIEW :
+
+foreach ($boats as $boat)
+{
+    echo '<p>' . $boat->getName() . '</p>';
+}
+-----------------------------------------------------RETURN BOAT LIST---------------------------------------------------
+
+-------------------------------------------RETURN BOAT CHOOSE WITH CAPACITY---------------------------------------------
+$boatManager = BoatController::getInstance();
+$boat = $boatManager->chooseBoat(1900);
+
+var_dump($boat);
+-------------------------------------------RETURN BOAT CHOOSE WITH CAPACITY---------------------------------------------
+
+
+------------------------------------------------------ADD BOAT----------------------------------------------------------
+$boatController = BoatController::getInstance();
+$boatController->addBoat(1,"OceanGun",1900);
+------------------------------------------------------ADD BOAT----------------------------------------------------------
+
+
+
+------------------------------------------------------UPDATE BOAT-------------------------------------------------------
+$boatController = BoatController::getInstance();
+$boat =  $boatController->updateBoat(4,"OceanGun","1850");
+------------------------------------------------------UPDATE BOAT-------------------------------------------------------
+
+
