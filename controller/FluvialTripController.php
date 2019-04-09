@@ -26,4 +26,26 @@ class FluvialTripController
 
         return self::$instance;
     }
+
+    public function getListsTrips()
+    {
+        return $this->fluvialTripManager->getListFluvialTrips();
+    }
+
+    public function getTripByName($id)
+    {
+        return $this->fluvialTripManager->getFluvialTrip($id);
+    }
+
+    public function addFluvialTrip($cityStart, $cityStartLat, $cityStartLon
+        , $cityFinish, $cityFinishLat, $cityFinishLon, $priceTon, $weight, $date)
+    {
+        return $this->fluvialTripManager->addFluvialTrip($cityStart, $cityStartLat, $cityStartLon
+            , $cityFinish, $cityFinishLat, $cityFinishLon, $priceTon, $weight, $date);
+    }
+
+    public function deleteFluvialTrip($id)
+    {
+        return $this->fluvialTripManager->deleteFluvialTrip($id);
+    }
 }

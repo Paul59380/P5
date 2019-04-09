@@ -74,3 +74,22 @@ $cityController->addCity('Rouen',49.4431, 1.0993);
 $cityController = CityController::getInstance();
 $cityController->deleteCity('Dunkerque');
 ---------------------------------------------------------DELETE CITY----------------------------------------------------
+
+---------------------------------------------------------LIST TRIPS-----------------------------------------------------
+$fluvialTripManager = FluvialTripManager::getInstance();
+$trips = $fluvialTripManager->getListFluvialTrips();
+
+var_dump($trips);
+---------------------------------------------------------LIST TRIPS-----------------------------------------------------
+
+---------------------------------------------------------ADD TRIP-------------------------------------------------------
+$fluvialTripManager = FluvialTripManager::getInstance();
+$fluvialTripManager->addFluvialTrip("Rouen", 12.3654788, 4.12545696,
+    "Bruay", 45.6325896, 2.12547852, 1.80, 1780,"2019-09-11" );
+---------------------------------------------------------ADD TRIP-------------------------------------------------------
+
+
+---------------------------------------------------------DELETE TRIP----------------------------------------------------
+$fluvialTripManager = FluvialTripManager::getInstance();
+$fluvialTripManager->deleteFluvialTrip(5);
+---------------------------------------------------------DELETE TRIP----------------------------------------------------
