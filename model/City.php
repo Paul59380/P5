@@ -12,8 +12,8 @@ class City
 {
     protected $id;
     protected $name;
-    protected $latitude;
-    protected $longitude;
+    protected $lat;
+    protected $lon;
 
     public function __construct($data)
     {
@@ -22,9 +22,8 @@ class City
 
     public function hydrate(array $data)
     {
-        foreach ($data as $key => $value)
-        {
-            $method = 'set' .ucfirst($key);
+        foreach ($data as $key => $value) {
+            $method = 'set' . ucfirst($key);
             $this->$method($value);
         }
     }
@@ -49,23 +48,23 @@ class City
         return $this->name;
     }
 
-    public function setLatitude($latitude)
+    public function setLat($lat)
     {
-        $this->latitude = $latitude;
+        $this->lat = $lat;
     }
 
-    public function getLatitude()
+    public function getLat()
     {
-        return $this->latitude;
+        return $this->lat;
     }
 
-    public function setLongitude($longitude)
+    public function setLon($lon)
     {
-        $this->longitude = $longitude;
+        $this->lon = $lon;
     }
 
-    public function getLongitude()
+    public function getLon()
     {
-        return $this->longitude;
+        return $this->lon;
     }
 }

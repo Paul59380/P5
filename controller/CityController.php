@@ -26,4 +26,24 @@ class CityController
 
         return self::$instance;
     }
+
+    public function getListCities()
+    {
+        return $this->cityManager->getListCities();
+    }
+
+    public function getCity($name)
+    {
+        return $this->cityManager->getCity($name);
+    }
+
+    public function deleteCity($name)
+    {
+        return $this->cityManager->deleteCity($name);
+    }
+
+    public function addCity($name, $lat, $lon)
+    {
+        return $this->cityManager->addCity($name, $lat, $lon);
+    }
 }
