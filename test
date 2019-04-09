@@ -1,0 +1,16 @@
+--------------------------------------------RETURN USER AND THIS BOAT(USER)---------------------------------------------
+$userManager = UserManager::getInstance();
+$data = $userManager->getUser(1);
+
+$user = new User($data);
+var_dump($user);
+--------------------------------------------RETURN USER AND THIS BOAT(USER)---------------------------------------------
+
+--------------------------------------------RETURN BOAT AND THIS User---------------------------------------------------
+$boatManager = BoatController::getInstance();
+$data = $boatManager->getOwnerBoat(1);
+
+$boat = new Boat($data);
+var_dump($boat);
+--------------------------------------------RETURN BOAT AND THIS User---------------------------------------------------
+
