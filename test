@@ -93,3 +93,33 @@ $fluvialTripManager->addFluvialTrip("Rouen", 12.3654788, 4.12545696,
 $fluvialTripManager = FluvialTripManager::getInstance();
 $fluvialTripManager->deleteFluvialTrip(5);
 ---------------------------------------------------------DELETE TRIP----------------------------------------------------
+
+---------------------------------------------------------UPDATE TRIP----------------------------------------------------
+$fluvialManager = FluvialTripManager::getInstance();
+$fluvialManager->updateFluvialTrip(2, "DK",3.05456,42.123, "EM", 2.125, 45.2136, 1.45,1100,"2019-06-09");
+---------------------------------------------------------UPDATE TRIP----------------------------------------------------
+
+---------------------------------------------------------GET LIST USERS-------------------------------------------------
+$userManager = UserManager::getInstance();
+var_dump($userManager->getListUsers());
+---------------------------------------------------------GET LIST USERS-------------------------------------------------
+
+---------------------------------------------------------ADD USERS------------------------------------------------------
+$userController = UserController::getInstance();
+$userController->addUser("Hocquette", "Coraline","065458895", password_hash("hello",PASSWORD_DEFAULT));
+---------------------------------------------------------ADD USERS------------------------------------------------------
+
+---------------------------------------------------------EXIST USERS----------------------------------------------------
+$userManager = UserManager::getInstance();
+var_dump($userManager->existUser("Unix"));
+---------------------------------------------------------EXIST USERS----------------------------------------------------
+
+---------------------------------------------------------DELETE USERS---------------------------------------------------
+$userManager = UserController::getInstance();
+try {
+    $userManager->deleteUser(6, "Hocquette", "Coraline");
+} catch (Exception $e) {
+    echo $e->getMessage();
+}
+---------------------------------------------------------DELETE USERS---------------------------------------------------
+

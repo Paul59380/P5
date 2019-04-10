@@ -9,5 +9,6 @@ use model\CityManager;
 use model\FluvialTripManager;
 use controller\BoatController;
 use controller\CityController;
+use controller\UserController;
 
 

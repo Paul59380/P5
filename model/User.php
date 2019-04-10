@@ -29,9 +29,9 @@ class User
             $method = 'set' . ucfirst($key);
             $this->$method($value);
         }
+
         $boatManager = BoatManager::getInstance();
-        $boat = new Boat($boatManager->getOwnerBoat($this->id));
-        $this->boat = $boat;
+        $this->boat = $boatManager->getOwnerBoat($this->id);
     }
 
     public function setId($id)

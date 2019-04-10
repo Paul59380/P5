@@ -26,4 +26,30 @@ class UserController
 
         return self::$instance;
     }
+
+    public function getListUsers()
+    {
+        return $this->userManager->getListUsers();
+    }
+
+    public function addUser($name, $firstName, $phone, $pass)
+    {
+        return $this->userManager->addUser($name, $firstName, $phone, $pass);
+    }
+
+    public function existUser($info)
+    {
+        return $this->userManager->existUser($info);
+    }
+
+    /**
+     * @param $id
+     * @param $name
+     * @param $firstName
+     * @throws \Exception
+     */
+    public function deleteUser($id, $name, $firstName)
+    {
+        return $this->userManager->deleteUser($id, $name, $firstName);
+    }
 }
