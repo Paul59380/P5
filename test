@@ -106,7 +106,7 @@ var_dump($userManager->getListUsers());
 
 ---------------------------------------------------------ADD USERS------------------------------------------------------
 $userController = UserController::getInstance();
-$userController->addUser("Hocquette", "Coraline","065458895", password_hash("hello",PASSWORD_DEFAULT));
+$userController->addUser("******", "******","065458895", password_hash("hello",PASSWORD_DEFAULT));
 ---------------------------------------------------------ADD USERS------------------------------------------------------
 
 ---------------------------------------------------------EXIST USERS----------------------------------------------------
