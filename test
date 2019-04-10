@@ -142,3 +142,15 @@ $favoriteManager = FavoriteTransportController::getInstance();
 $favoriteManager->deleteFavoriteTrip(8);
 ---------------------------------------------DELETE FAVORITE TRANSPORT -------------------------------------------------
 
+
+/*
+ * use model\Boat;
+use model\BoatManager;
+use model\User;
+use model\UserManager;
+use model\CityManager;
+use model\FluvialTripManager;
+use controller\BoatController;
+use controller\CityController;
+use controller\UserController;
+ */
