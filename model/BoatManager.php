@@ -8,6 +8,8 @@
 
 namespace model;
 
+use PDO;
+
 class BoatManager
 {
     protected $db;
@@ -37,7 +39,7 @@ class BoatManager
 
         $q = $this->db->prepare('SELECT * FROM boat');
         $q->execute();
-        while ($data = $q->fetch(\PDO::FETCH_ASSOC)) {
+        while ($data = $q->fetch(PDO::FETCH_ASSOC)) {
             $boats[] = new Boat($data);
         }
 
@@ -48,7 +50,7 @@ class BoatManager
     {
         $q = $this->db->prepare('SELECT * FROM boat WHERE id =' . $idUser);
         $q->execute();
-        $data = $q->fetch(\PDO::FETCH_ASSOC);
+        $data = $q->fetch(PDO::FETCH_ASSOC);
 
         return new Boat($data);
     }
@@ -61,7 +63,7 @@ class BoatManager
         $q->execute(array(
             ":capacity" => $capacity
         ));
-        while ($data = $q->fetch(\PDO::FETCH_ASSOC)) {
+        while ($data = $q->fetch(PDO::FETCH_ASSOC)) {
             $boats[] = new Boat($data);
         }
 
@@ -79,7 +81,7 @@ class BoatManager
         $q = $this->db->prepare('SELECT * FROM boat WHERE name = :name');
         $q->execute(array(":name" => $name));
 
-        return new Boat($q->fetch(\PDO::FETCH_ASSOC));
+        return new Boat($q->fetch(PDO::FETCH_ASSOC));
     }
 
     public function addBoat($idUser, $name, $capacity)

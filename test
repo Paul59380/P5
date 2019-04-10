@@ -123,3 +123,22 @@ try {
 }
 ---------------------------------------------------------DELETE USERS---------------------------------------------------
 
+
+---------------------------------------------ADD FAVORITE TRANSPORT USERS-----------------------------------------------
+$favoriteManager = FavoriteTransportController::getInstance();
+$favoriteManager->addFavoriteTrip(2,1);
+---------------------------------------------ADD FAVORITE TRANSPORT USERS-----------------------------------------------
+
+
+----------------------------------------GET LIST FAVORITE TRANSPORT BY USER ID------------------------------------------
+$favoriteManager = FavoriteTransportController::getInstance();
+$favoriteTrip =  $favoriteManager->getFavoriteTrip(2);
+var_dump($favoriteTrip);
+----------------------------------------GET LIST FAVORITE TRANSPORT BY USER ID------------------------------------------
+
+
+---------------------------------------------DELETE FAVORITE TRANSPORT -------------------------------------------------
+$favoriteManager = FavoriteTransportController::getInstance();
+$favoriteManager->deleteFavoriteTrip(8);
+---------------------------------------------DELETE FAVORITE TRANSPORT -------------------------------------------------
+

@@ -8,6 +8,8 @@
 
 namespace model;
 
+use PDO;
+
 class FluvialTripManager
 {
     protected static $instance;
@@ -35,7 +37,7 @@ class FluvialTripManager
     {
         $fluvialTrips = [];
         $q = $this->db->query('SELECT * FROM fluvial_trip');
-        while ($data = $q->fetch(\PDO::FETCH_ASSOC)) {
+        while ($data = $q->fetch(PDO::FETCH_ASSOC)) {
             $fluvialTrips[] = new FluvialTrip($data);
         }
 
@@ -46,7 +48,7 @@ class FluvialTripManager
     {
         $q = $this->db->prepare('SELECT * FROM fluvial_trip WHERE id = '.$id);
         $q->execute();
-        return new FluvialTrip($q->fetch(\PDO::FETCH_ASSOC));
+        return new FluvialTrip($q->fetch(PDO::FETCH_ASSOC));
     }
 
     public function addFluvialTrip($cityStart, $cityStartLat, $cityStartLon

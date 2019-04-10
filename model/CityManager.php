@@ -8,6 +8,8 @@
 
 namespace model;
 
+use PDO;
+
 class CityManager
 {
     protected $db;
@@ -35,7 +37,7 @@ class CityManager
     {
         $cities = [];
         $q = $this->db->query('SELECT * FROM city');
-        while ($data = $q->fetch(\PDO::FETCH_ASSOC)) {
+        while ($data = $q->fetch(PDO::FETCH_ASSOC)) {
             $cities[] = new City($data);
         }
 
@@ -49,7 +51,7 @@ class CityManager
             ":name" => $name
         ));
 
-        return new City($q->fetch(\PDO::FETCH_ASSOC));
+        return new City($q->fetch(PDO::FETCH_ASSOC));
     }
 
     public function deleteCity($name)

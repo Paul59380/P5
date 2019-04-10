@@ -9,6 +9,7 @@
 namespace model;
 
 use Exception;
+use PDO;
 
 class UserManager
 {
@@ -37,7 +38,7 @@ class UserManager
     {
         $users = [];
         $q = $this->db->query('SELECT * FROM user');
-        while ($data = $q->fetch(\PDO::FETCH_ASSOC)) {
+        while ($data = $q->fetch(PDO::FETCH_ASSOC)) {
             $users[] = new User($data);
         }
 
@@ -48,7 +49,7 @@ class UserManager
     {
         $q = $this->db->prepare('SELECT * FROM user WHERE id =' . $id);
         $q->execute();
-        $data = $q->fetch(\PDO::FETCH_ASSOC);
+        $data = $q->fetch(PDO::FETCH_ASSOC);
 
         return $data;
     }
