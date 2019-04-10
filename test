@@ -117,7 +117,7 @@ var_dump($userManager->existUser("Unix"));
 ---------------------------------------------------------DELETE USERS---------------------------------------------------
 $userManager = UserController::getInstance();
 try {
-    $userManager->deleteUser(6, "Hocquette", "Coraline");
+    $userManager->deleteUser(6, "******", "******");
 } catch (Exception $e) {
     echo $e->getMessage();
 }

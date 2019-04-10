@@ -53,7 +53,7 @@ class UserManager
         return $data;
     }
 
-    public function addUser($name, $firstName, $phone,  $pass)
+    public function addUser($name, $firstName, $phone, $pass)
     {
         $q = $this->db->prepare('INSERT INTO 
         user (id_role, name, firstname, pass, phone) VALUE (:id_role, :name, :first_name, :pass, :phone)');
