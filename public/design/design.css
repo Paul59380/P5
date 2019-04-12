@@ -8,12 +8,12 @@ html, body {
     margin: auto;
     background-color: white;
     padding: 1px;
-    width: 100%;
+    width: 80%;
 }
 
 .publicNavigation ul {
-    display: inline-flex;
-    width: 100%;
+    width: 20%;
+    margin: auto;
     text-align: center;
     list-style-type: none;
 }
