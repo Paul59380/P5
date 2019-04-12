@@ -37,7 +37,9 @@ class LoadMap {
         villes.forEach(function (ville) {
             const lat = ville.position.lat;
             const lng = ville.position.lng;
+            const name =ville.city;
             const marker = L.marker([lat, lng]).addTo(macarte);
+            marker.bindPopup(name);
         });
     }
 
