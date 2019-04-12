@@ -65,3 +65,8 @@ html, body {
 #connectionBlock legend {
     font-size: 20px;
 }
+
+#map{
+    width: 30%;
+    height: 450px;
+}
