@@ -5,18 +5,21 @@ html, body {
 }
 
 #navigationPublic {
-    //background-image: url("../images/watter4.jpg");
-    background-color: #17253d;
+    margin: auto;
+    background-color: white;
     padding: 1px;
+    width: 100%;
 }
 
 .publicNavigation ul {
+    display: inline-flex;
+    width: 100%;
     text-align: center;
     list-style-type: none;
 }
 
 .publicNavigation li {
-    display : block;
+    margin: auto;
     justify-content: space-around;
 }
 
@@ -74,9 +77,22 @@ html, body {
 }
 
 #ContentMapAndTrip {
+    width: 95%;
     display: flex;
+    padding: 30px;
     justify-content: space-around;
-    margin-top: 50px;
+    margin: auto;
+    background-color: rgba(234,233,234,0.62);
+    border-radius: 15px;
+}
+
+#titleTransport {
+    margin-top: 70px;
+    text-align: center;
+    color: coral;
+    font-size: 35px;
+    font-family: Calibri;
+    font-style: oblique;
 }
 
 #Trip {

@@ -4,11 +4,13 @@ ob_start(); ?>
     <div id="navigationPublic">
         <nav class="publicNavigation">
             <ul>
-                <li style="color: white; font-size: 30px">Votre espace personnel</li>
-                <li><i style="color: white" class="fas fa-anchor fa-2x"></i></li>
+                <li style="color: black; font-size: 30px">Bienvenue</li>
+                <li><i style="color: black" class="fas fa-anchor fa-2x"></i></li>
             </ul>
         </nav>
     </div>
+
+<p id="titleTransport">Transports Disponibles</p>
     <div id="ContentMapAndTrip">
         <div id="map">
         </div>
