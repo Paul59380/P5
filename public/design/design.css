@@ -5,6 +5,7 @@ html, body {
 }
 
 #navigationPublic {
+    //background-image: url("../images/watter4.jpg");
     background-color: #17253d;
     padding: 1px;
 }
@@ -67,6 +68,61 @@ html, body {
 }
 
 #map{
-    width: 30%;
+    width: 40%;
     height: 450px;
+    border-radius: 20px;
+}
+
+#ContentMapAndTrip {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 50px;
+}
+
+#Trip {
+    height: 450px;
+    padding: 10px;
+    text-align: center;
+    overflow: auto;
+    border-radius: 5px;
+}
+
+#Trip a {
+    text-decoration: none;
+    background-color: coral;
+    color: white;
+    border-radius: 5px;
+    padding: 10px 35px;
+}
+
+#Trip a:hover {
+    text-decoration: none;
+    background-color: white;
+    color: coral;
+    border: 2px solid coral;
+    border-radius: 5px;
+    padding: 10px 35px;
+}
+
+#displayTrip {
+    margin-left: 10px;
+    margin-right: 10px;
+    color: coral;
+}
+
+#infoTrip {
+    text-align: center;
+}
+
+#star {
+    text-decoration: none;
+    background-color: coral;
+    color: white;
+    border-radius: 5px;
+    padding: 10px 25px;
+}
+
+#star:hover {
+    background-color: white;
+    color: coral;
 }

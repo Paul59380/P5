@@ -1,5 +1,5 @@
 const init = new LoadMap();
-const test = init.extractUrlParams();
-init.load(test.d_city,test.d_lat,test.d_lon, test.f_city, test.f_lat, test.f_lon);
+const searchCities = init.extractUrlParams();
+init.load(searchCities.d_city,searchCities.d_lat,searchCities.d_lon, searchCities.f_city, searchCities.f_lat, searchCities.f_lon);
 
-// for test with parameters  : http://localhost/P5/index.php?action=homeUser&d_city=Dunkerque&d_lat=51.034368&d_lon=2.376776&f_city=Graveline&f_lat=50.9833&f_lon=2.1167
+// for searchCities with parameters  : http://localhost/P5/index.php?action=homeUser&d_city=Dunkerque&d_lat=51.034368&d_lon=2.376776&f_city=Graveline&f_lat=50.9833&f_lon=2.1167

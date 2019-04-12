@@ -1,21 +1,21 @@
 class LoadMap {
     load(d_city, d_lat, d_lon, f_city, f_lat, f_lon) {
-        var lat = 51.034368;
-        var lon = 2.376776;
+        var lat = 50.75;
+        var lon = 2.25;
         var macarte = null;
 
         macarte = L.map('map').setView([lat, lon], 11);
         L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
             attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
             minZoom: 1,
-            maxZoom: 9
+            maxZoom: 8
         }).addTo(macarte);
         window.onload = function () {
-            LoadMap.test(d_city, d_lat, d_lon, f_city, f_lat, f_lon, macarte);
+            LoadMap.searchCities(d_city, d_lat, d_lon, f_city, f_lat, f_lon, macarte);
         };
     }
 
-    static test(d_city, d_lat, d_lon, f_city, f_lat, f_lon, macarte) {
+    static searchCities(d_city, d_lat, d_lon, f_city, f_lat, f_lon, macarte) {
         let villes = [
             {
                 "ville": 1,
