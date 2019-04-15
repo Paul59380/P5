@@ -37,9 +37,9 @@ class UserController
         return $this->userManager->addUser($name, $firstName, $phone, $pass);
     }
 
-    public function existUser($info)
+    public function existUser($info, $firstName)
     {
-        return $this->userManager->existUser($info);
+        return $this->userManager->existUser($info, $firstName);
     }
 
     /**
@@ -51,5 +51,10 @@ class UserController
     public function deleteUser($id, $name, $firstName)
     {
         return $this->userManager->deleteUser($id, $name, $firstName);
+    }
+
+    public function getUser($name)
+    {
+        return $this->userManager->getUser($name);
     }
 }

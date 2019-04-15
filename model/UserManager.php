@@ -45,10 +45,12 @@ class UserManager
         return $users;
     }
 
-    public function getUser($id)
+    public function getUser($name)
     {
-        $q = $this->db->prepare('SELECT * FROM user WHERE id =' . $id);
-        $q->execute();
+        $q = $this->db->prepare('SELECT * FROM user WHERE name = :name');
+        $q->execute(array(
+            ":name" => $name
+        ));
         $data = $q->fetch(PDO::FETCH_ASSOC);
 
         return $data;
@@ -67,13 +69,16 @@ class UserManager
         ));
     }
 
-    public function existUser($info)
+    public function existUser($info, $infoFirstName)
     {
         if (is_int($info)) {
             return (bool)$this->db->query('SELECT * FROM user WHERE id =' . $info)->fetchColumn();
         } else {
-            $q = $this->db->prepare('SELECT * FROM user WHERE name = :name');
-            $q->execute([':name' => $info]);
+            $q = $this->db->prepare('SELECT * FROM user WHERE name = :name AND firstname = :firstName');
+            $q->execute(array(
+                ':name' => $info,
+                ':firstName' => $infoFirstName
+            ));
 
             return (bool)$q->fetchColumn();
         }
