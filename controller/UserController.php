@@ -53,8 +53,8 @@ class UserController
         return $this->userManager->deleteUser($id, $name, $firstName);
     }
 
-    public function getUser($name)
+    public function getUser($name, $firstName)
     {
-        return $this->userManager->getUser($name);
+        return $this->userManager->getUser($name, $firstName);
     }
 }

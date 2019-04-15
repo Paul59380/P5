@@ -16,7 +16,7 @@ class User
     protected $firstname;
     protected $pass;
     protected $phone;
-    protected $boat;
+    //protected $boat;
 
     public function __construct($data)
     {
@@ -30,8 +30,8 @@ class User
             $this->$method($value);
         }
 
-        $boatManager = BoatManager::getInstance();
-        $this->boat = $boatManager->getOwnerBoat($this->id);
+        //$boatManager = BoatManager::getInstance();
+        //$this->boat = $boatManager->getOwnerBoat($this->id);
     }
 
     public function setId($id)

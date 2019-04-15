@@ -20,7 +20,7 @@ if($_SESSION['role'] == 1) {
     <div id="map">
     </div>
     <?php
-    if (isset($_GET['id'])) {
+    if (isset($_GET['idTrip'])) {
         ?>
         <div id="infoTrip">
             <h1><?=

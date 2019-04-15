@@ -45,11 +45,12 @@ class UserManager
         return $users;
     }
 
-    public function getUser($name)
+    public function getUser($name, $firstName)
     {
-        $q = $this->db->prepare('SELECT * FROM user WHERE name = :name');
+        $q = $this->db->prepare('SELECT * FROM user WHERE name = :name AND firstname = :firstName');
         $q->execute(array(
-            ":name" => $name
+            ":name" => $name,
+            ":firstName" => $firstName
         ));
         $data = $q->fetch(PDO::FETCH_ASSOC);
 
