@@ -4,19 +4,17 @@ ob_start();
 if($_SESSION['role'] == 1) {
     header('Location:index.php?action=admin');
 } //TODO change redirection for Administrator
+include ('userNav.php');
 ?>
 
-<div id="navigationPublic">
-    <nav class="publicNavigation">
-        <ul>
-            <li style="color: black; font-size: 30px">Bienvenue
-                <br/> <?= $_SESSION['name'] . '  ' . $_SESSION['firstName'] ?></li>
-            <li><a href="index.php?action=deconnexion"><i style="color: black" class="fas fa-anchor fa-2x"></i></a></li>
-        </ul>
-    </nav>
+<p style="font-size: 35px; text-align: center; margin-top: 50px">Transports <span style="color: coral">Disponibles</span> </p> <br/>
+<div id="ligne_point">
+    <div class="ligne_1"> <hr> </div>
+    <div class="cercle">
+        <div class="point"></div></div>
+    <div class="ligne_2"> <hr> </div>
 </div>
 
-<p id="titleTransport">Transports Disponibles</p>
 <div id="ContentMapAndTrip">
     <div id="map">
     </div>

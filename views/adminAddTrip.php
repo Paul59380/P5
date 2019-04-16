@@ -1,37 +1,28 @@
 <?php
 ob_start();
+include ('adminNav.php');
 ?>
 
-<div id="navigationAdmin">
-    <nav class="adminNavigationOne">
-        <ul>
-            <li style="color: black; font-size: 30px"> <span style="color: coral; margin-left: 15px">
-                <?= $_SESSION['name'] . '  </span> &nbsp; ' . $_SESSION['firstName'] ?></li>
-            <li><a href="index.php?action=deconnexion"><i style="color: black" class="fas fa-anchor fa-2x"></i></a></li>
-        </ul>
-    </nav>
-    <nav class="adminNavigationTwo">
-        <ul>
-            <li style="margin-right: 20px;"><a style="color: black;" href="#"><i
-                            class="fas fa-search-location fa-2x"></i></a></li>
-            <li><a href="index.php?action=adminAddTrip" style="color: black;"><i class="fas fa-plus fa-2x"></i></a></li>
-        </ul>
-    </nav>
-</div>
-<p style="font-size: 35px; text-align: center">Ajouter une <span style="color: coral">ville</span> </p> <br/>
-<div id="ligne_point_2">
-    <div class="ligne_nos_projets_1"> <hr> </div>
-    <div class="cercle_nos_projets">
-        <div class="point_nos_projets"></div></div>
-    <div class="ligne_nos_projets_2"> <hr> </div>
+<p style="font-size: 35px; text-align: center">Ajouter une <span style="color: coral">ville</span></p> <br/>
+<div id="ligne_point">
+    <div class="ligne_1">
+        <hr>
+    </div>
+    <div class="cercle">
+        <div class="point"></div>
+    </div>
+    <div class="ligne_2">
+        <hr>
+    </div>
 </div>
 <div id="addCity">
-    <form action="index.php?action=addCities"  method="POST">
+    <form action="index.php?action=addCities" method="POST">
         <div class="left">
             <label>Nom de la ville :<input type="text" name="city" placeholder="Ex : Dunkerque" required></label>
         </div>
         <div class="center">
-            <label>Latitude :<input type="number" step="0.00000000001" placeholder="Ex : 51,0344"  name="lat" required></label>
+            <label>Latitude :<input type="number" step="0.00000000001" placeholder="Ex : 51,0344" name="lat"
+                                    required></label>
         </div>
         <div class="right">
             <label>Longitude :<input type="number" step="0.000000000001" placeholder="Ex : 2,37678" name="lon" required></label>
@@ -40,23 +31,31 @@ ob_start();
     </form>
 </div>
 
-<p style="font-size: 35px; text-align: center; margin-top: 150px">Créer un <span style="color: coral">voyage</span> </p> <br/>
-<div id="ligne_point_2">
-    <div class="ligne_nos_projets_1"> <hr> </div>
-    <div class="cercle_nos_projets">
-        <div class="point_nos_projets"></div></div>
-    <div class="ligne_nos_projets_2"> <hr> </div>
+<p style="font-size: 35px; text-align: center; margin-top: 150px">Créer un <span style="color: coral">voyage</span></p>
+<br/>
+<div id="ligne_point">
+    <div class="ligne_1">
+        <hr>
+    </div>
+    <div class="cercle">
+        <div class="point"></div>
+    </div>
+    <div class="ligne_2">
+        <hr>
+    </div>
 </div>
 
 <div id="ContentMapAndTrip">
     <fieldset id="addTrip">
         <legend>Ajouter un transport</legend>
-        <form action="index.php?action=addTrip"  method="POST">
-            <label>Ville de départ :<input type="text" name="departure_city" placeholder="Ex : Dunkerque" required></label>
+        <form action="index.php?action=addTrip" method="POST">
+            <label>Ville de départ :<input type="text" name="departure_city" placeholder="Ex : Dunkerque"
+                                           required></label>
             <label>Ville d'arriver :<input type="text" name="finishing_city" placeholder="Ex : Amiens" required></label>
-            <label>Prix de la tonne :<input type="number" step="0.01" placeholder="Ex : 1,25"  name="price_ton" required></label>
+            <label>Prix de la tonne :<input type="number" step="0.01" placeholder="Ex : 1,25" name="price_ton" required></label>
             <label>Poid total : <input type="number" placeholder="Ex : 1900" name="weight" required></label>
-            <label>Date du transport <input type="date" name="date_transport" placeholder="Format : DD/MM/AAAA"  required></label>
+            <label>Date du transport <input type="date" name="date_transport" placeholder="Format : DD/MM/AAAA"
+                                            required></label>
             <input type="submit" name="send_trip" value="Créer le voyage">
         </form>
     </fieldset>
@@ -101,7 +100,6 @@ ob_start();
         ?>
     </div>
 </div>
-
 
 
 <?php
