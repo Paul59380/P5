@@ -57,6 +57,17 @@ class UserManager
         return $data;
     }
 
+    public function getUserById($id)
+    {
+        $q = $this->db->prepare('SELECT * FROM user WHERE id = :id');
+        $q->execute(array(
+            ":id" => $id
+        ));
+        $data = $q->fetch(PDO::FETCH_ASSOC);
+
+        return $data;
+    }
+
     public function addUser($name, $firstName, $phone, $pass)
     {
         $q = $this->db->prepare('INSERT INTO 

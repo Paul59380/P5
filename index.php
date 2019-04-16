@@ -5,11 +5,13 @@ require('vendor/autoload.php');
 use controller\FluvialTripController;
 use controller\UserController;
 use controller\CityController;
+use controller\BoatController;
 use model\User;
 
 $fluvialTripController = FluvialTripController::getInstance();
 $userController = UserController::getInstance();
 $cityController = CityController::getInstance();
+$boatController = BoatController::getInstance();
 
 if (!isset($_GET['action'])) {
     require('views/connection.php');
@@ -79,4 +81,11 @@ elseif ($_GET['action'] == 'Trips' && isset($_GET['idUser'])) {
 } elseif ($_GET['action'] == "addCities") {
     $cityController->addCity($_POST['city'], $_POST['lat'], $_POST['lon']);
     header('Location:index.php?action=adminAddTrip');
+} elseif ($_GET['action'] == "searchBoat") {
+    $trips = $fluvialTripController->getListFluvialTrips();
+    require('views/adminSearch.php');
+} elseif ($_GET['action'] == "adminSearchBoat") {
+    $trip = $fluvialTripController->getFluvialTrip($_GET['idTrip']);
+    $boats = $boatController->getListBoat($_GET['capacity']);
+    require('views/adminBoat.php');
 }

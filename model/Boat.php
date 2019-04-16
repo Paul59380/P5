@@ -30,7 +30,13 @@ class Boat
         }
 
         $userManager = UserManager::getInstance();
-        $this->user = $userManager->getUser($this->id_user);
+        $this->user = new User($userManager->getUserById($this->id_user));
+    }
+
+
+    public function getUser()
+    {
+        return $this->user;
     }
 
     public function setId($id)

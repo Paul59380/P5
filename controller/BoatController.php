@@ -34,9 +34,9 @@ class BoatController
         return $data;
     }
 
-    public function getListBoat()
+    public function getListBoat($capacity)
     {
-        $boats = $this->boatManager->getListBoats();
+        $boats = $this->boatManager->getListBoats($capacity);
 
         return $boats;
     }

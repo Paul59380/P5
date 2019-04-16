@@ -59,30 +59,7 @@ include ('adminNav.php');
             <input type="submit" name="send_trip" value="Créer le voyage">
         </form>
     </fieldset>
-    <?php
-    if (isset($_GET['idTrip'])) {
-        ?>
-        <div id="infoTripAdmin">
-            <h1>
-                <?=
-                strtoupper($getTrip->getDeparture_city()) .
-                ' <i id="displayTrip" class="far fa-arrow-alt-circle-right fa-1x"></i> ' . strtoupper($getTrip->getFinishing_city()) ?>
-            </h1>
-            <br/>
-            <h2>Prévu le : <span style="color: coral"><?= $getTrip->getDate_transport() ?></span></h2>
-            <h2>Charge à transporter : <span style="color: coral;"><?= $getTrip->getWeight() ?> </span>Tonnes</h2>
-            <h2>Prix de la tonne : <span style="color: coral;"><?= $getTrip->getPrice_ton() ?> </span>€/T HT</h2>
-            <h2>Capacité minimum requise : <span style="color: coral;"><?= $getTrip->getWeight() ?> </span>Tonnes
-            </h2>
-            <h2>Voyage payé : <span
-                        style="color: coral;"><?= $getTrip->getWeight() * $getTrip->getPrice_ton() ?> </span>€
-            </h2>
-            <br/><br/>
-        </div>
 
-        <?php
-    }
-    ?>
     <div id="Tripadmin">
         <?php
         foreach ($trips as $trip) {

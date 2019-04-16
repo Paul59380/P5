@@ -33,12 +33,14 @@ class BoatManager
         return self::$instance;
     }
 
-    public function getListBoats()
+    public function getListBoats($capacity)
     {
         $boats = [];
 
-        $q = $this->db->prepare('SELECT * FROM boat');
-        $q->execute();
+        $q = $this->db->prepare('SELECT * FROM boat WHERE capacity = :capacity');
+        $q->execute(array(
+            ":capacity" => $capacity
+        ));
         while ($data = $q->fetch(PDO::FETCH_ASSOC)) {
             $boats[] = new Boat($data);
         }
