@@ -1,7 +1,8 @@
 <?php
 ob_start();
+
 if($_SESSION['role'] == 1) {
-    header('Location:index.php?action=Admin');
+    header('Location:index.php?action=admin');
 } //TODO change redirection for Administrator
 ?>
 

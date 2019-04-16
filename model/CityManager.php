@@ -8,6 +8,7 @@
 
 namespace model;
 
+use mysql_xdevapi\Exception;
 use PDO;
 
 class CityManager
@@ -46,12 +47,17 @@ class CityManager
 
     public function getCity($name)
     {
-        $q = $this->db->prepare('SELECT * FROM city WHERE name = :name');
-        $q->execute(array(
-            ":name" => $name
-        ));
+        if($this->existCity($name)){
+            $q = $this->db->prepare('SELECT * FROM city WHERE name = :name');
+            $q->execute(array(
+                ":name" => $name
+            ));
 
-        return new City($q->fetch(PDO::FETCH_ASSOC));
+            return new City($q->fetch(PDO::FETCH_ASSOC));
+        }
+        else {
+            throw new \Exception("Erreur : Cette ville n'as pas été àjouté à la liste de ville disponible");
+        }
     }
 
     public function deleteCity($name)
@@ -68,5 +74,19 @@ class CityManager
             ":lat" => $lat,
             ":lon" => $lon
         ));
+    }
+
+    public function existCity($info)
+    {
+        if (is_int($info)) {
+            return (bool)$this->db->query('SELECT * FROM city WHERE id =' . $info)->fetchColumn();
+        } else {
+            $q = $this->db->prepare('SELECT * FROM city WHERE name = :name');
+            $q->execute(array(
+                ':name' => $info
+            ));
+
+            return (bool)$q->fetchColumn();
+        }
     }
 }

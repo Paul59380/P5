@@ -46,4 +46,9 @@ class CityController
     {
         return $this->cityManager->addCity($name, $lat, $lon);
     }
+
+    public function existCity($info)
+    {
+        return $this->cityManager->existCity($info);
+    }
 }
