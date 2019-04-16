@@ -2,7 +2,7 @@
 ob_start();
 include('adminNav.php');
 ?>
-<p style="font-size: 35px; text-align: center; margin-top: 50px">Transports <span style="color: coral">Disponibles</span> </p> <br/>
+<p style="font-size: 35px; text-align: center; margin-top: 50px">Bateaux trouvés pour <span style="color: coral">ce voyage</span> </p> <br/>
 <div id="ligne_point">
     <div class="ligne_1"> <hr> </div>
     <div class="cercle">
@@ -52,5 +52,5 @@ include('adminNav.php');
 
 <?php
 $content = ob_get_clean();
-require('userTemplate.php');
+require('template.php');
 ?>

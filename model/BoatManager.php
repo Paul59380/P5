@@ -50,11 +50,14 @@ class BoatManager
 
     public function getOwnerBoat($idUser)
     {
-        $q = $this->db->prepare('SELECT * FROM boat WHERE id =' . $idUser);
+        $boats = [];
+        $q = $this->db->prepare('SELECT * FROM boat WHERE id_user =' . $idUser);
         $q->execute();
-        $data = $q->fetch(PDO::FETCH_ASSOC);
+        while($data = $q->fetch(PDO::FETCH_ASSOC)){
+            $boats[] = new Boat($data);
+        }
 
-        return new Boat($data);
+        return $boats;
     }
 
     public function chooseBoats($capacity)

@@ -47,17 +47,17 @@ include ('adminNav.php');
 
 <div id="ContentMapAndTrip">
     <fieldset id="addTrip">
-        <legend>Ajouter un transport</legend>
-        <form action="index.php?action=addTrip" method="POST">
-            <label>Ville de départ :<input type="text" name="departure_city" placeholder="Ex : Dunkerque"
-                                           required></label>
-            <label>Ville d'arriver :<input type="text" name="finishing_city" placeholder="Ex : Amiens" required></label>
-            <label>Prix de la tonne :<input type="number" step="0.01" placeholder="Ex : 1,25" name="price_ton" required></label>
-            <label>Poid total : <input type="number" placeholder="Ex : 1900" name="weight" required></label>
-            <label>Date du transport <input type="date" name="date_transport" placeholder="Format : DD/MM/AAAA"
-                                            required></label>
-            <input type="submit" name="send_trip" value="Créer le voyage">
-        </form>
+    <legend>Ajouter un transport</legend>
+    <form action="index.php?action=addTrip" method="POST">
+        <label>Ville de départ :<input type="text" name="departure_city" placeholder="Ex : Dunkerque"
+                                       required></label>
+        <label>Ville d'arriver :<input type="text" name="finishing_city" placeholder="Ex : Amiens" required></label>
+        <label>Prix de la tonne :<input type="number" step="0.01" placeholder="Ex : 1,25" name="price_ton" required></label>
+        <label>Poid total : <input type="number" placeholder="Ex : 1900" name="weight" required></label>
+        <label>Date du transport <input type="date" name="date_transport" placeholder="Format : DD/MM/AAAA"
+                                        required></label>
+        <input type="submit" name="send_trip" value="Créer le voyage">
+    </form>
     </fieldset>
 
     <div id="Tripadmin">
@@ -81,5 +81,5 @@ include ('adminNav.php');
 
 <?php
 $content = ob_get_clean();
-require('userTemplate.php');
+require('template.php');
 ?>

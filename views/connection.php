@@ -30,5 +30,5 @@ ob_start(); ?>
     </div>
 <?php
 $content = ob_get_clean();
-require('userTemplate.php');
+require('template.php');
 ?>

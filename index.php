@@ -88,4 +88,10 @@ elseif ($_GET['action'] == 'Trips' && isset($_GET['idUser'])) {
     $trip = $fluvialTripController->getFluvialTrip($_GET['idTrip']);
     $boats = $boatController->getListBoat($_GET['capacity']);
     require('views/adminBoat.php');
+} elseif ($_GET['action'] == "addBoat" && isset($_GET['idUser'])) {
+    $boats = $boatController->getOwnerBoat($_GET['idUser']);
+    require('views/userBoat.php');
+} elseif ($_GET['action'] == "sendNewBoat") {
+    $boatController->addBoat($_GET['idUser'], $_POST['name'], $_POST['capacity']);
+    header('Location:index.php?action=addBoat&idUser='.$_GET['idUser']);
 }
