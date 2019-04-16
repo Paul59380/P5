@@ -18,25 +18,34 @@ ob_start();
         </ul>
     </nav>
 </div>
-
+<p style="font-size: 35px; text-align: center">Ajouter une <span style="color: coral">ville</span> </p> <br/>
+<div id="ligne_point_2">
+    <div class="ligne_nos_projets_1"> <hr> </div>
+    <div class="cercle_nos_projets">
+        <div class="point_nos_projets"></div></div>
+    <div class="ligne_nos_projets_2"> <hr> </div>
+</div>
 <div id="addCity">
-    <form action="index.php?action=addTrip"  method="POST">
+    <form action="index.php?action=addCities"  method="POST">
         <div class="left">
-            <label>Ville de départ :<input type="text" name="departure_city" placeholder="Ex : Dunkerque" required></label>
-            <label>Ville d'arriver :<input type="text" name="finishing_city" placeholder="Ex : Amiens" required></label>
-
+            <label>Nom de la ville :<input type="text" name="city" placeholder="Ex : Dunkerque" required></label>
         </div>
         <div class="center">
-            <label>Latitude ville de départ :<input type="number" step="0.01" placeholder="Ex : 1,25"  name="price_ton" required></label>
-            <label>Latitude ville d'arrivé :<input type="number" step="0.01" placeholder="Ex : 1,25"  name="price_ton" required></label>
+            <label>Latitude :<input type="number" step="0.00000000001" placeholder="Ex : 51,0344"  name="lat" required></label>
         </div>
         <div class="right">
-            <label>Longitude ville de départ :<input type="number" placeholder="Ex : 1900" name="weight" required></label>
-
-            <label>Longitude ville d'arrivé :<input type="number" placeholder="Ex : 1900" name="weight" required></label><br/>
+            <label>Longitude :<input type="number" step="0.000000000001" placeholder="Ex : 2,37678" name="lon" required></label>
             <input type="submit" name="send_trip" value="Ajouter la ville"><br/>
         </div>
     </form>
+</div>
+
+<p style="font-size: 35px; text-align: center; margin-top: 150px">Créer un <span style="color: coral">voyage</span> </p> <br/>
+<div id="ligne_point_2">
+    <div class="ligne_nos_projets_1"> <hr> </div>
+    <div class="cercle_nos_projets">
+        <div class="point_nos_projets"></div></div>
+    <div class="ligne_nos_projets_2"> <hr> </div>
 </div>
 
 <div id="ContentMapAndTrip">
@@ -55,9 +64,11 @@ ob_start();
     if (isset($_GET['idTrip'])) {
         ?>
         <div id="infoTripAdmin">
-            <h1><?=
+            <h1>
+                <?=
                 strtoupper($getTrip->getDeparture_city()) .
-                ' <i id="displayTrip" class="far fa-arrow-alt-circle-right fa-1x"></i> ' . strtoupper($getTrip->getFinishing_city()) ?></h1>
+                ' <i id="displayTrip" class="far fa-arrow-alt-circle-right fa-1x"></i> ' . strtoupper($getTrip->getFinishing_city()) ?>
+            </h1>
             <br/>
             <h2>Prévu le : <span style="color: coral"><?= $getTrip->getDate_transport() ?></span></h2>
             <h2>Charge à transporter : <span style="color: coral;"><?= $getTrip->getWeight() ?> </span>Tonnes</h2>

@@ -77,4 +77,7 @@ if (!isset($_GET['action'])) {
     } catch (Exception $e) {
         echo $e->getMessage();
     }
+} elseif ($_GET['action'] == "addCities") {
+    $cityController->addCity($_POST['city'], $_POST['lat'], $_POST['lon']);
+    header('Location:index.php?action=adminAddTrip');
 }
