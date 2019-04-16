@@ -23,11 +23,7 @@ if (!isset($_GET['action'])) {
                     "id" => $user->getId(),
                     "role" => $user->getId_role()
                 ];
-                if($_SESSION['id'] != 1){
                     header('Location:index.php?action=homeUser&idUser=' . $_SESSION['id']);
-                } else {
-                    header('Location:index.php?action=admin&idUser=' . $_SESSION['id']);
-                }
             } else {
                 echo "Mot de pass incorrect";
                 unset($user);
@@ -56,12 +52,15 @@ if (!isset($_GET['action'])) {
 } elseif ($_GET['action'] == "deconnexion") {
     session_destroy();
     header('Location:index.php');
-} elseif ($_GET['action'] == 'homeUser' && isset($_GET['idUser'])) {
+} elseif ($_GET['action'] == "homeUser" && isset($_GET['idUser'])) {
+    require('views/userHome.php');
+}
+elseif ($_GET['action'] == 'Trips' && isset($_GET['idUser'])) {
     if (isset($_GET['idTrip'])) {
         $getTrip = $fluvialTripController->getFluvialTrip($_GET['idTrip']);
     }
     $trips = $fluvialTripController->getListFluvialTrips();
-    require('views/userHome.php');
+    require('views/userTrip.php');
 }elseif ($_GET['action'] == "admin"){
     require('views/adminHome.php');
 } elseif ($_GET['action'] == "adminAddTrip") {
