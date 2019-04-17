@@ -35,7 +35,7 @@ include ('userNav.php');
                         style="color: coral;"><?= $getTrip->getWeight() * $getTrip->getPrice_ton() ?> </span>€
             </h2>
             <br/><br/>
-            <a href="#"><i id="star" class="fas fa-star fa-2x"></i></a>
+            <a href="index.php?action=addFavoriteTrip&idUser=<?= $_SESSION['id'] ?>&idTrip=<?= $getTrip->getId() ?>"><i id="star" class="fas fa-star fa-1x"></i></a>
         </div>
 
         <?php
@@ -61,6 +61,44 @@ include ('userNav.php');
         ?>
     </div>
 </div>
+
+<p style="font-size: 35px; text-align: center; margin-top: 50px">Vos transports <span style="color: coral">Favoris</span> </p> <br/>
+<div id="ligne_point">
+    <div class="ligne_1"> <hr> </div>
+    <div class="cercle">
+        <div class="point"></div></div>
+    <div class="ligne_2"> <hr> </div>
+</div>
+    <?php
+    foreach ($favoriteTrips as $favorite){
+        ?>
+<fieldset id="favoriteTransport">
+    <legend><a href="index.php?action=deleteFavoriteTrip&idFavorite=<?= $favorite->getId() ?>" <a  style="color: red" class="far fa-trash-alt" title="Supprimer ce transport des favoris"></i></a>
+    </legend>
+
+    <table style="width: 100%">
+            <tr>
+                <td>Départ</td>
+                <td>Arrivé</td>
+                <td>Date</td>
+                <td>Prix/T HT</td>
+                <td>Poid</td>
+                <td>Voyage payé HT</td>
+            </tr>
+        <tr>
+            <td><span><?= $favorite->getDeparture_city() ?></span></td>
+            <td><span> <?= $favorite->getFinishing_city() ?></span></td>
+            <td><span><?= $favorite->getDate_transport() ?></span></td>
+            <td><span><?= $favorite->getPrice_ton() ?> €</span></td>
+            <td><span><?= $favorite->getWeight() ?> T</span></td>
+            <td><span><?= $favorite->getPrice_ton()*$favorite->getWeight() ?> €</span></td>
+        </tr>
+    </table>
+</fieldset>
+        <?php
+    }
+    ?>
+
 <?php
 $content = ob_get_clean();
 require('template.php');

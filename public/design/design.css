@@ -317,11 +317,23 @@ html, body {
     border: 2px solid coral;
 }
 
-#addBoat {
+#addBoat, #favoriteTransport {
     margin: auto;
     width: 30%;
     padding : 30px
 }
+ #favoriteTransport {
+     width: 40%;
+     padding: 20px;
+     margin-bottom: 50px;
+     border-radius: 8px;
+ }
+
+#favoriteTransport span {
+    color: coral;
+    font-size: 20px;
+}
+
 #addBoat input{
     display: block;
     width: 60%;
@@ -354,4 +366,8 @@ html, body {
 
 #addBoat {
     border-radius: 5px;
+}
+
+table td {
+    text-align: center;
 }

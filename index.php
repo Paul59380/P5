@@ -6,12 +6,14 @@ use controller\FluvialTripController;
 use controller\UserController;
 use controller\CityController;
 use controller\BoatController;
+use controller\FavoriteTransportController;
 use model\User;
 
 $fluvialTripController = FluvialTripController::getInstance();
 $userController = UserController::getInstance();
 $cityController = CityController::getInstance();
 $boatController = BoatController::getInstance();
+$favoriteController = FavoriteTransportController::getInstance();
 
 if (!isset($_GET['action'])) {
     require('views/connection.php');
@@ -62,6 +64,7 @@ elseif ($_GET['action'] == 'Trips' && isset($_GET['idUser'])) {
         $getTrip = $fluvialTripController->getFluvialTrip($_GET['idTrip']);
     }
     $trips = $fluvialTripController->getListFluvialTrips();
+    $favoriteTrips = $favoriteController->getFavoriteTrip($_GET['idUser']);
     require('views/userTrip.php');
 }elseif ($_GET['action'] == "admin"){
     require('views/adminHome.php');
@@ -94,4 +97,13 @@ elseif ($_GET['action'] == 'Trips' && isset($_GET['idUser'])) {
 } elseif ($_GET['action'] == "sendNewBoat") {
     $boatController->addBoat($_GET['idUser'], $_POST['name'], $_POST['capacity']);
     header('Location:index.php?action=addBoat&idUser='.$_GET['idUser']);
+} elseif ($_GET['action'] == "addFavoriteTrip") {
+    $favoriteController->addFavoriteTrip($_GET['idTrip'], $_GET['idUser']);
+    header('Location:'. $_SERVER["HTTP_REFERER"]);
+} elseif ($_GET['action'] == "deleteFavoriteTrip") {
+    $favoriteController->deleteFavoriteTrip($_GET['idFavorite']);
+    header('Location:'. $_SERVER["HTTP_REFERER"]);
+} elseif ($_GET['action'] == "deleteBoat") {
+    $boatController->deleteBoat($_GET['idBoat']);
+    header('Location:'. $_SERVER["HTTP_REFERER"]);
 }

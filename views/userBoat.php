@@ -19,11 +19,10 @@ include ('userNav.php');
     <?php
     foreach ($boats as $boat){
         ?>
-    <p>Nom : <span style="color: coral;"><?= $boat->getName() ?></span> <i class="fas fa-arrow-circle-right fa-1x"></i> Capacité :<span style="color: coral"> <?= $boat->getCapacity() ?></span></p>
+    <p>Nom : <span style="color: coral;"><?= $boat->getName() ?></span> <i class="fas fa-arrow-circle-right fa-1x"></i> Capacité :<span style="color: coral"> <?= $boat->getCapacity() ?></span> <a href="index.php?action=deleteBoat&idBoat=<?= $boat->getId() ?>" style="color: red;" class="far fa-trash-alt" title="Supprimer le bateau"></i></a> </p>
     <?php
     }
     ?>
-
 </fieldset>
 
 <fieldset id="addBoat">

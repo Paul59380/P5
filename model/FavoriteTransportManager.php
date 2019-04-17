@@ -50,7 +50,7 @@ class FavoriteTransportManager
     public function getFavoriteTrip($idUser)
     {
         $trips = [];
-        $q = $this->db->prepare('SELECT * FROM favorite_transport WHERE id_user = :idUser');
+        $q = $this->db->prepare('SELECT * FROM favorite_transport WHERE id_user = :idUser ORDER BY id DESC');
         $q->execute(array(
             ":idUser" => $idUser
         ));
