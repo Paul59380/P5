@@ -21,4 +21,5 @@
 <script src="public/js/jquery.js"></script>
 <script src="public/js/LoadMap.js"></script>
 <script src="public/js/FormEvent.js"></script>
+<script src="public/js/FavoriteEvent.js"></script>
 <script src="public/js/indexLoadMap.js"></script>

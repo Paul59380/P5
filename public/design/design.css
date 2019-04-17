@@ -111,6 +111,11 @@ html, body {
 
 #infoTrip {
     text-align: center;
+    font-size: 20px;
+}
+
+#infoTrip span{
+    color: coral;
 }
 
 #star {
@@ -371,3 +376,46 @@ html, body {
 table td {
     text-align: center;
 }
+
+.chevron {
+    margin-top: -50px;
+    margin-bottom: 40px;
+}
+
+.chevron button {
+    width: 4%;
+    margin-left: 47.7%;
+    background-color: white;
+    border: none;
+}
+.chevron i:nth-child(1){
+    color: red;
+}
+
+.chevron i:nth-child(2){
+    margin-top: -16px;
+    display: block;
+    color: red;
+}
+
+.chevronUp {
+    margin-top: -50px;
+    margin-bottom: 40px;
+}
+
+.chevronUp button {
+    width: 4%;
+    margin-left: 47.7%;
+    background-color: white;
+    border: none;
+}
+.chevronUp i:nth-child(1){
+    color: red;
+}
+
+.chevronUp i:nth-child(2){
+    margin-top: -16px;
+    display: block;
+    color: red;
+}
+
