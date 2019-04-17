@@ -1,10 +1,10 @@
 <?php
 ob_start();
-
+$title = "Gestion des bateaux";
 if($_SESSION['role'] == 1) {
     header('Location:index.php?action=admin');
 } //TODO change redirection for Administrator
-include ('userNav.php');
+include('navigations/userNav.php');
 ?>
 
 <p style="font-size: 35px; text-align: center; margin-top: 50px">Ajouter votre <span style="color: coral">bateau</span> </p> <br/>
@@ -36,5 +36,5 @@ include ('userNav.php');
 </fieldset>
 <?php
 $content = ob_get_clean();
-require('template.php');
+require('templates/template.php');
 ?>

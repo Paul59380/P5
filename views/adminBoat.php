@@ -1,6 +1,7 @@
 <?php
 ob_start();
-include('adminNav.php');
+$title = "Trouver un bateau";
+include('navigations/adminNav.php');
 ?>
 <p style="font-size: 35px; text-align: center; margin-top: 50px">Bateaux trouvés pour <span style="color: coral">ce voyage</span> </p> <br/>
 <div id="ligne_point">
@@ -52,5 +53,5 @@ include('adminNav.php');
 
 <?php
 $content = ob_get_clean();
-require('template.php');
+require('templates/template.php');
 ?>

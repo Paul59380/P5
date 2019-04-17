@@ -1,6 +1,7 @@
 <?php
 ob_start();
-include ('adminNav.php');
+$title = "Gestion des voyages";
+include('navigations/adminNav.php');
 ?>
 
 <p style="font-size: 35px; text-align: center">Ajouter une <span style="color: coral">ville</span></p> <br/>
@@ -81,5 +82,5 @@ include ('adminNav.php');
 
 <?php
 $content = ob_get_clean();
-require('template.php');
+require('templates/template.php');
 ?>

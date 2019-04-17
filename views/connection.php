@@ -1,21 +1,9 @@
 <?php
-ob_start(); ?>
-    <title>Se connecter</title>
-
-<div id="navigationUser">
-    <nav class="adminNavigationOne">
-        <ul>
-            <li style="color: black; font-size: 30px"> <span style="color: coral; margin-left: 15px">
-                Espace de connection</li>
-        </ul>
-    </nav>
-    <nav class="adminNavigationTwo">
-        <ul>
-            <li><a href="index.php?action=deconnexion"><i style="color: black" class="fas fa-anchor fa-2x" title="Se déconnecter"></i></a></li>
-        </ul>
-    </nav>
-</div>
-
+ob_start();
+$title = "Se connecter";
+$contentNav = "Espace de connexion";
+include ('navigations/visitorNav.php');
+?>
     <div id="connectionBlock">
         <fieldset>
             <legend><span>Déjà inscrit ?</span></legend>
@@ -30,5 +18,5 @@ ob_start(); ?>
     </div>
 <?php
 $content = ob_get_clean();
-require('templateForm.php');
+require('templates/templateForm.php');
 ?>

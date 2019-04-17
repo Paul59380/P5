@@ -4,7 +4,7 @@ ob_start();
 if($_SESSION['role'] == 1) {
     header('Location:index.php?action=admin');
 } //TODO change redirection for Administrator
-include ('userNav.php');
+include('navigations/userNav.php');
 ?>
 <p style="font-size: 35px; text-align: center; margin-top: 50px">Transports <span style="color: coral">Disponibles</span> </p> <br/>
 <div id="ligne_point">
@@ -100,5 +100,5 @@ include ('userNav.php');
 
 <?php
 $content = ob_get_clean();
-require('template.php');
+require('templates/templateMap.php');
 ?>

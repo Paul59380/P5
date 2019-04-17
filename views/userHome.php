@@ -1,13 +1,13 @@
 <?php
 ob_start();
-
+$title = "Acceuil";
 if($_SESSION['role'] == 1) {
     header('Location:index.php?action=admin');
 } //TODO change redirection for Administrator
-include ('userNav.php');
+include('navigations/userNav.php');
 ?>
 
 <?php
 $content = ob_get_clean();
-require('template.php');
+require('templates/template.php');
 ?>
