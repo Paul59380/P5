@@ -6,7 +6,6 @@ if($_SESSION['role'] == 1) {
 } //TODO change redirection for Administrator
 include ('userNav.php');
 ?>
-
 <p style="font-size: 35px; text-align: center; margin-top: 50px">Transports <span style="color: coral">Disponibles</span> </p> <br/>
 <div id="ligne_point">
     <div class="ligne_1"> <hr> </div>

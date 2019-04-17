@@ -19,7 +19,7 @@ ob_start(); ?>
     <div id="connectionBlock">
         <fieldset>
             <legend><span>Déjà inscrit ?</span></legend>
-            <form  method="POST">
+            <form id="connectForm" method="POST">
                 <label>Nom :<input type="text" name="name"></label>
                 <label>Prénom :<input type="text" name="firstName"></label>
                 <label>Mots de passe :<input type="password" name="password"></label>
@@ -30,5 +30,5 @@ ob_start(); ?>
     </div>
 <?php
 $content = ob_get_clean();
-require('template.php');
+require('templateForm.php');
 ?>
