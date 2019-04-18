@@ -70,11 +70,14 @@ elseif ($_GET['action'] == 'Trips' && isset($_GET['idUser'])) {
     require('views/adminHome.php');
 } elseif ($_GET['action'] == "adminAddTrip") {
     $trips = $fluvialTripController->getListFluvialTrips();
+    $cities = $cityController->getListCities();
     require('views/adminAddTrip.php');
 } elseif ($_GET['action'] == "addTrip") {
     try{
-        $departure = $cityController->getCity($_POST['departure_city']);
-        $finishing = $cityController->getCity($_POST['finishing_city']);
+        $depart = (int)$_POST['departure_city'];
+        $finish = (int)$_POST['finishing_city'];
+        $departure = $cityController->getCity($depart);
+        $finishing = $cityController->getCity($finish);
 
         $fluvialTripController->addFluvialTrip($departure->getName(),$departure->getLat(),$departure->getLon(),$finishing->getName(),$finishing->getLat(),$finishing->getLon(),$_POST['price_ton'],$_POST['weight'], $_POST['date_transport']);
         header('Location:index.php?action=adminAddTrip');

@@ -52,7 +52,7 @@ include('navigations/userNav.php');
                 <span>Charge à transporter : <?= $trip->getWeight() ?></span>
             </p>
             <?php
-            echo '<a href="index.php?action=Trips&idUser=' . $_SESSION['id'] . '&d_city=' . urldecode($trip->getDeparture_city()) . '&d_lat=' . $trip->getLat_departure() . '&d_lon=' . $trip->getLon_departure() . '&f_city=' . $trip->getFinishing_city() . '&f_lat=' . $trip->getLat_finishing() . '&f_lon=' . $trip->getLon_finishing() . '&idTrip=' . $trip->getId() . '">Voir</a> <br/>';
+            echo '<a class="testA" href="index.php?action=Trips&idUser=' . $_SESSION['id'] . '&d_city=' . urldecode($trip->getDeparture_city()) . '&d_lat=' . $trip->getLat_departure() . '&d_lon=' . $trip->getLon_departure() . '&f_city=' . $trip->getFinishing_city() . '&f_lat=' . $trip->getLat_finishing() . '&f_lon=' . $trip->getLon_finishing() . '&idTrip=' . $trip->getId() . '">Voir</a> <br/>';
             ?>
             <br/>
             <?php
@@ -68,13 +68,13 @@ include('navigations/userNav.php');
     <div class="ligne_2"> <hr> </div>
 </div>
 
-<div class="chevron">
+<div class="chevron" title="déplier la liste">
     <button class="show">
         <i class="fas fa-chevron-down fa-3x"></i>
         <i class="fas fa-chevron-down fa-2x"></i>
     </button>
 </div>
-<div class="chevronUp">
+<div class="chevronUp" title="replier la liste">
     <button class="show2">
         <i class="fas fa-chevron-up fa-2x"></i>
         <i class="fas fa-chevron-up fa-3x"></i>

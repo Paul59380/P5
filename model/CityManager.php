@@ -45,12 +45,12 @@ class CityManager
         return $cities;
     }
 
-    public function getCity($name)
+    public function getCity($id)
     {
-        if($this->existCity($name)){
-            $q = $this->db->prepare('SELECT * FROM city WHERE name = :name');
+        if($this->existCity($id)){
+            $q = $this->db->prepare('SELECT * FROM city WHERE id = :id');
             $q->execute(array(
-                ":name" => $name
+                ":id" => $id
             ));
 
             return new City($q->fetch(PDO::FETCH_ASSOC));

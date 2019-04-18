@@ -64,7 +64,7 @@ html, body {
     padding: 30px;
     justify-content: space-around;
     margin: auto;
-    //margin-top: 70px;
+/ / margin-top: 70 px;
     background-color: rgba(234, 233, 234, 0.62);
     border-radius: 15px;
 }
@@ -114,7 +114,7 @@ html, body {
     font-size: 20px;
 }
 
-#infoTrip span{
+#infoTrip span {
     color: coral;
 }
 
@@ -142,6 +142,7 @@ html, body {
 .adminNavigationTwo li {
     display: inline-flex;
 }
+
 #navigationAdmin, #navigationUser {
     display: flex;
     justify-content: space-between;
@@ -161,9 +162,10 @@ html, body {
 
 #addTrip {
     width: 30%;
-    padding : 15px
+    padding: 15px
 }
-#addTrip input{
+
+#addTrip input, select {
     display: block;
     width: 60%;
     margin: auto;
@@ -171,7 +173,7 @@ html, body {
     padding: 10px;
 }
 
-#addTrip label{
+#addTrip label {
     margin-left: 35%;
     margin-bottom: 10px;
     padding: 10px;
@@ -204,6 +206,7 @@ html, body {
     overflow: auto;
     border-radius: 5px;
 }
+
 #TripSearch {
     height: 500px;
     padding: 10px;
@@ -237,6 +240,7 @@ html, body {
 #addCity label {
     font-size: 20px;
 }
+
 #addCity form {
     width: 100%;
     justify-content: space-around;
@@ -255,7 +259,7 @@ html, body {
 #addCity input[type="submit"] {
     width: 10%;
     position: absolute;
-    background-color: rgba(255,70,0,0.62);
+    background-color: rgba(255, 70, 0, 0.62);
     font-size: 17px;
     color: white;
     border: none;
@@ -268,7 +272,7 @@ html, body {
     border: 2px solid coral;
 }
 
-#ligne_point{
+#ligne_point {
     display: flex;
     width: 10%;
     margin: auto;
@@ -276,18 +280,18 @@ html, body {
     margin-bottom: 3%;
 }
 
-.ligne_1{
+.ligne_1 {
     width: 40%;
 }
 
-.ligne_2{
+.ligne_2 {
     width: 40%;
     margin-left: 1%;
     border-left: none;
     border-top: none;
 }
 
-.point{
+.point {
     border: 6px solid coral;
     border-radius: 100%;
     width: 0.1%;
@@ -302,7 +306,7 @@ html, body {
     margin-left: 2%;
 }
 
-#userBoat span{
+#userBoat span {
     color: coral;
 }
 
@@ -310,7 +314,7 @@ html, body {
     text-decoration: none;
     font-size: 18px;
     border-radius: 8px;
-    margin : 30px 40px;
+    margin: 30px 40px;
     color: white;
     background-color: coral;
     padding: 10px;
@@ -325,21 +329,22 @@ html, body {
 #addBoat, #favoriteTransport {
     margin: auto;
     width: 30%;
-    padding : 30px
+    padding: 30px
 }
- #favoriteTransport {
-     width: 40%;
-     padding: 20px;
-     margin-bottom: 50px;
-     border-radius: 8px;
- }
+
+#favoriteTransport {
+    width: 40%;
+    padding: 20px;
+    margin-bottom: 50px;
+    border-radius: 8px;
+}
 
 #favoriteTransport span {
     color: coral;
     font-size: 20px;
 }
 
-#addBoat input{
+#addBoat input {
     display: block;
     width: 60%;
     margin: auto;
@@ -348,7 +353,7 @@ html, body {
     padding: 10px;
 }
 
-#addBoat label{
+#addBoat label {
     margin-left: 20%;
     margin-bottom: 10px;
     padding: 10px;
@@ -388,11 +393,12 @@ table td {
     background-color: white;
     border: none;
 }
-.chevron i:nth-child(1){
+
+.chevron i:nth-child(1) {
     color: red;
 }
 
-.chevron i:nth-child(2){
+.chevron i:nth-child(2) {
     margin-top: -16px;
     display: block;
     color: red;
@@ -409,13 +415,27 @@ table td {
     background-color: white;
     border: none;
 }
-.chevronUp i:nth-child(1){
+
+.chevronUp i:nth-child(1) {
     color: red;
 }
 
-.chevronUp i:nth-child(2){
+.chevronUp i:nth-child(2) {
     margin-top: -16px;
     display: block;
     color: red;
 }
 
+#showAddCity, #hideAddCity {
+    width: 15%;
+    margin-left: 42.5%;
+    margin-top: 90px;
+    margin-bottom: 50px;
+    text-align: center;
+    padding: 10px;
+    border: 2px solid coral;
+    color: coral;
+    font-size: 18px;
+    border-radius: 8px;
+    background-color: white;
+}
