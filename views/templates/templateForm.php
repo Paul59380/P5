@@ -15,5 +15,5 @@
 </body>
 </html>
 <script src="public/js/jquery.js"></script>
-<script src="public/js/FormEvent.js"></script>
+<script src="public/js/class/FormEvent.js"></script>
 <script src="public/js/indexForm.js"></script>

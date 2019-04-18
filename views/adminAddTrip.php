@@ -101,7 +101,9 @@ include('navigations/adminNav.php');
                 ' <i style="color:coral;" class="far fa-arrow-alt-circle-right fa-1x"></i> ' . strtoupper($trip->getFinishing_city()) ?>
             </span> <br/>
                 <span>Le : <?= $trip->getDate_transport() ?></span> <br/>
-                <span>Charge à transporter : <?= $trip->getWeight() ?></span>
+                <span>Charge à transporter : <?= $trip->getWeight() ?></span> <br/>
+                <a id="updateTrip" href="index.php?action=updateTrip&idTrip=<?= $trip->getId() ?>"><i class="far fa-edit fa-1x"></i></a>
+                <a id="deleteTrip" href="index.php?action=deleteTrip&idTrip=<?= $trip->getId() ?>"><i class="fas fa-trash-restore-alt"></i></a>
             </p>
             <br/>
             <?php

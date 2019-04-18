@@ -109,4 +109,19 @@ elseif ($_GET['action'] == 'Trips' && isset($_GET['idUser'])) {
 } elseif ($_GET['action'] == "deleteBoat") {
     $boatController->deleteBoat($_GET['idBoat']);
     header('Location:'. $_SERVER["HTTP_REFERER"]);
+} elseif ($_GET['action'] == "updateTrip") {
+    $trip = $fluvialTripController->getFluvialTrip($_GET['idTrip']);
+    $cities = $cityController->getListCities();
+    require('views/adminUpdateTrip.php');
+} elseif ($_GET['action'] == "update") {
+    $depart = (int)$_POST['departure_city'];
+    $finish = (int)$_POST['finishing_city'];
+    $departure = $cityController->getCity($depart);
+    $finishing = $cityController->getCity($finish);
+
+    $fluvialTripController->updateFluvialTrip($_GET['idTrip'], $departure->getName(), $departure->getLat(), $departure->getLon(), $finishing->getName(), $finishing->getLat(), $finishing->getLon(), $_POST['price_ton'], $_POST['weight'], $_POST['date_transport']);
+    header('Location:'. $_SERVER["HTTP_REFERER"]);
+} elseif ($_GET['action'] == "deleteTrip") {
+    $fluvialTripController->deleteFluvialTrip($_GET['idTrip']);
+    header('Location:'. $_SERVER["HTTP_REFERER"]);
 }

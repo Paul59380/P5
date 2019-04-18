@@ -64,7 +64,6 @@ html, body {
     padding: 30px;
     justify-content: space-around;
     margin: auto;
-/ / margin-top: 70 px;
     background-color: rgba(234, 233, 234, 0.62);
     border-radius: 15px;
 }
@@ -209,27 +208,20 @@ html, body {
 
 #TripSearch {
     height: 500px;
-    padding: 10px;
+    margin: auto;
+    width: 50%;
+    padding: 20px;
     text-align: center;
     overflow: auto;
-    border-radius: 5px;
+    border-radius: 15px;
 }
 
-#Tripadmin a {
-    text-decoration: none;
-    background-color: coral;
-    color: white;
-    border-radius: 5px;
-    padding: 10px 35px;
+#updateTrip {
+    color: green;
 }
 
-#Tripadmin a:hover {
-    text-decoration: none;
-    background-color: white;
-    color: coral;
-    border: 2px solid coral;
-    border-radius: 5px;
-    padding: 10px 35px;
+#deleteTrip {
+    color : red;
 }
 
 #addCity {

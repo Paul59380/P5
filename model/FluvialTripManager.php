@@ -36,7 +36,7 @@ class FluvialTripManager
     public function getListFluvialTrips()
     {
         $fluvialTrips = [];
-        $q = $this->db->query('SELECT * FROM fluvial_trip ORDER BY id DESC');
+        $q = $this->db->query('SELECT * FROM fluvial_trip ORDER BY date_transport DESC');
         while ($data = $q->fetch(PDO::FETCH_ASSOC)) {
             $fluvialTrips[] = new FluvialTrip($data);
         }
