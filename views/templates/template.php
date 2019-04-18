@@ -16,4 +16,5 @@
 </html>
 <script src="public/js/jquery.js"></script>
 <script src="public/js/class/ShowCity.js"></script>
-<script src="public/js/indexAdmin"></script>
+<script src="public/js/indexAdmin.js"></script>
+<script src="public/js/slide.js"></script>

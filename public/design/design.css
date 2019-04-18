@@ -431,3 +431,61 @@ table td {
     border-radius: 8px;
     background-color: white;
 }
+
+#slider {
+    width: 1000px;
+    height: 450px;
+    margin:  20px auto;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+#slider .slides {
+    display: block;
+    width: 6000px;
+    height: 400px;
+    margin: 0;
+    padding: 0;
+}
+
+#slider .slide {
+    float: left;
+    list-style-type: none;
+    width: 1000px;
+    height: 450px;
+}
+
+#welcome {
+    width: 70%;
+    margin: 50px auto;
+}
+
+#welcome p {
+    text-align: justify;
+    font-family: Ebrima;
+    font-size: large;
+}
+
+#welcome p span{
+    color : coral;
+    font-style: italic;
+}
+
+.findBoat {
+     text-align: center;
+     display: flex;
+     margin-bottom: 150px;
+     justify-content: space-around;
+ }
+
+.findBoat span{
+    color: coral;
+}
+
+.findBoat img{
+    border-radius: 10px;
+}
+
+.textFindBoat {
+    margin-top: 80px;
+}
