@@ -1,15 +1,23 @@
 class ShowCity {
-    showCity()
+    constructor()
+    {
+        $('#city').hide();
+        $('#hideAddCity').hide();
+
+        ShowCity.showCity();
+        ShowCity.hideCity();
+    }
+    static showCity()
     {
         $('#showAddCity').on('click', function () {
             $('#showAddCity').hide();
             $('#hideAddCity').fadeIn();
-            $('#city').show(700);
+            $('#city').fadeIn(700);
             $('html,body').animate({scrollTop: 0}, 'slow');
         });
     }
 
-    hideCity()
+    static hideCity()
     {
         $('#hideAddCity').on('click', function () {
             $('#hideAddCity').hide();

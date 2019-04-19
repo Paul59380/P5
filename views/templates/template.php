@@ -16,6 +16,7 @@
 </html>
 <script src="public/js/jquery.js"></script>
 <script src="public/js/class/ShowCity.js"></script>
-<script src="public/js/indexAdmin.js"></script>
 <script src="public/js/class/Slider.js"></script>
-<script src="public/js/slide.js"></script>
+<script src="public/js/class/FavoriteEvent.js"></script>
+<script src="public/js/class/ShowCity.js"></script>
+<script src="public/js/indexTemplate.js"></script>

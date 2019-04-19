@@ -3,7 +3,7 @@ class Slider {
         $(function () {
             //setInterval
             let width = 1000;
-            let animationSpeed = 1000;
+            let animationSpeed = 2000;
             let pause = 5000;
             let currentSlide = 1;
 

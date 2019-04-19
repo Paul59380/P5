@@ -1,27 +1,27 @@
 class FavoriteEvent {
-    constructor() {
-        $('.Trs').hide();
-        $('.chevronUp').hide();
+    constructor($elementHidden, $chevronUp, $buttonOne, $buttonTwo, $chevronDown, $htmlAndBody){
+        $elementHidden.hide();
+        $chevronUp.hide();
 
-        FavoriteEvent.showFavoriteTrips();
-        FavoriteEvent.hideFavoriteTrips();
+        FavoriteEvent.showFavoriteTrips($elementHidden, $chevronUp, $buttonOne, $chevronDown, $htmlAndBody);
+        FavoriteEvent.hideFavoriteTrips($elementHidden, $chevronUp, $buttonTwo, $chevronDown, $htmlAndBody);
     }
 
-    static showFavoriteTrips() {
-        $('.show').on('click', function () {
-            $('.Trs').show(700);
-            $('.chevron').hide();
-            $('.chevronUp').fadeIn();
-            $('html,body').animate({scrollTop: $('.Trs').offset().top}, 'slow');
+    static showFavoriteTrips($element, $chevronUp, $buttonOne, $chevronDown, $htmlAndBody) {
+        $buttonOne.on('click', function () {
+            $element.fadeIn(700);
+            $chevronDown.hide();
+            $chevronUp.fadeIn();
+            $htmlAndBody.animate({scrollTop: $element.offset().top}, 'slow');
         });
     }
 
-    static hideFavoriteTrips() {
-        $('.show2').on('click', function () {
-            $('.Trs').hide(1000);
-            $('.chevron').fadeIn();
-            $('.chevronUp').hide();
-            $('html,body').animate({scrollTop: 0}, 'slow');
+    static hideFavoriteTrips($element, $chevronUp, $buttonTwo, $chevronDown, $htmlAndBody) {
+        $buttonTwo.on('click', function () {
+            $element.fadeOut(1000);
+            $chevronDown.fadeIn();
+            $chevronUp.hide();
+            $htmlAndBody.animate({scrollTop: 0}, 'slow');
         });
     }
 }
