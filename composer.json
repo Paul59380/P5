@@ -1,0 +1,19 @@
+{
+    "name": "p5/paul",
+    "authors": [
+        {
+            "name": "Paul59380",
+            "email": "paul.genly59380@gmail.com"
+        }
+    ],
+    "require": {
+        "twig/twig": "~1.0",
+      "ext-pdo": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "controller\\" : "controller",
+            "model\\" : "model"
+        }
+    }
+}

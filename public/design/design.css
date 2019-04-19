@@ -209,7 +209,7 @@ html, body {
 #TripSearch {
     height: 500px;
     margin: auto;
-    width: 50%;
+    width: 100%;
     padding: 20px;
     text-align: center;
     overflow: auto;

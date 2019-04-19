@@ -79,50 +79,68 @@ include('navigations/adminNav.php');
 <div id="home">
     <div class="findBoat">
         <div class="screenFindBoat">
-            <img src="public/images/map.png" alt="map et transport">
+            <img src="public/images/addCity.png" alt="map et transport">
         </div>
-        <div class="textFindBoat">
-            <h3 style="color: coral">Accès aux transports en temps réel</h3>
-            <p>Dans le menu l'icône <i class="fas fa-search-location fa-2x"></i> vous permettra d'accèder à la liste des
-                transports mis à jour par nos affréteurs </p>
-            <p>Sous chaque transport listé un bouton <span>Voir</span> sera présent. <br/> Ce bouton fera apparaître la
-                ville de départ et la destination finale du transport à effectuer</p>
-            <p>Vous aurez la possibilité d'ajouter un voyage à vos favoris en cliquant sur l'icône <i
-                        class="fas fa-star fa-2x"></i> présente sous la description du voyage</p>
+        <div style="margin-top: -20px; width: 30%" class="textFindBoat">
+            <h3 style="color: coral">Ajouter une ville</h3>
+            <p>Dans le menu l'icône <i class="fas fa-plus fa-2x"></i> vous permettra d'accèder à la partie administrateur pour la gestion des voyages </p>
+            <p>Vous trouverez en haut de page un bouton <span>Ajouter une ville</span>. <br/> Ce bouton fera apparaître la
+                un formulaire pour l'ajout d'un ville avec ses coordonées GPS, celle-ci permettrons la localisation par marqueurs sur la carte pour tout les bateliers consultant les transports disponibles</p>
+            <p>Après l'ajout d'une ville vous trouverez dans le formulaire de création de transport deux liste déroulante avec les villes précédement ajouté</p>
         </div>
     </div>
 
     <div class="findBoat">
-        <div class="textFindBoat">
-            <h3 style="color: coral">Vos Transport favoris</h3>
-            <p>Après avoir cliqué sur l'icône <i class="fas fa-star fa-2x"></i> vous trouvez en bas de page la section
-                <span>"Vos transports favoris"</span></p>
-            <p>Cliquez sur les deux flèches rouge pour déplier la liste de vos transport favoris <br/><br/>
-                Une icône <i style="color: red" class="far fa-trash-alt fa-2x"></i> vous permettra de supprimer des
-                transports de votre liste.<br/>
-                Pour replier la liste de transport cliquez sur les deux flèches rouge présent en dessous du titre <span>"Vos transports favoris"</span>
+        <div style="margin-top: 130px" class="textFindBoat">
+            <h3 style="color: coral">Créer un voyage</h3>
+            <p>Sous la section <span>Ajouter une ville</span> un formulaire de création de voyage sera présent dans la section <span>Créer un voyage</span> </p>
+            <p>Selectionner la ville de départ et d'arriver et complétez l'ensemble du formulaire. <br/><br/>
+                Cliquez sur le bouton <span>Créer le voyage </span> et il apparaîtra dans la liste de voyage située sur la droite.<br/>
+                Les coordonées GPS seront automatiquement affecter aux villes selectionner dans le formulaire.
             </p>
         </div>
         <div class="screenFindBoat">
-            <img src="public/images/fav.png" alt="map et transport">
+            <img src="public/images/createTrip.png" alt="map et transport">
+        </div>
+    </div>
+
+    <div class="findBoat">
+        <div  class="screenFindBoat">
+            <img src="public/images/updateTrip.png" alt="map et transport">
+        </div>
+
+        <div style="margin-top: 120px" class="textFindBoat">
+            <h3 style="color: coral">Modifier/Supprimer un transport</h3>
+            <p>Dans la page d'ajout de voyage une liste de voyage sera dispnible.<br/>Pour chaque voyage vous trouverez ci-dessous les icônes suivantes : <i style="color:green;" class="far fa-edit"></i> ,  <i style="color:red;" class="fas fa-trash-restore"></i> </p>
+            <p>L'icône  <i style="color:red;" class="fas fa-trash-restore"></i> vous permettra en un clique de supprimer un voyage existant <br/>
+            <p>L'icône  <i style="color:red;" class="fas fa-trash-restore"></i> vous redirigera vers une page contant un formulaire qui sera remplira automatique avec les données correspondant au voyage à modifier. <br/>
+            <p>Pour changer les informations du voyage (date, poids, prix/Tonne), remplacez les anciennes valeurs par les nouvelles et cliquez sur <span>Modifier le voyage</span></p>
+        </div>
+    </div>
+
+    <div class="findBoat">
+        <div class="textFindBoat">
+            <h3 style="color: coral">Rechercher un bateau pour un transport</h3>
+            <p>Dans le menu l'icône <i class="fas fa-search-location"></i> vous permettra d'accèder à la page de recherche de
+                bateaux </p>
+            <p>Une liste contenant tout les voyages référencer sera présente<br/>
+                Cliquez sur le bouton <span>Rechercher</span>correspondant au voyage pour lequel un bateau correspondant doit être rechercher <br/>
+        </div>
+
+        <div class="screenFindBoat">
+            <img src="public/images/searchBoat.png" alt="map et transport">
         </div>
     </div>
 
     <div class="findBoat">
         <div class="screenFindBoat">
-            <img src="public/images/addBoat.png" alt="map et transport">
+            <img src="public/images/foundBoat.png" alt="map et transport">
         </div>
+        <div style="width: 20%" class="textFindBoat">
+            <h3 style="color: coral">Consultez la liste de bateau</h3>
 
-        <div class="textFindBoat">
-            <h3 style="color: coral">Ajouter un bateau</h3>
-            <p>Dans le menu l'icône <i class="fas fa-plus fa-2x"></i> vous permettra d'accèder à la page d'ajout de
-                bateau </p>
-            <p>Un formulaire corncernant les details du bateau sera présent.<br/>
-                <span>Remplissez</span> le formulaire et cliquez sue le bouton <span>"Ajouter le bateau</span></p>
-            <p>Un cadran sera présent au dessus du formulaire, celui-ci indiquera la liste de vos bateaux si vous en
-                possédé. <br/>
-                L'icône <i style="color: red" class="far fa-trash-alt fa-2x"></i> présente à côté de la description d'un
-                bateau vous permettra la suppression d'un bateau à tout moment </p>
+            <p>Vous serez rediriger vers une page contenant les <span>informations</span> du voyage selectionner et à sa droite une liste de bateaux correspondants <span>aux critères</span> de voyage mis en place à la création du voyage</p>
+            <p>Vous accèderez ainsi ,en un clique, à <span>toutes les informations</span> des propriétaires de bataux pouvant effectuer ce voyage </p>
         </div>
     </div>
 </div>
