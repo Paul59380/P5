@@ -1,7 +1,7 @@
 class LoadMap {
     load(d_city, d_lat, d_lon, f_city, f_lat, f_lon) {
-        var lat = 50.8466;
-        var lon = 4.3528;
+        var lat = 50.6333;
+        var lon = 3.0667;
         var macarte = null;
 
         macarte = L.map('map').setView([lat, lon], 11);

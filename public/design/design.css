@@ -375,13 +375,13 @@ table td {
 }
 
 .chevron {
-    margin-top: -50px;
+    margin-top: -45px;
     margin-bottom: 40px;
 }
 
 .chevron button {
     width: 4%;
-    margin-left: 47.7%;
+    margin-left: 47.75%;
     background-color: white;
     border: none;
 }
@@ -397,13 +397,13 @@ table td {
 }
 
 .chevronUp {
-    margin-top: -50px;
+    margin-top: -45px;
     margin-bottom: 40px;
 }
 
 .chevronUp button {
     width: 4%;
-    margin-left: 47.7%;
+    margin-left: 47.75%;
     background-color: white;
     border: none;
 }
@@ -491,7 +491,7 @@ table td {
 }
 
 .hideHelp {
-    visibility: hidden;
+    display: none;
 }
 
 @media all and (max-width: 1300px) {
@@ -689,13 +689,19 @@ table td {
         display: none;
     }
 
+    #favoriteTransport {
+        width: 80%;
+    }
+
+
     #favoriteTransport td {
-        display: block;
+        display: flex;
     }
 
     .hideHelp {
-        visibility: visible;
+        display: flex;
         color: red;
+        margin-right: 20px;
     }
 
     .chevron {
