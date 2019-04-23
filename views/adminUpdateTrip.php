@@ -21,16 +21,16 @@ include('navigations/adminNav.php');
 <div id="ContentMapAndTrip">
     <div style="margin-left: 10%" id="Trip">
             <h1>
-            <span> <?= strtoupper($trip->getDeparture_city()) .
-                ' <i style="color:coral;" class="far fa-arrow-alt-circle-right fa-1x"></i> ' . strtoupper($trip->getFinishing_city()) ?> </span> <br/>
+            <span> <?= htmlspecialchars(strtoupper($trip->getDeparture_city())) .
+                ' <i style="color:coral;" class="far fa-arrow-alt-circle-right fa-1x"></i> ' . htmlspecialchars(strtoupper($trip->getFinishing_city())) ?> </span> <br/>
             </h1>
 
-                <h2>Le : <span style="color: coral"><?= $trip->getDate_transport() ?></span>  <br/>
-                Charge à transporter : <span style="color: coral"><?= $trip->getWeight() ?></span>  Tonnes <br/>
-                Prix/ T HT : <span style="color:coral;"><?= $trip->getPrice_ton() ?></span>  €</h2>
+                <h2>Le : <span style="color: coral"><?= htmlspecialchars($trip->getDate_transport()) ?></span>  <br/>
+                Charge à transporter : <span style="color: coral"><?= htmlspecialchars($trip->getWeight()) ?></span>  Tonnes <br/>
+                Prix/ T HT : <span style="color:coral;"><?= htmlspecialchars($trip->getPrice_ton()) ?></span>  €</h2>
 
         <h2>
-            Prix Total Hors Taxes : <span style="color: coral"><?= $trip->getWeight()*$trip->getPrice_ton() ?></span> €
+            Prix Total Hors Taxes : <span style="color: coral"><?= htmlspecialchars($trip->getWeight()*$trip->getPrice_ton()) ?></span> €
         </h2>
 
     </div>
@@ -42,7 +42,7 @@ include('navigations/adminNav.php');
                 <?php
                 foreach ($cities as $city) {
                     ?>
-                    <option value='<?= $city->getId() ?>'><?= $city->getName() ?></option>
+                    <option value='<?= htmlspecialchars($city->getId()) ?>'><?= htmlspecialchars($city->getName()) ?></option>
                     <?php
                 }
                 ?>
@@ -54,15 +54,15 @@ include('navigations/adminNav.php');
                 <?php
                 foreach ($cities as $city) {
                     ?>
-                    <option value='<?= $city->getId() ?>'><?= $city->getName() ?></option>
+                    <option value='<?= htmlspecialchars($city->getId()) ?>'><?= htmlspecialchars($city->getName()) ?></option>
                     <?php
                 }
                 ?>
             </select>
         </label>
-        <label>Prix de la tonne :<input type="number" step="0.01" placeholder="Ex : 1,25" name="price_ton" value="<?= $trip->getPrice_ton() ?>" required></label>
-        <label>Poid total : <input type="number" placeholder="Ex : 1900" name="weight" value="<?= $trip->getWeight() ?>" required></label>
-        <label>Date du transport <input type="date" name="date_transport" placeholder="Format : DD/MM/AAAA" value="<?= $trip->getDate_transport() ?>"
+        <label>Prix de la tonne :<input type="number" step="0.01" placeholder="Ex : 1,25" name="price_ton" value="<?= htmlspecialchars($trip->getPrice_ton()) ?>" required></label>
+        <label>Poid total : <input type="number" placeholder="Ex : 1900" name="weight" value="<?= htmlspecialchars($trip->getWeight()) ?>" required></label>
+        <label>Date du transport <input type="date" name="date_transport" placeholder="Format : DD/MM/AAAA" value="<?= htmlspecialchars($trip->getDate_transport()) ?>"
                                         required></label>
         <input type="submit" name="send_trip" value="Créer le voyage">
     </form>

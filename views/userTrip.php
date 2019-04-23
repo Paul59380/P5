@@ -22,19 +22,19 @@ include('navigations/userNav.php');
         ?>
         <div id="infoTrip">
             <h2><?=
-                strtoupper($getTrip->getDeparture_city()) .
-                ' <i id="displayTrip" class="far fa-arrow-alt-circle-right fa-1x"></i> ' . strtoupper($getTrip->getFinishing_city()) ?></h2>
+                htmlspecialchars(strtoupper($getTrip->getDeparture_city())) .
+                ' <i id="displayTrip" class="far fa-arrow-alt-circle-right fa-1x"></i> ' . htmlspecialchars(strtoupper($getTrip->getFinishing_city())) ?></h2>
             <br/>
-            <p>Prévu le : <span><?= $getTrip->getDate_transport() ?></span></p>
-            <p>Charge à transporter : <span><?= $getTrip->getWeight() ?> </span>Tonnes</p>
-            <p>Prix de la tonne : <span><?= $getTrip->getPrice_ton() ?> </span>€/T HT</p>
-            <p>Capacité minimum requise : <span><?= $getTrip->getWeight() ?> </span>Tonnes
+            <p>Prévu le : <span><?= htmlspecialchars($getTrip->getDate_transport()) ?></span></p>
+            <p>Charge à transporter : <span><?= htmlspecialchars($getTrip->getWeight()) ?> </span>Tonnes</p>
+            <p>Prix de la tonne : <span><?= htmlspecialchars($getTrip->getPrice_ton()) ?> </span>€/T HT</p>
+            <p>Capacité minimum requise : <span><?= htmlspecialchars($getTrip->getWeight()) ?> </span>Tonnes
             </p>
             <p>Voyage payé : <span
-                        style="color: coral;"><?= $getTrip->getWeight() * $getTrip->getPrice_ton() ?> </span>€
+                        style="color: coral;"><?= htmlspecialchars($getTrip->getWeight() * $getTrip->getPrice_ton()) ?> </span>€
             </p>
             <br/><br/>
-            <a href="index.php?action=addFavoriteTrip&idUser=<?= $_SESSION['id'] ?>&idTrip=<?= $getTrip->getId() ?>"><i id="star" class="fas fa-star fa-1x"></i></a>
+            <a href="index.php?action=addFavoriteTrip&idUser=<?= $_SESSION['id'] ?>&idTrip=<?= htmlspecialchars($getTrip->getId()) ?>"><i id="star" class="fas fa-star fa-1x"></i></a>
         </div>
 
         <?php
@@ -45,14 +45,14 @@ include('navigations/userNav.php');
         foreach ($trips as $trip) {
             ?>
             <p>
-            <span style="font-size: 20px; font-style: italic"> <?= strtoupper($trip->getDeparture_city()) .
-                ' <i style="color:coral;" class="far fa-arrow-alt-circle-right fa-1x"></i> ' . strtoupper($trip->getFinishing_city()) ?>
+            <span style="font-size: 20px; font-style: italic"> <?= htmlspecialchars(strtoupper($trip->getDeparture_city())) .
+                ' <i style="color:coral;" class="far fa-arrow-alt-circle-right fa-1x"></i> ' . htmlspecialchars(strtoupper($trip->getFinishing_city())) ?>
             </span> <br/>
-                <span>Le : <?= $trip->getDate_transport() ?></span> <br/>
-                <span>Charge à transporter : <?= $trip->getWeight() ?></span>
+                <span>Le : <?= htmlspecialchars($trip->getDate_transport()) ?></span> <br/>
+                <span>Charge à transporter : <?= htmlspecialchars($trip->getWeight()) ?></span>
             </p>
             <?php
-            echo '<a class="testA" href="index.php?action=Trips&idUser=' . $_SESSION['id'] . '&d_city=' . urldecode($trip->getDeparture_city()) . '&d_lat=' . $trip->getLat_departure() . '&d_lon=' . $trip->getLon_departure() . '&f_city=' . $trip->getFinishing_city() . '&f_lat=' . $trip->getLat_finishing() . '&f_lon=' . $trip->getLon_finishing() . '&idTrip=' . $trip->getId() . '">Voir</a> <br/>';
+            echo '<a class="testA" href="index.php?action=Trips&idUser=' . $_SESSION['id'] . '&d_city=' . htmlspecialchars($trip->getDeparture_city()) . '&d_lat=' . htmlspecialchars($trip->getLat_departure()) . '&d_lon=' . htmlspecialchars($trip->getLon_departure()) . '&f_city=' . htmlspecialchars($trip->getFinishing_city()) . '&f_lat=' . htmlspecialchars($trip->getLat_finishing()) . '&f_lon=' . htmlspecialchars($trip->getLon_finishing()) . '&idTrip=' . htmlspecialchars($trip->getId()) . '">Voir</a> <br/>';
             ?>
             <br/>
             <?php
@@ -86,7 +86,7 @@ include('navigations/userNav.php');
     foreach ($favoriteTrips as $favorite){
         ?>
         <fieldset id="favoriteTransport">
-            <legend><a href="index.php?action=deleteFavoriteTrip&idFavorite=<?= $favorite->getId() ?>" <a  style="color: red" class="far fa-trash-alt" title="Supprimer ce transport des favoris"></i></a>
+            <legend><a href="index.php?action=deleteFavoriteTrip&idFavorite=<?= htmlspecialchars($favorite->getId()) ?>" <a  style="color: red" class="far fa-trash-alt" title="Supprimer ce transport des favoris"></i></a>
             </legend>
 
             <table style="width: 100%">
@@ -99,12 +99,12 @@ include('navigations/userNav.php');
                     <td>Voyage payé HT</td>
                 </tr>
                 <tr>
-                    <td><span><?= $favorite->getDeparture_city() ?></span></td>
-                    <td><span> <?= $favorite->getFinishing_city() ?></span></td>
-                    <td><span><?= $favorite->getDate_transport() ?></span></td>
-                    <td><span><?= $favorite->getPrice_ton() ?> €</span></td>
-                    <td><span><?= $favorite->getWeight() ?> T</span></td>
-                    <td><span><?= $favorite->getPrice_ton()*$favorite->getWeight() ?> €</span></td>
+                    <td><span><?= htmlspecialchars($favorite->getDeparture_city()) ?></span></td>
+                    <td><span> <?= htmlspecialchars($favorite->getFinishing_city()) ?></span></td>
+                    <td><span><?= htmlspecialchars($favorite->getDate_transport()) ?></span></td>
+                    <td><span><?= htmlspecialchars($favorite->getPrice_ton()) ?> €</span></td>
+                    <td><span><?= htmlspecialchars($favorite->getWeight()) ?> T</span></td>
+                    <td><span><?= htmlspecialchars($favorite->getPrice_ton()*$favorite->getWeight()) ?> €</span></td>
                 </tr>
             </table>
         </fieldset>

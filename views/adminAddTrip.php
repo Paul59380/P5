@@ -66,7 +66,7 @@ include('navigations/adminNav.php');
                 <?php
                 foreach ($cities as $city) {
                     ?>
-                    <option value='<?= $city->getId() ?>'><?= $city->getName() ?></option>
+                    <option value='<?= $city->getId() ?>'><?= htmlspecialchars($city->getName()) ?></option>
                 <?php
                 }
                 ?>
@@ -78,7 +78,7 @@ include('navigations/adminNav.php');
                 <?php
                 foreach ($cities as $city) {
                     ?>
-                    <option value='<?= $city->getId() ?>'><?= $city->getName() ?></option>
+                    <option value='<?= htmlspecialchars($city->getId()) ?>'><?= htmlspecialchars($city->getName()) ?></option>
                     <?php
                 }
                 ?>
@@ -97,13 +97,13 @@ include('navigations/adminNav.php');
         foreach ($trips as $trip) {
             ?>
             <p>
-            <span style="font-size: 20px; font-style: italic"> <?= strtoupper($trip->getDeparture_city()) .
-                ' <i style="color:coral;" class="far fa-arrow-alt-circle-right fa-1x"></i> ' . strtoupper($trip->getFinishing_city()) ?>
+            <span style="font-size: 20px; font-style: italic"> <?= htmlspecialchars(strtoupper($trip->getDeparture_city())) .
+                ' <i style="color:coral;" class="far fa-arrow-alt-circle-right fa-1x"></i> ' . htmlspecialchars(strtoupper($trip->getFinishing_city())) ?>
             </span> <br/>
-                <span>Le : <?= $trip->getDate_transport() ?></span> <br/>
-                <span>Charge à transporter : <?= $trip->getWeight() ?></span> <br/>
-                <a id="updateTrip" href="index.php?action=updateTrip&idTrip=<?= $trip->getId() ?>"><i class="far fa-edit fa-1x"></i></a>
-                <a id="deleteTrip" href="index.php?action=deleteTrip&idTrip=<?= $trip->getId() ?>"><i class="fas fa-trash-restore-alt"></i></a>
+                <span>Le : <?= htmlspecialchars($trip->getDate_transport()) ?></span> <br/>
+                <span>Charge à transporter : <?= htmlspecialchars($trip->getWeight()) ?></span> <br/>
+                <a id="updateTrip" href="index.php?action=updateTrip&idTrip=<?= htmlspecialchars($trip->getId()) ?>"><i class="far fa-edit fa-1x"></i></a>
+                <a id="deleteTrip" href="index.php?action=deleteTrip&idTrip=<?= htmlspecialchars($trip->getId()) ?>"><i class="fas fa-trash-restore-alt"></i></a>
             </p>
             <br/>
             <?php

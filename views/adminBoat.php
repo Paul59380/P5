@@ -19,16 +19,16 @@ include('navigations/adminNav.php');
         ?>
         <div id="infoTrip">
             <p style="font-size: 30px"><?=
-                strtoupper($trip->getDeparture_city()) .
-                ' <i id="displayTrip" class="far fa-arrow-alt-circle-right fa-1x"></i> ' . strtoupper($trip->getFinishing_city()) ?></p>
+                htmlspecialchars(strtoupper($trip->getDeparture_city())) .
+                ' <i id="displayTrip" class="far fa-arrow-alt-circle-right fa-1x"></i> ' . htmlspecialchars(strtoupper($trip->getFinishing_city())) ?></p>
             <br/>
-            <h2>Prévu le : <span style="color: coral"><?= $trip->getDate_transport() ?></span></h2>
-            <h2>Charge à transporter : <span style="color: coral;"><?= $trip->getWeight() ?> </span>Tonnes</h2>
-            <h2>Prix de la tonne : <span style="color: coral;"><?= $trip->getPrice_ton() ?> </span>€/T HT</h2>
-            <h2>Capacité minimum requise : <span style="color: coral;"><?= $trip->getWeight() ?> </span>Tonnes
+            <h2>Prévu le : <span style="color: coral"><?= htmlspecialchars($trip->getDate_transport()) ?></span></h2>
+            <h2>Charge à transporter : <span style="color: coral;"><?= htmlspecialchars($trip->getWeight()) ?> </span>Tonnes</h2>
+            <h2>Prix de la tonne : <span style="color: coral;"><?= htmlspecialchars($trip->getPrice_ton()) ?> </span>€/T HT</h2>
+            <h2>Capacité minimum requise : <span style="color: coral;"><?= htmlspecialchars($trip->getWeight()) ?> </span>Tonnes
             </h2>
             <h2>Voyage payé : <span
-                    style="color: coral;"><?= $trip->getWeight() * $trip->getPrice_ton() ?> </span>€
+                    style="color: coral;"><?= htmlspecialchars($trip->getWeight() * $trip->getPrice_ton()) ?> </span>€
             </h2>
             <br/><br/>
         </div>
@@ -40,10 +40,10 @@ include('navigations/adminNav.php');
         foreach ($boats as $boat) {
             ?>
             <div class="boat">
-                <p>Propriétaire : <span><?= $boat->getUser()->getName().' '. $boat->getUser()->getFirstName() ?></span></p>
-                <p>Nom du Bateau : <span><?= $boat->getName() ?></span></p>
-                <p>Capacité du bateau : <span><?= $boat->getCapacity() ?></span> Tonnes</p>
-                <p>Numéro de téléphone : <span><?= $boat->getUser()->getPhone() ?></span></p>
+                <p>Propriétaire : <span><?= htmlspecialchars($boat->getUser()->getName()).' '. htmlspecialchars($boat->getUser()->getFirstName()) ?></span></p>
+                <p>Nom du Bateau : <span><?= htmlspecialchars($boat->getName()) ?></span></p>
+                <p>Capacité du bateau : <span><?= htmlspecialchars($boat->getCapacity()) ?></span> Tonnes</p>
+                <p>Numéro de téléphone : <span><?= htmlspecialchars($boat->getUser()->getPhone()) ?></span></p>
             </div> <br/>
         <?php
         }
