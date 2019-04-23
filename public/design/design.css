@@ -489,3 +489,230 @@ table td {
 .textFindBoat {
     margin-top: 80px;
 }
+
+.hideHelp {
+    visibility: hidden;
+}
+
+@media all and (max-width: 1300px) {
+    #connectionBlock {
+        width: 80%;
+    }
+
+    .findBoat {
+        display: block;
+    }
+
+    .findBoat img{
+        width: 50%;
+        height: auto;
+    }
+
+    .textFindBoat {
+        width: 80%;
+        margin: auto;
+        text-align: center;
+    }
+     #slider{
+         width: 90%;
+         height: auto;
+     }
+
+     .chevron {
+         margin-top: -25px;
+         margin-left: -15px;
+     }
+
+     .chevron i:nth-child(2) {
+         margin-left: 5px;
+     }
+
+     .chevronUp {
+         margin-top: -25px;
+         margin-left: -13px;
+     }
+
+    .chevronUp i:nth-child(1) {
+        margin-left: 5px;
+    }
+
+    #map {
+        width: 95%;
+        margin-left: 2.5%;
+        align-content: center;
+    }
+
+    #ContentMapAndTrip {
+        display: block;
+        padding: 10px;
+    }
+
+    #favoriteTransport {
+        width: 90%;
+    }
+
+    #addBoat {
+        width: 80%;
+    }
+
+    #addTrip {
+        width: 80%;
+        margin: auto;
+    }
+
+    #showAddCity, #hideAddCity {
+        width: 30%;
+        margin-left: 35.5%;
+    }
+
+    #city {
+        margin-top: -20px;
+    }
+
+    #addCity input[type="submit"] {
+        position: absolute;
+        left: 35.5%;
+        width: 30%;
+    }
+
+    #Tripadmin {
+        width: 80%;
+        margin: 50px auto;
+    }
+
+    #Trip {
+        margin-left: 0;
+        height: auto;
+    }
+
+    #userBoat {
+        text-align: center;
+    }
+}
+
+@media all and (max-width: 691px) {
+
+    #navigationAdmin {
+        display: block;
+    }
+
+    #navigationAdmin ul{
+        margin: 10px -50px;
+    }
+
+    .adminNavigationTwo li:nth-child(1){
+        margin-left: 90px;
+    }
+
+    #addCity form {
+        display: block;
+        width: 80%;
+        margin: auto;
+    }
+
+    #addCity input[type="submit"] {
+        position: absolute;
+        left: 28%;
+        width: 50%;
+    }
+
+    #showAddCity, #hideAddCity {
+        width: 50%;
+        margin-left: 28%;
+        margin-bottom: -300px; !important;
+    }
+
+    #addTrip input, select {
+        width: 70%;
+    }
+
+    #addTrip input[type="submit"] {
+        width: 70%;
+    }
+
+    #Trip {
+        margin-left: 0;
+        font-size: 10px;
+    }
+
+    #TripSearch {
+        width: 90%;
+    }
+
+    #connectionBlock form {
+        width: 100%;
+    }
+
+    #connectionBlock input {
+        width: 90%;
+        margin-left: 0;
+        margin-bottom: 40px;
+        margin-top: 10px;
+    }
+
+    #connectionBlock input[type="submit"] {
+        width: 90%;
+        margin-left: 10px;
+    }
+
+    #connectionBlock label {
+        margin-left: 0;
+    }
+
+    .adminNavigationOne {
+        display: block;
+    }
+
+    .adminNavigationTwo {
+        display: block;
+        //margin-left: 12%;
+    }
+
+    #navigationUser {
+        display: inline;
+    }
+
+    #Trip span {
+        font-size: 15px;
+    }
+    #Trip a {
+        padding: 8px 10px;
+        font-size: 15px;
+    }
+
+    #Trip a:hover {
+        padding: 8px 10px;
+        font-size: 15px;
+    }
+
+    #favoriteTransport tr:nth-child(1){
+        display: none;
+    }
+
+    #favoriteTransport td {
+        display: block;
+    }
+
+    .hideHelp {
+        visibility: visible;
+        color: red;
+    }
+
+    .chevron {
+        margin-top: -5px;
+        margin-left: -30px;
+    }
+
+    .chevron i:nth-child(2) {
+        margin-left: 5px;
+    }
+
+    .chevronUp {
+        margin-top: -5px;
+        margin-left: -30px;
+    }
+
+    .chevronUp i:nth-child(1) {
+        margin-left: 5px;
+    }
+}

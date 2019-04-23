@@ -18,18 +18,18 @@ include('navigations/adminNav.php');
     if (isset($_GET['idTrip'])) {
         ?>
         <div id="infoTrip">
-            <p style="font-size: 30px"><?=
-                htmlspecialchars(strtoupper($trip->getDeparture_city())) .
+            <p style="font-size: 30px">
+                <?= htmlspecialchars(strtoupper($trip->getDeparture_city())) .
                 ' <i id="displayTrip" class="far fa-arrow-alt-circle-right fa-1x"></i> ' . htmlspecialchars(strtoupper($trip->getFinishing_city())) ?></p>
             <br/>
-            <h2>Prévu le : <span style="color: coral"><?= htmlspecialchars($trip->getDate_transport()) ?></span></h2>
-            <h2>Charge à transporter : <span style="color: coral;"><?= htmlspecialchars($trip->getWeight()) ?> </span>Tonnes</h2>
-            <h2>Prix de la tonne : <span style="color: coral;"><?= htmlspecialchars($trip->getPrice_ton()) ?> </span>€/T HT</h2>
-            <h2>Capacité minimum requise : <span style="color: coral;"><?= htmlspecialchars($trip->getWeight()) ?> </span>Tonnes
-            </h2>
-            <h2>Voyage payé : <span
+            <p>Prévu le : <span style="color: coral"><?= htmlspecialchars($trip->getDate_transport()) ?></span></p>
+            <p>Charge à transporter : <span style="color: coral;"><?= htmlspecialchars($trip->getWeight()) ?> </span>Tonnes</p>
+            <p>Prix de la tonne : <span style="color: coral;"><?= htmlspecialchars($trip->getPrice_ton()) ?> </span>€/T HT</p>
+            <p>Capacité minimum requise : <span style="color: coral;"><?= htmlspecialchars($trip->getWeight()) ?> </span>Tonnes
+            </p>
+            <p>Voyage payé : <span
                     style="color: coral;"><?= htmlspecialchars($trip->getWeight() * $trip->getPrice_ton()) ?> </span>€
-            </h2>
+            </p>
             <br/><br/>
         </div>
         <?php

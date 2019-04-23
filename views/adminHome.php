@@ -81,7 +81,7 @@ include('navigations/adminNav.php');
         <div class="screenFindBoat">
             <img src="public/images/addCity.png" alt="map et transport">
         </div>
-        <div style="margin-top: -20px; width: 30%" class="textFindBoat">
+        <div style="margin-top: -20px" class="textFindBoat">
             <h3 style="color: coral">Ajouter une ville</h3>
             <p>Dans le menu l'icône <i class="fas fa-plus fa-2x"></i> vous permettra d'accèder à la partie administrateur pour la gestion des voyages </p>
             <p>Vous trouverez en haut de page un bouton <span>Ajouter une ville</span>. <br/> Ce bouton fera apparaître la
@@ -105,7 +105,7 @@ include('navigations/adminNav.php');
     </div>
 
     <div class="findBoat">
-        <div  class="screenFindBoat">
+        <div class="screenFindBoat">
             <img src="public/images/updateTrip.png" alt="map et transport">
         </div>
 
@@ -136,7 +136,7 @@ include('navigations/adminNav.php');
         <div class="screenFindBoat">
             <img src="public/images/foundBoat.png" alt="map et transport">
         </div>
-        <div style="width: 20%" class="textFindBoat">
+        <div class="textFindBoat">
             <h3 style="color: coral">Consultez la liste de bateau</h3>
 
             <p>Vous serez rediriger vers une page contenant les <span>informations</span> du voyage selectionner et à sa droite une liste de bateaux correspondants <span>aux critères</span> de voyage mis en place à la création du voyage</p>

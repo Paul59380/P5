@@ -99,12 +99,12 @@ include('navigations/userNav.php');
                     <td>Voyage payé HT</td>
                 </tr>
                 <tr>
-                    <td><span><?= htmlspecialchars($favorite->getDeparture_city()) ?></span></td>
-                    <td><span> <?= htmlspecialchars($favorite->getFinishing_city()) ?></span></td>
-                    <td><span><?= htmlspecialchars($favorite->getDate_transport()) ?></span></td>
-                    <td><span><?= htmlspecialchars($favorite->getPrice_ton()) ?> €</span></td>
-                    <td><span><?= htmlspecialchars($favorite->getWeight()) ?> T</span></td>
-                    <td><span><?= htmlspecialchars($favorite->getPrice_ton()*$favorite->getWeight()) ?> €</span></td>
+                    <td><span style="color:black;" class="hideHelp">Départ : </span> <span><?= htmlspecialchars($favorite->getDeparture_city()) ?></span></td>
+                    <td><span style="color:black;" class="hideHelp">Arrivé : </span><span> <?= htmlspecialchars($favorite->getFinishing_city()) ?></span></td>
+                    <td><span style="color:black;" class="hideHelp">Date : </span><span><?= htmlspecialchars($favorite->getDate_transport()) ?></span></td>
+                    <td><span style="color:black;" class="hideHelp">Prix de la tonne : </span><span><?= htmlspecialchars($favorite->getPrice_ton()) ?> €</span></td>
+                    <td><span style="color:black;" class="hideHelp">Poids : </span><span><?= htmlspecialchars($favorite->getWeight()) ?> T</span></td>
+                    <td><span style="color:black;" class="hideHelp">Payé : </span><span><?= htmlspecialchars($favorite->getPrice_ton()*$favorite->getWeight()) ?> €</span></td>
                 </tr>
             </table>
         </fieldset>

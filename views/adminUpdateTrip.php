@@ -19,7 +19,7 @@ include('navigations/adminNav.php');
 </div>
 
 <div id="ContentMapAndTrip">
-    <div style="margin-left: 10%" id="Trip">
+    <div id="Trip">
             <h1>
             <span> <?= htmlspecialchars(strtoupper($trip->getDeparture_city())) .
                 ' <i style="color:coral;" class="far fa-arrow-alt-circle-right fa-1x"></i> ' . htmlspecialchars(strtoupper($trip->getFinishing_city())) ?> </span> <br/>
