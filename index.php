@@ -1,7 +1,8 @@
 <?php
 session_start();
 require('vendor/autoload.php');
-use controller\ControllerIndex;
+require('ControllerIndex.php');
+
 $controller = new ControllerIndex();
 
 if (!isset($_GET['action'])) {

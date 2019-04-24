@@ -8,7 +8,6 @@
 
 namespace model;
 
-use mysql_xdevapi\Exception;
 use PDO;
 
 class CityManager
@@ -45,6 +44,11 @@ class CityManager
         return $cities;
     }
 
+    /**
+     * @param $id
+     * @return City
+     * @throws \Exception
+     */
     public function getCity($id)
     {
         if($this->existCity($id)){
