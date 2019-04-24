@@ -39,6 +39,11 @@ class SandboxNodeVisitor extends AbstractNodeVisitor
 
     private $needsToStringWrap = false;
 
+    public function getPriority()
+    {
+        return 0;
+    }
+
     protected function doEnterNode(Node $node, Environment $env)
     {
         if ($node instanceof ModuleNode) {
@@ -97,21 +102,6 @@ class SandboxNodeVisitor extends AbstractNodeVisitor
         return $node;
     }
 
-    protected function doLeaveNode(Node $node, Environment $env)
-    {
-        if ($node instanceof ModuleNode) {
-            $this->inAModule = false;
-
-            $node->setNode('constructor_end', new Node([new CheckSecurityNode($this->filters, $this->tags, $this->functions), $node->getNode('display_start')]));
-        } elseif ($this->inAModule) {
-            if ($node instanceof PrintNode || $node instanceof SetNode) {
-                $this->needsToStringWrap = false;
-            }
-        }
-
-        return $node;
-    }
-
     private function wrapNode(Node $node, $name)
     {
         $expr = $node->getNode($name);
@@ -128,9 +118,19 @@ class SandboxNodeVisitor extends AbstractNodeVisitor
         }
     }
 
-    public function getPriority()
+    protected function doLeaveNode(Node $node, Environment $env)
     {
-        return 0;
+        if ($node instanceof ModuleNode) {
+            $this->inAModule = false;
+
+            $node->setNode('constructor_end', new Node([new CheckSecurityNode($this->filters, $this->tags, $this->functions), $node->getNode('display_start')]));
+        } elseif ($this->inAModule) {
+            if ($node instanceof PrintNode || $node instanceof SetNode) {
+                $this->needsToStringWrap = false;
+            }
+        }
+
+        return $node;
     }
 }
 

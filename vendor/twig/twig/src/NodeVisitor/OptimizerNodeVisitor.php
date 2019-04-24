@@ -67,6 +67,11 @@ class OptimizerNodeVisitor extends AbstractNodeVisitor
         $this->optimizers = $optimizers;
     }
 
+    public function getPriority()
+    {
+        return 255;
+    }
+
     protected function doEnterNode(Node $node, Environment $env)
     {
         if (self::OPTIMIZE_FOR === (self::OPTIMIZE_FOR & $this->optimizers)) {
@@ -85,6 +90,83 @@ class OptimizerNodeVisitor extends AbstractNodeVisitor
             } elseif ($node instanceof BodyNode) {
                 $this->inABody = true;
             }
+        }
+
+        return $node;
+    }
+
+    /**
+     * Optimizes "for" tag by removing the "loop" variable creation whenever possible.
+     */
+    protected function enterOptimizeFor(\Twig_NodeInterface $node, Environment $env)
+    {
+        if ($node instanceof ForNode) {
+            // disable the loop variable by default
+            $node->setAttribute('with_loop', false);
+            array_unshift($this->loops, $node);
+            array_unshift($this->loopsTargets, $node->getNode('value_target')->getAttribute('name'));
+            array_unshift($this->loopsTargets, $node->getNode('key_target')->getAttribute('name'));
+        } elseif (!$this->loops) {
+            // we are outside a loop
+            return;
+        }
+
+        // when do we need to add the loop variable back?
+
+        // the loop variable is referenced for the current loop
+        elseif ($node instanceof NameExpression && 'loop' === $node->getAttribute('name')) {
+            $node->setAttribute('always_defined', true);
+            $this->addLoopToCurrent();
+        } // optimize access to loop targets
+        elseif ($node instanceof NameExpression && \in_array($node->getAttribute('name'), $this->loopsTargets)) {
+            $node->setAttribute('always_defined', true);
+        } // block reference
+        elseif ($node instanceof BlockReferenceNode || $node instanceof BlockReferenceExpression) {
+            $this->addLoopToCurrent();
+        } // include without the only attribute
+        elseif ($node instanceof IncludeNode && !$node->getAttribute('only')) {
+            $this->addLoopToAll();
+        } // include function without the with_context=false parameter
+        elseif ($node instanceof FunctionExpression
+            && 'include' === $node->getAttribute('name')
+            && (!$node->getNode('arguments')->hasNode('with_context')
+                || false !== $node->getNode('arguments')->getNode('with_context')->getAttribute('value')
+            )
+        ) {
+            $this->addLoopToAll();
+        } // the loop variable is referenced via an attribute
+        elseif ($node instanceof GetAttrExpression
+            && (!$node->getNode('attribute') instanceof ConstantExpression
+                || 'parent' === $node->getNode('attribute')->getAttribute('value')
+            )
+            && (true === $this->loops[0]->getAttribute('with_loop')
+                || ($node->getNode('node') instanceof NameExpression
+                    && 'loop' === $node->getNode('node')->getAttribute('name')
+                )
+            )
+        ) {
+            $this->addLoopToAll();
+        }
+    }
+
+    protected function addLoopToCurrent()
+    {
+        $this->loops[0]->setAttribute('with_loop', true);
+    }
+
+    protected function addLoopToAll()
+    {
+        foreach ($this->loops as $loop) {
+            $loop->setAttribute('with_loop', true);
+        }
+    }
+
+    protected function optimizeVariables(\Twig_NodeInterface $node, Environment $env)
+    {
+        if ('Twig_Node_Expression_Name' === \get_class($node) && $node->isSimple()) {
+            $this->prependedNodes[0][] = $node->getAttribute('name');
+
+            return new TempNameExpression($node->getAttribute('name'), $node->getTemplateLine());
         }
 
         return $node;
@@ -123,12 +205,27 @@ class OptimizerNodeVisitor extends AbstractNodeVisitor
         return $node;
     }
 
-    protected function optimizeVariables(\Twig_NodeInterface $node, Environment $env)
+    /**
+     * Optimizes "for" tag by removing the "loop" variable creation whenever possible.
+     */
+    protected function leaveOptimizeFor(\Twig_NodeInterface $node, Environment $env)
     {
-        if ('Twig_Node_Expression_Name' === \get_class($node) && $node->isSimple()) {
-            $this->prependedNodes[0][] = $node->getAttribute('name');
+        if ($node instanceof ForNode) {
+            array_shift($this->loops);
+            array_shift($this->loopsTargets);
+            array_shift($this->loopsTargets);
+        }
+    }
 
-            return new TempNameExpression($node->getAttribute('name'), $node->getTemplateLine());
+    /**
+     * Removes "raw" filters.
+     *
+     * @return \Twig_NodeInterface
+     */
+    protected function optimizeRawFilter(\Twig_NodeInterface $node, Environment $env)
+    {
+        if ($node instanceof FilterExpression && 'raw' == $node->getNode('filter')->getAttribute('value')) {
+            return $node->getNode('node');
         }
 
         return $node;
@@ -160,113 +257,6 @@ class OptimizerNodeVisitor extends AbstractNodeVisitor
         }
 
         return $node;
-    }
-
-    /**
-     * Removes "raw" filters.
-     *
-     * @return \Twig_NodeInterface
-     */
-    protected function optimizeRawFilter(\Twig_NodeInterface $node, Environment $env)
-    {
-        if ($node instanceof FilterExpression && 'raw' == $node->getNode('filter')->getAttribute('value')) {
-            return $node->getNode('node');
-        }
-
-        return $node;
-    }
-
-    /**
-     * Optimizes "for" tag by removing the "loop" variable creation whenever possible.
-     */
-    protected function enterOptimizeFor(\Twig_NodeInterface $node, Environment $env)
-    {
-        if ($node instanceof ForNode) {
-            // disable the loop variable by default
-            $node->setAttribute('with_loop', false);
-            array_unshift($this->loops, $node);
-            array_unshift($this->loopsTargets, $node->getNode('value_target')->getAttribute('name'));
-            array_unshift($this->loopsTargets, $node->getNode('key_target')->getAttribute('name'));
-        } elseif (!$this->loops) {
-            // we are outside a loop
-            return;
-        }
-
-        // when do we need to add the loop variable back?
-
-        // the loop variable is referenced for the current loop
-        elseif ($node instanceof NameExpression && 'loop' === $node->getAttribute('name')) {
-            $node->setAttribute('always_defined', true);
-            $this->addLoopToCurrent();
-        }
-
-        // optimize access to loop targets
-        elseif ($node instanceof NameExpression && \in_array($node->getAttribute('name'), $this->loopsTargets)) {
-            $node->setAttribute('always_defined', true);
-        }
-
-        // block reference
-        elseif ($node instanceof BlockReferenceNode || $node instanceof BlockReferenceExpression) {
-            $this->addLoopToCurrent();
-        }
-
-        // include without the only attribute
-        elseif ($node instanceof IncludeNode && !$node->getAttribute('only')) {
-            $this->addLoopToAll();
-        }
-
-        // include function without the with_context=false parameter
-        elseif ($node instanceof FunctionExpression
-            && 'include' === $node->getAttribute('name')
-            && (!$node->getNode('arguments')->hasNode('with_context')
-                 || false !== $node->getNode('arguments')->getNode('with_context')->getAttribute('value')
-               )
-        ) {
-            $this->addLoopToAll();
-        }
-
-        // the loop variable is referenced via an attribute
-        elseif ($node instanceof GetAttrExpression
-            && (!$node->getNode('attribute') instanceof ConstantExpression
-                || 'parent' === $node->getNode('attribute')->getAttribute('value')
-               )
-            && (true === $this->loops[0]->getAttribute('with_loop')
-                || ($node->getNode('node') instanceof NameExpression
-                    && 'loop' === $node->getNode('node')->getAttribute('name')
-                   )
-               )
-        ) {
-            $this->addLoopToAll();
-        }
-    }
-
-    /**
-     * Optimizes "for" tag by removing the "loop" variable creation whenever possible.
-     */
-    protected function leaveOptimizeFor(\Twig_NodeInterface $node, Environment $env)
-    {
-        if ($node instanceof ForNode) {
-            array_shift($this->loops);
-            array_shift($this->loopsTargets);
-            array_shift($this->loopsTargets);
-        }
-    }
-
-    protected function addLoopToCurrent()
-    {
-        $this->loops[0]->setAttribute('with_loop', true);
-    }
-
-    protected function addLoopToAll()
-    {
-        foreach ($this->loops as $loop) {
-            $loop->setAttribute('with_loop', true);
-        }
-    }
-
-    public function getPriority()
-    {
-        return 255;
     }
 }
 

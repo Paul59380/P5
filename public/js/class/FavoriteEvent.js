@@ -1,5 +1,5 @@
 class FavoriteEvent {
-    constructor($elementHidden, $chevronUp, $buttonOne, $buttonTwo, $chevronDown, $htmlAndBody){
+    constructor($elementHidden, $chevronUp, $buttonOne, $buttonTwo, $chevronDown, $htmlAndBody) {
         $elementHidden.hide();
         $chevronUp.hide();
 

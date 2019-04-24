@@ -60,7 +60,7 @@ class TwigTest
 
     public function isDeprecated()
     {
-        return (bool) $this->options['deprecated'];
+        return (bool)$this->options['deprecated'];
     }
 
     public function getDeprecatedVersion()
@@ -73,14 +73,14 @@ class TwigTest
         return $this->options['alternative'];
     }
 
-    public function setArguments($arguments)
-    {
-        $this->arguments = $arguments;
-    }
-
     public function getArguments()
     {
         return $this->arguments;
+    }
+
+    public function setArguments($arguments)
+    {
+        $this->arguments = $arguments;
     }
 }
 

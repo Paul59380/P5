@@ -83,6 +83,7 @@ html, body {
     text-align: center;
     overflow: auto;
     border-radius: 5px;
+    margin-left: 15%;
 }
 
 #Trip a {
@@ -111,6 +112,7 @@ html, body {
 #infoTrip {
     text-align: center;
     font-size: 20px;
+    margin-left: 10%;
 }
 
 #infoTrip span {
@@ -221,7 +223,7 @@ html, body {
 }
 
 #deleteTrip {
-    color : red;
+    color: red;
 }
 
 #addCity {
@@ -435,7 +437,7 @@ table td {
 #slider {
     width: 1000px;
     height: 450px;
-    margin:  20px auto;
+    margin: 20px auto;
     border-radius: 15px;
     overflow: hidden;
 }
@@ -466,23 +468,23 @@ table td {
     font-size: large;
 }
 
-#welcome p span{
-    color : coral;
+#welcome p span {
+    color: coral;
     font-style: italic;
 }
 
 .findBoat {
-     text-align: center;
-     display: flex;
-     margin-bottom: 150px;
-     justify-content: space-around;
- }
+    text-align: center;
+    display: flex;
+    margin-bottom: 150px;
+    justify-content: space-around;
+}
 
-.findBoat span{
+.findBoat span {
     color: coral;
 }
 
-.findBoat img{
+.findBoat img {
     border-radius: 10px;
 }
 
@@ -503,7 +505,7 @@ table td {
         display: block;
     }
 
-    .findBoat img{
+    .findBoat img {
         width: 50%;
         height: auto;
     }
@@ -513,24 +515,29 @@ table td {
         margin: auto;
         text-align: center;
     }
-     #slider{
-         width: 90%;
-         height: auto;
-     }
 
-     .chevron {
-         margin-top: -25px;
-         margin-left: -15px;
-     }
+    #slider {
+        width: 90%;
+        height: auto;
+    }
 
-     .chevron i:nth-child(2) {
-         margin-left: 5px;
-     }
+    #infoTrip {
+        margin-left: 0;
+    }
 
-     .chevronUp {
-         margin-top: -25px;
-         margin-left: -13px;
-     }
+    .chevron {
+        margin-top: -25px;
+        margin-left: -15px;
+    }
+
+    .chevron i:nth-child(2) {
+        margin-left: 5px;
+    }
+
+    .chevronUp {
+        margin-top: -25px;
+        margin-left: -13px;
+    }
 
     .chevronUp i:nth-child(1) {
         margin-left: 5px;
@@ -596,11 +603,11 @@ table td {
         display: block;
     }
 
-    #navigationAdmin ul{
+    #navigationAdmin ul {
         margin: 10px -50px;
     }
 
-    .adminNavigationTwo li:nth-child(1){
+    .adminNavigationTwo li:nth-child(1) {
         margin-left: 90px;
     }
 
@@ -619,7 +626,8 @@ table td {
     #showAddCity, #hideAddCity {
         width: 50%;
         margin-left: 28%;
-        margin-bottom: -300px; !important;
+        margin-bottom: -300px;
+    !important;
     }
 
     #addTrip input, select {
@@ -665,7 +673,7 @@ table td {
 
     .adminNavigationTwo {
         display: block;
-        //margin-left: 12%;
+    / / margin-left: 12 %;
     }
 
     #navigationUser {
@@ -675,6 +683,7 @@ table td {
     #Trip span {
         font-size: 15px;
     }
+
     #Trip a {
         padding: 8px 10px;
         font-size: 15px;
@@ -685,7 +694,7 @@ table td {
         font-size: 15px;
     }
 
-    #favoriteTransport tr:nth-child(1){
+    #favoriteTransport tr:nth-child(1) {
         display: none;
     }
 
@@ -720,5 +729,9 @@ table td {
 
     .chevronUp i:nth-child(1) {
         margin-left: 5px;
+    }
+
+    #infoTrip {
+        margin-left: 0;
     }
 }

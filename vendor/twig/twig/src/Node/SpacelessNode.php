@@ -33,8 +33,7 @@ class SpacelessNode extends Node
             ->addDebugInfo($this)
             ->write("ob_start();\n")
             ->subcompile($this->getNode('body'))
-            ->write("echo trim(preg_replace('/>\s+</', '><', ob_get_clean()));\n")
-        ;
+            ->write("echo trim(preg_replace('/>\s+</', '><', ob_get_clean()));\n");
     }
 }
 

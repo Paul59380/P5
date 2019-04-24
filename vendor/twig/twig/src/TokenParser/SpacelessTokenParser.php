@@ -39,14 +39,14 @@ class SpacelessTokenParser extends AbstractTokenParser
         return new SpacelessNode($body, $lineno, $this->getTag());
     }
 
-    public function decideSpacelessEnd(Token $token)
-    {
-        return $token->test('endspaceless');
-    }
-
     public function getTag()
     {
         return 'spaceless';
+    }
+
+    public function decideSpacelessEnd(Token $token)
+    {
+        return $token->test('endspaceless');
     }
 }
 

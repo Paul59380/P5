@@ -56,7 +56,7 @@ class FromTokenParser extends AbstractTokenParser
                 throw new SyntaxError(sprintf('"%s" cannot be an imported macro as it is a reserved keyword.', $name), $token->getLine(), $stream->getSourceContext());
             }
 
-            $this->parser->addImportedSymbol('function', $alias, 'get'.$name, $node->getNode('var'));
+            $this->parser->addImportedSymbol('function', $alias, 'get' . $name, $node->getNode('var'));
         }
 
         return $node;

@@ -42,6 +42,11 @@ class EscaperNodeVisitor extends AbstractNodeVisitor
         $this->safeAnalysis = new SafeAnalysisNodeVisitor();
     }
 
+    public function getPriority()
+    {
+        return 0;
+    }
+
     protected function doEnterNode(Node $node, Environment $env)
     {
         if ($node instanceof ModuleNode) {
@@ -59,6 +64,15 @@ class EscaperNodeVisitor extends AbstractNodeVisitor
         }
 
         return $node;
+    }
+
+    protected function needEscaping(Environment $env)
+    {
+        if (\count($this->statusStack)) {
+            return $this->statusStack[\count($this->statusStack) - 1];
+        }
+
+        return $this->defaultStrategy ? $this->defaultStrategy : false;
     }
 
     protected function doLeaveNode(Node $node, Environment $env)
@@ -80,26 +94,6 @@ class EscaperNodeVisitor extends AbstractNodeVisitor
         }
 
         return $node;
-    }
-
-    protected function escapePrintNode(PrintNode $node, Environment $env, $type)
-    {
-        if (false === $type) {
-            return $node;
-        }
-
-        $expression = $node->getNode('expr');
-
-        if ($this->isSafeFor($type, $expression, $env)) {
-            return $node;
-        }
-
-        $class = \get_class($node);
-
-        return new $class(
-            $this->getEscaperFilter($type, $expression),
-            $node->getTemplateLine()
-        );
     }
 
     protected function preEscapeFilterNode(FilterExpression $filter, Environment $env)
@@ -139,27 +133,33 @@ class EscaperNodeVisitor extends AbstractNodeVisitor
         return \in_array($type, $safe) || \in_array('all', $safe);
     }
 
-    protected function needEscaping(Environment $env)
-    {
-        if (\count($this->statusStack)) {
-            return $this->statusStack[\count($this->statusStack) - 1];
-        }
-
-        return $this->defaultStrategy ? $this->defaultStrategy : false;
-    }
-
     protected function getEscaperFilter($type, \Twig_NodeInterface $node)
     {
         $line = $node->getTemplateLine();
         $name = new ConstantExpression('escape', $line);
-        $args = new Node([new ConstantExpression((string) $type, $line), new ConstantExpression(null, $line), new ConstantExpression(true, $line)]);
+        $args = new Node([new ConstantExpression((string)$type, $line), new ConstantExpression(null, $line), new ConstantExpression(true, $line)]);
 
         return new FilterExpression($node, $name, $args, $line);
     }
 
-    public function getPriority()
+    protected function escapePrintNode(PrintNode $node, Environment $env, $type)
     {
-        return 0;
+        if (false === $type) {
+            return $node;
+        }
+
+        $expression = $node->getNode('expr');
+
+        if ($this->isSafeFor($type, $expression, $env)) {
+            return $node;
+        }
+
+        $class = \get_class($node);
+
+        return new $class(
+            $this->getEscaperFilter($type, $expression),
+            $node->getTemplateLine()
+        );
     }
 }
 

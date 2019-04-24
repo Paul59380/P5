@@ -5,8 +5,8 @@ class Twig_Extension_Session extends Twig_Extension
     public function getGlobals()
     {
         return array(
-            'session'   => $_SESSION
-        ) ;
+            'session' => $_SESSION
+        );
     }
 
     public function getName()

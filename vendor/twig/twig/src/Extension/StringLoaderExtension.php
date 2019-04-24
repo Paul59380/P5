@@ -10,44 +10,46 @@
  */
 
 namespace Twig\Extension {
-use Twig\TwigFunction;
 
-/**
- * @final
- */
-class StringLoaderExtension extends AbstractExtension
-{
-    public function getFunctions()
+    use Twig\TwigFunction;
+
+    /**
+     * @final
+     */
+    class StringLoaderExtension extends AbstractExtension
     {
-        return [
-            new TwigFunction('template_from_string', 'twig_template_from_string', ['needs_environment' => true]),
-        ];
+        public function getFunctions()
+        {
+            return [
+                new TwigFunction('template_from_string', 'twig_template_from_string', ['needs_environment' => true]),
+            ];
+        }
+
+        public function getName()
+        {
+            return 'string_loader';
+        }
     }
 
-    public function getName()
-    {
-        return 'string_loader';
-    }
-}
-
-class_alias('Twig\Extension\StringLoaderExtension', 'Twig_Extension_StringLoader');
+    class_alias('Twig\Extension\StringLoaderExtension', 'Twig_Extension_StringLoader');
 }
 
 namespace {
-use Twig\Environment;
-use Twig\Template;
 
-/**
- * Loads a template from a string.
- *
- *     {{ include(template_from_string("Hello {{ name }}")) }}
- *
- * @param string $template A template as a string or object implementing __toString()
- *
- * @return Template
- */
-function twig_template_from_string(Environment $env, $template)
-{
-    return $env->createTemplate((string) $template);
-}
+    use Twig\Environment;
+    use Twig\Template;
+
+    /**
+     * Loads a template from a string.
+     *
+     *     {{ include(template_from_string("Hello {{ name }}")) }}
+     *
+     * @param string $template A template as a string or object implementing __toString()
+     *
+     * @return Template
+     */
+    function twig_template_from_string(Environment $env, $template)
+    {
+        return $env->createTemplate((string)$template);
+    }
 }

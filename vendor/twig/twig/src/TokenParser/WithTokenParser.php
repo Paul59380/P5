@@ -43,14 +43,14 @@ class WithTokenParser extends AbstractTokenParser
         return new WithNode($body, $variables, $only, $token->getLine(), $this->getTag());
     }
 
-    public function decideWithEnd(Token $token)
-    {
-        return $token->test('endwith');
-    }
-
     public function getTag()
     {
         return 'with';
+    }
+
+    public function decideWithEnd(Token $token)
+    {
+        return $token->test('endwith');
     }
 }
 

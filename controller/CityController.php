@@ -14,10 +14,6 @@ class CityController
         $this->cityManager = CityManager::getInstance();
     }
 
-    protected function __clone()
-    {
-    }
-
     public static function getInstance()
     {
         if (!isset(self::$instance)) {
@@ -50,5 +46,9 @@ class CityController
     public function existCity($info)
     {
         return $this->cityManager->existCity($info);
+    }
+
+    protected function __clone()
+    {
     }
 }

@@ -36,42 +36,9 @@ class SafeAnalysisNodeVisitor extends AbstractNodeVisitor
         $this->safeVars = $safeVars;
     }
 
-    public function getSafe(\Twig_NodeInterface $node)
+    public function getPriority()
     {
-        $hash = spl_object_hash($node);
-        if (!isset($this->data[$hash])) {
-            return;
-        }
-
-        foreach ($this->data[$hash] as $bucket) {
-            if ($bucket['key'] !== $node) {
-                continue;
-            }
-
-            if (\in_array('html_attr', $bucket['value'])) {
-                $bucket['value'][] = 'html';
-            }
-
-            return $bucket['value'];
-        }
-    }
-
-    protected function setSafe(\Twig_NodeInterface $node, array $safe)
-    {
-        $hash = spl_object_hash($node);
-        if (isset($this->data[$hash])) {
-            foreach ($this->data[$hash] as &$bucket) {
-                if ($bucket['key'] === $node) {
-                    $bucket['value'] = $safe;
-
-                    return;
-                }
-            }
-        }
-        $this->data[$hash][] = [
-            'key' => $node,
-            'value' => $safe,
-        ];
+        return 0;
     }
 
     protected function doEnterNode(Node $node, Environment $env)
@@ -138,6 +105,24 @@ class SafeAnalysisNodeVisitor extends AbstractNodeVisitor
         return $node;
     }
 
+    protected function setSafe(\Twig_NodeInterface $node, array $safe)
+    {
+        $hash = spl_object_hash($node);
+        if (isset($this->data[$hash])) {
+            foreach ($this->data[$hash] as &$bucket) {
+                if ($bucket['key'] === $node) {
+                    $bucket['value'] = $safe;
+
+                    return;
+                }
+            }
+        }
+        $this->data[$hash][] = [
+            'key' => $node,
+            'value' => $safe,
+        ];
+    }
+
     protected function intersectSafe(array $a = null, array $b = null)
     {
         if (null === $a || null === $b) {
@@ -155,9 +140,24 @@ class SafeAnalysisNodeVisitor extends AbstractNodeVisitor
         return array_intersect($a, $b);
     }
 
-    public function getPriority()
+    public function getSafe(\Twig_NodeInterface $node)
     {
-        return 0;
+        $hash = spl_object_hash($node);
+        if (!isset($this->data[$hash])) {
+            return;
+        }
+
+        foreach ($this->data[$hash] as $bucket) {
+            if ($bucket['key'] !== $node) {
+                continue;
+            }
+
+            if (\in_array('html_attr', $bucket['value'])) {
+                $bucket['value'][] = 'html';
+            }
+
+            return $bucket['value'];
+        }
     }
 }
 

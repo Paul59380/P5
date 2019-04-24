@@ -51,14 +51,14 @@ class MacroTokenParser extends AbstractTokenParser
         $this->parser->setMacro($name, new MacroNode($name, new BodyNode([$body]), $arguments, $lineno, $this->getTag()));
     }
 
-    public function decideBlockEnd(Token $token)
-    {
-        return $token->test('endmacro');
-    }
-
     public function getTag()
     {
         return 'macro';
+    }
+
+    public function decideBlockEnd(Token $token)
+    {
+        return $token->test('endmacro');
     }
 }
 

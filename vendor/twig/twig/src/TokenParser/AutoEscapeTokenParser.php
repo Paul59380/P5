@@ -74,14 +74,14 @@ class AutoEscapeTokenParser extends AbstractTokenParser
         return new AutoEscapeNode($value, $body, $lineno, $this->getTag());
     }
 
-    public function decideBlockEnd(Token $token)
-    {
-        return $token->test('endautoescape');
-    }
-
     public function getTag()
     {
         return 'autoescape';
+    }
+
+    public function decideBlockEnd(Token $token)
+    {
+        return $token->test('endautoescape');
     }
 }
 

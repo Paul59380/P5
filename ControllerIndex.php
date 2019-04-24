@@ -19,13 +19,14 @@ class ControllerIndex
         $this->cityController = controller\CityController::getInstance();
         $this->boatController = controller\BoatController::getInstance();
         $this->favoriteController = controller\FavoriteTransportController::getInstance();
-        $this->loader = new \Twig_Loader_Filesystem(__DIR__.'\views');
+        $this->loader = new \Twig_Loader_Filesystem(__DIR__ . '\views');
         $this->twig = new \Twig_Environment($this->loader, [
             'cache' => false
         ]);
     }
 
-    public function displayConnectForm(){
+    public function displayConnectForm()
+    {
         echo $this->twig->render('connection.php.twig');
         if (!empty($_POST['name']) && !empty($_POST['firstName']) && !empty($_POST['password'])) {
             if ($this->userController->existUser($_POST['name'], $_POST['firstName'])) {
@@ -37,9 +38,9 @@ class ControllerIndex
                         "id" => $user->getId(),
                         "role" => $user->getId_role()
                     ];
-                    if($_SESSION['role'] == 2){
+                    if ($_SESSION['role'] == 2) {
                         header('Location:index.php?action=homeUser&idUser=' . $_SESSION['id']);
-                    } elseif ( $_SESSION['role'] == 1 ){
+                    } elseif ($_SESSION['role'] == 1) {
                         header('Location:index.php?action=admin&idUser=' . $_SESSION['id']);
                     }
                 } else {
@@ -57,7 +58,7 @@ class ControllerIndex
         echo $this->twig->render('inscription.php.twig');
         if (!empty($_POST['NewName']) && !empty($_POST['NewFirstName']) && !empty($_POST['NewPassword']) && !empty($_POST['PhoneNumber'])) {
             if (!$this->userController->existUser($_POST['NewName'], $_POST['NewFirstName'])) {
-                $this->userController->addUser($_POST['NewName'], $_POST['NewFirstName'],$_POST['PhoneNumber'], password_hash($_POST['NewPassword'],PASSWORD_DEFAULT));
+                $this->userController->addUser($_POST['NewName'], $_POST['NewFirstName'], $_POST['PhoneNumber'], password_hash($_POST['NewPassword'], PASSWORD_DEFAULT));
                 $user = new User($this->userController->getUser($_POST['NewName'], $_POST['NewFirstName']));
                 $_SESSION = [
                     "name" => $user->getName(),
@@ -65,9 +66,9 @@ class ControllerIndex
                     "id" => $user->getId(),
                     "role" => $user->getId_role()
                 ];
-                if($_SESSION['role'] == 2){
+                if ($_SESSION['role'] == 2) {
                     header('Location:index.php?action=homeUser&idUser=' . $_SESSION['id']);
-                } elseif ( $_SESSION['role'] == 1 ){
+                } elseif ($_SESSION['role'] == 1) {
                     header('Location:index.php?action=admin&idUser=' . $_SESSION['id']);
                 }
             } else {
@@ -118,16 +119,15 @@ class ControllerIndex
         echo $this->twig->render('adminAddTrip.php.twig', ['session' => $_SESSION, 'trips' => $trips, 'cities' => $cities]);
     }
 
-
     public function adminAddTrip()
     {
-        try{
+        try {
             $depart = (int)$_POST['departure_city'];
             $finish = (int)$_POST['finishing_city'];
             $departure = $this->cityController->getCity($depart);
             $finishing = $this->cityController->getCity($finish);
 
-            $this->fluvialTripController->addFluvialTrip($departure->getName(),$departure->getLat(),$departure->getLon(),$finishing->getName(),$finishing->getLat(),$finishing->getLon(),$_POST['price_ton'],$_POST['weight'], $_POST['date_transport']);
+            $this->fluvialTripController->addFluvialTrip($departure->getName(), $departure->getLat(), $departure->getLon(), $finishing->getName(), $finishing->getLat(), $finishing->getLon(), $_POST['price_ton'], $_POST['weight'], $_POST['date_transport']);
             header('Location:index.php?action=adminAddTrip');
         } catch (Exception $e) {
             echo $e->getMessage();
@@ -156,31 +156,31 @@ class ControllerIndex
     public function displayOwnerBoat()
     {
         $boats = $this->boatController->getOwnerBoat($_GET['idUser']);
-        echo $this->twig->render('userBoat.php.twig', ['session' => $_SESSION ,'boats' => $boats]);
+        echo $this->twig->render('userBoat.php.twig', ['session' => $_SESSION, 'boats' => $boats]);
     }
 
     public function addBoat()
     {
         $this->boatController->addBoat($_GET['idUser'], $_POST['name'], $_POST['capacity']);
-        header('Location:index.php?action=addBoat&idUser='.$_GET['idUser']);
+        header('Location:index.php?action=addBoat&idUser=' . $_GET['idUser']);
     }
 
     public function addFavoriteTrip()
     {
         $this->favoriteController->addFavoriteTrip($_GET['idTrip'], $_GET['idUser']);
-        header('Location:'. $_SERVER["HTTP_REFERER"]);
+        header('Location:' . $_SERVER["HTTP_REFERER"]);
     }
 
     public function deleteFavoriteTrip()
     {
         $this->favoriteController->deleteFavoriteTrip($_GET['idFavorite']);
-        header('Location:'. $_SERVER["HTTP_REFERER"]);
+        header('Location:' . $_SERVER["HTTP_REFERER"]);
     }
 
     public function deleteBoat()
     {
         $this->boatController->deleteBoat($_GET['idBoat']);
-        header('Location:'. $_SERVER["HTTP_REFERER"]);
+        header('Location:' . $_SERVER["HTTP_REFERER"]);
     }
 
     public function displayUpdateTrip()
@@ -198,13 +198,13 @@ class ControllerIndex
         $finishing = $this->cityController->getCity($finish);
 
         $this->fluvialTripController->updateFluvialTrip($_GET['idTrip'], $departure->getName(), $departure->getLat(), $departure->getLon(), $finishing->getName(), $finishing->getLat(), $finishing->getLon(), $_POST['price_ton'], $_POST['weight'], $_POST['date_transport']);
-        header('Location:'. $_SERVER["HTTP_REFERER"]);
+        header('Location:' . $_SERVER["HTTP_REFERER"]);
     }
 
     public function deleteTrip()
     {
         $this->fluvialTripController->deleteFluvialTrip($_GET['idTrip']);
-        header('Location:'. $_SERVER["HTTP_REFERER"]);
+        header('Location:' . $_SERVER["HTTP_REFERER"]);
     }
 
     public function disconnection()

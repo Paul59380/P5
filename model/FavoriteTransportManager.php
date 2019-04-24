@@ -14,10 +14,6 @@ class FavoriteTransportManager
         $this->db = PDOFactory::connectedAtDataBase();
     }
 
-    public function __clone()
-    {
-    }
-
     public static function getInstance()
     {
         if (!isset(self::$instance)) {
@@ -25,6 +21,10 @@ class FavoriteTransportManager
         }
 
         return self::$instance;
+    }
+
+    public function __clone()
+    {
     }
 
     public function addFavoriteTrip($idTrip, $idSessionUser)
@@ -63,6 +63,6 @@ class FavoriteTransportManager
 
     public function deleteFavoriteTrip($id)
     {
-        return $q = $this->db->query('DELETE FROM favorite_transport WHERE id = '.$id);
+        return $q = $this->db->query('DELETE FROM favorite_transport WHERE id = ' . $id);
     }
 }

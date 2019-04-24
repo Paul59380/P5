@@ -1,19 +1,19 @@
 {
-    "name": "p5/paul",
-    "authors": [
-        {
-            "name": "Paul59380",
-            "email": "********"
-        }
-    ],
-    "require": {
-        "twig/twig": "~1.0",
-      "ext-pdo": "*"
-    },
-    "autoload": {
-        "psr-4": {
-            "controller\\" : "controller",
-            "model\\" : "model"
-        }
+  "name": "p5/paul",
+  "authors": [
+    {
+      "name": "Paul59380",
+      "email": "********"
     }
+  ],
+  "require": {
+    "twig/twig": "~1.0",
+    "ext-pdo": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "controller\\": "controller",
+      "model\\": "model"
+    }
+  }
 }

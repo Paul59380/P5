@@ -30,6 +30,13 @@ abstract class AbstractNodeVisitor implements NodeVisitorInterface
         return $this->doEnterNode($node, $env);
     }
 
+    /**
+     * Called before child nodes are visited.
+     *
+     * @return Node The modified node
+     */
+    abstract protected function doEnterNode(Node $node, Environment $env);
+
     final public function leaveNode(\Twig_NodeInterface $node, Environment $env)
     {
         if (!$node instanceof Node) {
@@ -38,13 +45,6 @@ abstract class AbstractNodeVisitor implements NodeVisitorInterface
 
         return $this->doLeaveNode($node, $env);
     }
-
-    /**
-     * Called before child nodes are visited.
-     *
-     * @return Node The modified node
-     */
-    abstract protected function doEnterNode(Node $node, Environment $env);
 
     /**
      * Called after child nodes are visited.

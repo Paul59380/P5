@@ -25,11 +25,11 @@ class FilesystemCache implements CacheInterface
 
     /**
      * @param string $directory The root cache directory
-     * @param int    $options   A set of options
+     * @param int $options A set of options
      */
     public function __construct($directory, $options = 0)
     {
-        $this->directory = rtrim($directory, '\/').'/';
+        $this->directory = rtrim($directory, '\/') . '/';
         $this->options = $options;
     }
 
@@ -37,7 +37,7 @@ class FilesystemCache implements CacheInterface
     {
         $hash = hash('sha256', $className);
 
-        return $this->directory.$hash[0].$hash[1].'/'.$hash.'.php';
+        return $this->directory . $hash[0] . $hash[1] . '/' . $hash . '.php';
     }
 
     public function load($key)
@@ -86,7 +86,7 @@ class FilesystemCache implements CacheInterface
             return 0;
         }
 
-        return (int) @filemtime($key);
+        return (int)@filemtime($key);
     }
 }
 

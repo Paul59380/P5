@@ -1,6 +1,6 @@
 {% extends 'templates/template.php.twig' %}
 {% block title %}
-Gestion des voyages
+    Gestion des voyages
 {% endblock %}
 
 {% block content %}
@@ -29,13 +29,16 @@ Gestion des voyages
         <div id="addCity">
             <form action="index.php?action=addCities" method="POST">
                 <div class="left">
-                    <label>Nom de la ville :<input type="text" name="city" placeholder="Ex : Dunkerque" required></label>
+                    <label>Nom de la ville :<input type="text" name="city" placeholder="Ex : Dunkerque"
+                                                   required></label>
                 </div>
                 <div class="center">
-                    <label>Latitude :<input type="number" step="0.00000000001" placeholder="Ex : 51,0344" name="lat" required></label>
+                    <label>Latitude :<input type="number" step="0.00000000001" placeholder="Ex : 51,0344" name="lat"
+                                            required></label>
                 </div>
                 <div class="right">
-                    <label>Longitude :<input type="number" step="0.000000000001" placeholder="Ex : 2,37678" name="lon" required></label>
+                    <label>Longitude :<input type="number" step="0.000000000001" placeholder="Ex : 2,37678" name="lon"
+                                             required></label>
                     <input type="submit" name="send_trip" value="Ajouter la ville"><br/>
                 </div>
             </form>
@@ -65,9 +68,9 @@ Gestion des voyages
                 <label> Ville de départ
                     <select name="departure_city">
 
-                {% for city in cities %}
-                        <option value='{{ city.id }}'>{{ city.name }}</option>
-                {% endfor %}
+                        {% for city in cities %}
+                            <option value='{{ city.id }}'>{{ city.name }}</option>
+                        {% endfor %}
                     </select>
                 </label>
 
@@ -89,17 +92,18 @@ Gestion des voyages
 
         <div id="Tripadmin">
             {% for trip in trips %}
-            <p>
-            <span style="font-size: 20px; font-style: italic"> {{ trip.departure_city }} <i style="color:coral;" class="far fa-arrow-alt-circle-right fa-1x"></i> {{ trip.finishing_city }}
+                <p>
+            <span style="font-size: 20px; font-style: italic"> {{ trip.departure_city }} <i style="color:coral;"
+                                                                                            class="far fa-arrow-alt-circle-right fa-1x"></i> {{ trip.finishing_city }}
             </span> <br/>
-                <span>Le : {{ trip.date_transport }}</span> <br/>
-                <span>Charge à transporter : {{ trip.weight }}</span> <br/>
-                <a id="updateTrip" href="index.php?action=updateTrip&idTrip={{ trip.id }}"><i
-                            class="far fa-edit fa-1x"></i></a>
-                <a id="deleteTrip" href="index.php?action=deleteTrip&idTrip={{ trip.id }}"><i
-                            class="fas fa-trash-restore-alt"></i></a>
-            </p>
-            <br/>
+                    <span>Le : {{ trip.date_transport }}</span> <br/>
+                    <span>Charge à transporter : {{ trip.weight }}</span> <br/>
+                    <a id="updateTrip" href="index.php?action=updateTrip&idTrip={{ trip.id }}"><i
+                                class="far fa-edit fa-1x"></i></a>
+                    <a id="deleteTrip" href="index.php?action=deleteTrip&idTrip={{ trip.id }}"><i
+                                class="fas fa-trash-restore-alt"></i></a>
+                </p>
+                <br/>
             {% endfor %}
         </div>
     </div>

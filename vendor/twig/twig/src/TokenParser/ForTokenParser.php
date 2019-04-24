@@ -76,17 +76,6 @@ class ForTokenParser extends AbstractTokenParser
         return new ForNode($keyTarget, $valueTarget, $seq, $ifexpr, $body, $else, $lineno, $this->getTag());
     }
 
-    public function decideForFork(Token $token)
-    {
-        return $token->test(['else', 'endfor']);
-    }
-
-    public function decideForEnd(Token $token)
-    {
-        return $token->test('endfor');
-    }
-
-    // the loop variable cannot be used in the condition
     protected function checkLoopUsageCondition(TokenStream $stream, \Twig_NodeInterface $node)
     {
         if ($node instanceof GetAttrExpression && $node->getNode('node') instanceof NameExpression && 'loop' == $node->getNode('node')->getAttribute('name')) {
@@ -102,8 +91,6 @@ class ForTokenParser extends AbstractTokenParser
         }
     }
 
-    // check usage of non-defined loop-items
-    // it does not catch all problems (for instance when a for is included into another or when the variable is used in an include)
     protected function checkLoopUsageBody(TokenStream $stream, \Twig_NodeInterface $node)
     {
         if ($node instanceof GetAttrExpression && $node->getNode('node') instanceof NameExpression && 'loop' == $node->getNode('node')->getAttribute('name')) {
@@ -127,9 +114,24 @@ class ForTokenParser extends AbstractTokenParser
         }
     }
 
+    // the loop variable cannot be used in the condition
+
     public function getTag()
     {
         return 'for';
+    }
+
+    // check usage of non-defined loop-items
+    // it does not catch all problems (for instance when a for is included into another or when the variable is used in an include)
+
+    public function decideForFork(Token $token)
+    {
+        return $token->test(['else', 'endfor']);
+    }
+
+    public function decideForEnd(Token $token)
+    {
+        return $token->test('endfor');
     }
 }
 

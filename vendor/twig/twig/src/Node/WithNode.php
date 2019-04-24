@@ -27,7 +27,7 @@ class WithNode extends Node
             $nodes['variables'] = $variables;
         }
 
-        parent::__construct($nodes, ['only' => (bool) $only], $lineno, $tag);
+        parent::__construct($nodes, ['only' => (bool)$only], $lineno, $tag);
     }
 
     public function compile(Compiler $compiler)
@@ -49,8 +49,7 @@ class WithNode extends Node
                 ->indent()
                 ->write("throw new RuntimeError('Variables passed to the \"with\" tag must be a hash.');\n")
                 ->outdent()
-                ->write("}\n")
-            ;
+                ->write("}\n");
 
             if ($this->getAttribute('only')) {
                 $compiler->write("\$context = ['_parent' => \$context];\n");
@@ -65,8 +64,7 @@ class WithNode extends Node
 
         $compiler
             ->subcompile($this->getNode('body'))
-            ->write("\$context = \$context['_parent'];\n")
-        ;
+            ->write("\$context = \$context['_parent'];\n");
     }
 }
 

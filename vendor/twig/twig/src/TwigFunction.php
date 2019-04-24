@@ -58,14 +58,14 @@ class TwigFunction
         return $this->options['node_class'];
     }
 
-    public function setArguments($arguments)
-    {
-        $this->arguments = $arguments;
-    }
-
     public function getArguments()
     {
         return $this->arguments;
+    }
+
+    public function setArguments($arguments)
+    {
+        $this->arguments = $arguments;
     }
 
     public function needsEnvironment()
@@ -98,7 +98,7 @@ class TwigFunction
 
     public function isDeprecated()
     {
-        return (bool) $this->options['deprecated'];
+        return (bool)$this->options['deprecated'];
     }
 
     public function getDeprecatedVersion()

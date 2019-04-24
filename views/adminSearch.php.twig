@@ -24,14 +24,16 @@
 
     <div id="TripSearch">
         {% for trip in trips %}
-        <p>
-            <span style="font-size: 20px; font-style: italic"> {{ trip.departure_city }} <i style="color:coral;" class="far fa-arrow-alt-circle-right fa-1x"></i> {{ trip.finishing_city }}
+            <p>
+            <span style="font-size: 20px; font-style: italic"> {{ trip.departure_city }} <i style="color:coral;"
+                                                                                            class="far fa-arrow-alt-circle-right fa-1x"></i> {{ trip.finishing_city }}
             </span> <br/>
-            <span>Le : {{ trip.date_transport }} </span> <br/>
-            <span>Charge à transporter : {{ trip.weight }}</span>
-        </p>
-        <a class="return" href="index.php?action=adminSearchBoat&capacity={{ trip.weight }}&idTrip={{ trip.id }}">Rechercher</a> <br/>
-        <br/>
+                <span>Le : {{ trip.date_transport }} </span> <br/>
+                <span>Charge à transporter : {{ trip.weight }}</span>
+            </p>
+            <a class="return" href="index.php?action=adminSearchBoat&capacity={{ trip.weight }}&idTrip={{ trip.id }}">Rechercher</a>
+            <br/>
+            <br/>
         {% endfor %}
     </div>
 {% endblock %}

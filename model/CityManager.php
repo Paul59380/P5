@@ -12,16 +12,12 @@ use PDO;
 
 class CityManager
 {
-    protected $db;
     protected static $instance;
+    protected $db;
 
     protected function __construct()
     {
         $this->db = PDOFactory::connectedAtDataBase();
-    }
-
-    protected function __clone()
-    {
     }
 
     public static function getInstance()
@@ -51,16 +47,29 @@ class CityManager
      */
     public function getCity($id)
     {
-        if($this->existCity($id)){
+        if ($this->existCity($id)) {
             $q = $this->db->prepare('SELECT * FROM city WHERE id = :id');
             $q->execute(array(
                 ":id" => $id
             ));
 
             return new City($q->fetch(PDO::FETCH_ASSOC));
-        }
-        else {
+        } else {
             throw new \Exception("Erreur : Cette ville n'as pas été àjouté à la liste de ville disponible");
+        }
+    }
+
+    public function existCity($info)
+    {
+        if (is_int($info)) {
+            return (bool)$this->db->query('SELECT * FROM city WHERE id =' . $info)->fetchColumn();
+        } else {
+            $q = $this->db->prepare('SELECT * FROM city WHERE name = :name');
+            $q->execute(array(
+                ':name' => $info
+            ));
+
+            return (bool)$q->fetchColumn();
         }
     }
 
@@ -80,17 +89,7 @@ class CityManager
         ));
     }
 
-    public function existCity($info)
+    protected function __clone()
     {
-        if (is_int($info)) {
-            return (bool)$this->db->query('SELECT * FROM city WHERE id =' . $info)->fetchColumn();
-        } else {
-            $q = $this->db->prepare('SELECT * FROM city WHERE name = :name');
-            $q->execute(array(
-                ':name' => $info
-            ));
-
-            return (bool)$q->fetchColumn();
-        }
     }
 }

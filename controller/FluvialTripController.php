@@ -14,10 +14,6 @@ class FluvialTripController
         $this->fluvialTripManager = FluvialTripManager::getInstance();
     }
 
-    protected function __clone()
-    {
-    }
-
     public static function getInstance()
     {
         if (!isset(self::$instance)) {
@@ -54,5 +50,9 @@ class FluvialTripController
     {
         return $this->fluvialTripManager->updateFluvialTrip($id, $cityStart, $cityStartLat, $cityStartLon
             , $cityFinish, $cityFinishLat, $cityFinishLon, $priceTon, $weight, $date);
+    }
+
+    protected function __clone()
+    {
     }
 }

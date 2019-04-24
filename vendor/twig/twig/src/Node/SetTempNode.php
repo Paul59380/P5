@@ -36,8 +36,7 @@ class SetTempNode extends Node
             ->repr($name)
             ->raw(']; } else { $_')
             ->raw($name)
-            ->raw("_ = null; }\n")
-        ;
+            ->raw("_ = null; }\n");
     }
 }
 

@@ -14,13 +14,9 @@ class FavoriteTransportController
         $this->favoriteTransportManager = FavoriteTransportManager::getInstance();
     }
 
-    protected function __clone()
-    {
-    }
-
     public static function getInstance()
     {
-        if(!isset(self::$instance)) {
+        if (!isset(self::$instance)) {
             self::$instance = new self;
         }
 
@@ -40,5 +36,9 @@ class FavoriteTransportController
     public function deleteFavoriteTrip($id)
     {
         return $this->favoriteTransportManager->deleteFavoriteTrip($id);
+    }
+
+    protected function __clone()
+    {
     }
 }

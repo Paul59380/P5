@@ -38,16 +38,14 @@ class MacroNode extends Node
     {
         $compiler
             ->addDebugInfo($this)
-            ->write(sprintf('public function get%s(', $this->getAttribute('name')))
-        ;
+            ->write(sprintf('public function get%s(', $this->getAttribute('name')));
 
         $count = \count($this->getNode('arguments'));
         $pos = 0;
         foreach ($this->getNode('arguments') as $name => $default) {
             $compiler
-                ->raw('$__'.$name.'__ = ')
-                ->subcompile($default)
-            ;
+                ->raw('$__' . $name . '__ = ')
+                ->subcompile($default);
 
             if (++$pos < $count) {
                 $compiler->raw(', ');
@@ -65,28 +63,24 @@ class MacroNode extends Node
         $compiler
             ->raw(")\n")
             ->write("{\n")
-            ->indent()
-        ;
+            ->indent();
 
         $compiler
             ->write("\$context = \$this->env->mergeGlobals([\n")
-            ->indent()
-        ;
+            ->indent();
 
         foreach ($this->getNode('arguments') as $name => $default) {
             $compiler
                 ->write('')
                 ->string($name)
-                ->raw(' => $__'.$name.'__')
-                ->raw(",\n")
-            ;
+                ->raw(' => $__' . $name . '__')
+                ->raw(",\n");
         }
 
         $compiler
             ->write('')
             ->string(self::VARARGS_NAME)
-            ->raw(' => ')
-        ;
+            ->raw(' => ');
 
         if (\PHP_VERSION_ID >= 50600) {
             $compiler->raw("\$__varargs__,\n");
@@ -96,8 +90,7 @@ class MacroNode extends Node
                 ->repr($count)
                 ->raw(' ? array_slice(func_get_args(), ')
                 ->repr($count)
-                ->raw(") : [],\n")
-            ;
+                ->raw(") : [],\n");
         }
 
         $compiler
@@ -122,8 +115,7 @@ class MacroNode extends Node
             ->write("}\n\n")
             ->write("return ('' === \$tmp = ob_get_clean()) ? '' : new Markup(\$tmp, \$this->env->getCharset());\n")
             ->outdent()
-            ->write("}\n\n")
-        ;
+            ->write("}\n\n");
     }
 }
 

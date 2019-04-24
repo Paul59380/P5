@@ -29,19 +29,14 @@ class FavoriteTransport
         }
     }
 
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
     public function getId()
     {
         return $this->id;
     }
 
-    public function setId_user($id_user)
+    public function setId($id)
     {
-        $this->id_user = $id_user;
+        $this->id = $id;
     }
 
     public function getId_user()
@@ -49,9 +44,9 @@ class FavoriteTransport
         return $this->id_user;
     }
 
-    public function setDeparture_city($departure_city)
+    public function setId_user($id_user)
     {
-        $this->departure_city = $departure_city;
+        $this->id_user = $id_user;
     }
 
     public function getDeparture_city()
@@ -59,9 +54,9 @@ class FavoriteTransport
         return $this->departure_city;
     }
 
-    public function setLat_departure($lat_departure)
+    public function setDeparture_city($departure_city)
     {
-        $this->lat_departure = $lat_departure;
+        $this->departure_city = $departure_city;
     }
 
     public function getLat_departure()
@@ -69,9 +64,9 @@ class FavoriteTransport
         return $this->lat_departure;
     }
 
-    public function setLon_departure($lon_departure)
+    public function setLat_departure($lat_departure)
     {
-        $this->lon_departure = $lon_departure;
+        $this->lat_departure = $lat_departure;
     }
 
     public function getLon_departure()
@@ -79,9 +74,9 @@ class FavoriteTransport
         return $this->lon_departure;
     }
 
-    public function setFinishing_city($finishing_city)
+    public function setLon_departure($lon_departure)
     {
-        $this->finishing_city = $finishing_city;
+        $this->lon_departure = $lon_departure;
     }
 
     public function getFinishing_city()
@@ -89,9 +84,9 @@ class FavoriteTransport
         return $this->finishing_city;
     }
 
-    public function setLat_finishing($lat_finishing)
+    public function setFinishing_city($finishing_city)
     {
-        $this->lat_finishing = $lat_finishing;
+        $this->finishing_city = $finishing_city;
     }
 
     public function getLat_finishing()
@@ -99,9 +94,9 @@ class FavoriteTransport
         return $this->lat_finishing;
     }
 
-    public function setLon_finishing($lon_finishing)
+    public function setLat_finishing($lat_finishing)
     {
-        $this->lon_finishing = $lon_finishing;
+        $this->lat_finishing = $lat_finishing;
     }
 
     public function getLon_finishing()
@@ -109,9 +104,9 @@ class FavoriteTransport
         return $this->lon_finishing;
     }
 
-    public function setPrice_ton($price_ton)
+    public function setLon_finishing($lon_finishing)
     {
-        $this->price_ton = $price_ton;
+        $this->lon_finishing = $lon_finishing;
     }
 
     public function getPrice_ton()
@@ -119,9 +114,9 @@ class FavoriteTransport
         return $this->price_ton;
     }
 
-    public function setWeight($weight)
+    public function setPrice_ton($price_ton)
     {
-        $this->weight = $weight;
+        $this->price_ton = $price_ton;
     }
 
     public function getWeight()
@@ -129,14 +124,19 @@ class FavoriteTransport
         return $this->weight;
     }
 
-    public function setDate_transport($date_transport)
+    public function setWeight($weight)
     {
-        $this->date_transport = $date_transport;
+        $this->weight = $weight;
     }
 
     public function getDate_transport()
     {
         return $this->date_transport;
+    }
+
+    public function setDate_transport($date_transport)
+    {
+        $this->date_transport = $date_transport;
     }
 }
 

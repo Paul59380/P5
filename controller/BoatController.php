@@ -14,10 +14,6 @@ class BoatController
         $this->boatManager = BoatManager::getInstance();
     }
 
-    protected function __clone()
-    {
-    }
-
     public static function getInstance()
     {
         if (!isset(self::$instance)) {
@@ -61,5 +57,9 @@ class BoatController
     public function updateBoat($id, $newName, $capacity)
     {
         return $this->boatManager->updateBoat($id, $newName, $capacity);
+    }
+
+    protected function __clone()
+    {
     }
 }

@@ -16,6 +16,7 @@ class User
     protected $firstname;
     protected $pass;
     protected $phone;
+
     //protected $boat;
 
     public function __construct($data)
@@ -34,19 +35,14 @@ class User
         //$this->boat = $boatManager->getOwnerBoat($this->id);
     }
 
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
     public function getId()
     {
         return $this->id;
     }
 
-    public function setName($name)
+    public function setId($id)
     {
-        $this->name = $name;
+        $this->id = $id;
     }
 
     public function getName()
@@ -54,9 +50,9 @@ class User
         return $this->name;
     }
 
-    public function setFirstname($firstname)
+    public function setName($name)
     {
-        $this->firstname = $firstname;
+        $this->name = $name;
     }
 
     public function getFirstname()
@@ -64,9 +60,9 @@ class User
         return $this->firstname;
     }
 
-    public function setId_role($id_role)
+    public function setFirstname($firstname)
     {
-        $this->id_role = $id_role;
+        $this->firstname = $firstname;
     }
 
     public function getId_role()
@@ -74,9 +70,9 @@ class User
         return $this->id_role;
     }
 
-    public function setPass($pass)
+    public function setId_role($id_role)
     {
-        $this->pass = $pass;
+        $this->id_role = $id_role;
     }
 
     public function getPass()
@@ -84,13 +80,18 @@ class User
         return $this->pass;
     }
 
-    public function setPhone($phone)
+    public function setPass($pass)
     {
-        $this->phone = $phone;
+        $this->pass = $pass;
     }
 
     public function getPhone()
     {
         return $this->phone;
+    }
+
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
     }
 }
