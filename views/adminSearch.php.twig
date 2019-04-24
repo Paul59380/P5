@@ -1,0 +1,37 @@
+{% extends 'templates/template.php.twig' %}
+{% block title %}
+    Trouver un bateau
+{% endblock %}
+
+{% block content %}
+    {% include 'navigations/adminNav.php.twig' %}
+    <p style="font-size: 35px; text-align: center; margin-top: 150px">Rechercher un <span
+                style="color: coral">bateau</span>
+    </p>
+    <br/>
+    <div id="ligne_point">
+        <div class="ligne_1">
+            <hr>
+        </div>
+        <div class="cercle">
+            <div class="point"></div>
+        </div>
+        <div class="ligne_2">
+            <hr>
+        </div>
+    </div>
+
+
+    <div id="TripSearch">
+        {% for trip in trips %}
+        <p>
+            <span style="font-size: 20px; font-style: italic"> {{ trip.departure_city }} <i style="color:coral;" class="far fa-arrow-alt-circle-right fa-1x"></i> {{ trip.finishing_city }}
+            </span> <br/>
+            <span>Le : {{ trip.date_transport }} </span> <br/>
+            <span>Charge à transporter : {{ trip.weight }}</span>
+        </p>
+        <a class="return" href="index.php?action=adminSearchBoat&capacity={{ trip.weight }}&idTrip={{ trip.id }}">Rechercher</a> <br/>
+        <br/>
+        {% endfor %}
+    </div>
+{% endblock %}

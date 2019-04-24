@@ -1,0 +1,121 @@
+{% extends 'templates/templateMap.php.twig' %}
+{% block title %}
+    Nos Voyages
+{% endblock %}
+
+{% block content %}
+    {% include 'navigations/userNav.php.twig' %}
+    <p style="font-size: 35px; text-align: center; margin-top: 50px">Transports <span
+                style="color: coral">Disponibles</span></p> <br/>
+    <div id="ligne_point">
+        <div class="ligne_1">
+            <hr>
+        </div>
+        <div class="cercle">
+            <div class="point"></div>
+        </div>
+        <div class="ligne_2">
+            <hr>
+        </div>
+    </div>
+
+    <div id="ContentMapAndTrip">
+        <div id="map">
+        </div>
+
+    {% if getTrip is defined %}
+        <div id="infoTrip">
+            <h2>
+                {{ getTrip.departure_city }} <i id="displayTrip" class="far fa-arrow-alt-circle-right fa-1x"></i>
+                {{ getTrip.finishing_city }}</h2>
+            <br/>
+            <p>Prévu le : <span>{{ getTrip.date_transport }}</span></p>
+            <p>Charge à transporter : <span>{{ getTrip.weight }} </span>Tonnes</p>
+            <p>Prix de la tonne : <span>{{ getTrip.price_ton }}</span>€/T HT</p>
+            <p>Capacité minimum requise : <span>{{ getTrip.capacity }} </span>Tonnes
+            </p>
+            <p>Voyage payé : <span
+                        style="color: coral;">{{ getTrip.weight * getTrip.price_ton }} </span>€
+            </p>
+            <br/><br/>
+            <a href="index.php?action=addFavoriteTrip&idUser={{ session.id }}&idTrip={{ getTrip.id }}"><i
+                        id="star" class="fas fa-star fa-1x"></i></a>
+        </div>
+    {% endif %}
+        <div id="Trip">
+            <?php
+        {% for trip in trips %}
+            <p>
+            <span style="font-size: 20px; font-style: italic"> {{ trip.departure_city }} <i style="color:coral;" class="far fa-arrow-alt-circle-right fa-1x"></i> {{ trip.finishing_city }}
+            </span> <br/>
+            <span>Le : {{ trip.date_transport }}</span> <br/>
+            <span>Charge à transporter : {{ trip.weight }}</span>
+            </p>
+            <a class="testA"
+               href="index.php?action=Trips&idUser={{ session.id }}&d_city={{ trip.departure_city }}&d_lat={{ trip.lat_departure }}&d_lon={{ trip.lon_departure }}&f_city={{ trip.finishing_city }}&f_lat={{ trip.lat_finishing }}&f_lon={{ trip.lon_finishing }}&idTrip={{ trip.id }}">Voir</a>
+            <br/>
+            <br/>
+            {% endfor %}
+        </div>
+
+    </div>
+    <p style="font-size: 35px; text-align: center; margin-top: 50px">Vos transports <span
+                style="color: coral">Favoris</span></p> <br/>
+    <div id="ligne_point">
+        <div class="ligne_1">
+            <hr>
+        </div>
+        <div class="cercle">
+            <div class="point"></div>
+        </div>
+        <div class="ligne_2">
+            <hr>
+        </div>
+    </div>
+
+    <div class="chevron" title="déplier la liste">
+        <button class="show">
+            <i class="fas fa-chevron-down fa-3x"></i>
+            <i class="fas fa-chevron-down fa-2x"></i>
+        </button>
+    </div>
+    <div class="chevronUp" title="replier la liste">
+        <button class="show2">
+            <i class="fas fa-chevron-up fa-2x"></i>
+            <i class="fas fa-chevron-up fa-3x"></i>
+        </button>
+    </div>
+
+
+        {% for favorite in favorites %}
+            <div class="Trs">
+        <fieldset id="favoriteTransport">
+            <legend><a href="index.php?action=deleteFavoriteTrip&idFavorite={{ favorite.id }}"><i style="color: red" class="far fa-trash-alt" title="Supprimer ce transport des favoris"></i></a>
+            </legend>
+
+            <table style="width: 100%">
+                <tr>
+                    <td>Départ</td>
+                    <td>Arrivé</td>
+                    <td>Date</td>
+                    <td>Prix/T HT</td>
+                    <td>Poid</td>
+                    <td>Voyage payé HT</td>
+                </tr>
+                <tr>
+                    <td><span style="color:black;" class="hideHelp">Départ : </span>
+                        <span>{{ favorite.departure_city }}</span></td>
+                    <td><span style="color:black;"
+                              class="hideHelp">Arrivé : </span><span> {{ favorite.finishing_city }}</span></td>
+                    <td><span style="color:black;" class="hideHelp">Date : </span><span>{{ favorite.date_transport }}</span></td>
+                    <td><span style="color:black;"
+                              class="hideHelp">Prix de la tonne : </span><span>{{ favorite.price_ton }} €</span></td>
+                    <td><span style="color:black;"
+                              class="hideHelp">Poids : </span><span>{{ favorite.weight }} T</span></td>
+                    <td><span style="color:black;" class="hideHelp">Payé : </span><span>{{ favorite.weight*favorite.price_ton }} €</span></td>
+                </tr>
+            </table>
+        </fieldset>
+    </div>
+        {% endfor %}
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'templates/templateForm.php.twig' %}
+
+{% block title %}
+    hello
+{% endblock %}
+
+{% block content %}
+
+{% include 'navigations/visitorNav.php.twig' %}
+    <div id="connectionBlock">
+        <fieldset>
+            <legend><span>Déjà inscrit ?</span></legend>
+            <form id="connectForm" method="POST">
+                <label>Nom :<input type="text" name="name"></label>
+                <label>Prénom :<input type="text" name="firstName"></label>
+                <label>Mots de passe :<input type="password" name="password"></label>
+                <input type="submit" name="connect" value="Se connecter">
+            </form>
+            <a style="text-decoration: none; color: red" href="index.php?action=inscription">Créer un compte</a>
+        </fieldset>
+    </div>
+{% endblock %}
