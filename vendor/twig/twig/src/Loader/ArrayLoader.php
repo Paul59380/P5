@@ -43,19 +43,19 @@ class ArrayLoader implements LoaderInterface, ExistsLoaderInterface, SourceConte
     /**
      * Adds or overrides a template.
      *
-     * @param string $name The template name
+     * @param string $name     The template name
      * @param string $template The template source
      */
     public function setTemplate($name, $template)
     {
-        $this->templates[(string)$name] = $template;
+        $this->templates[(string) $name] = $template;
     }
 
     public function getSource($name)
     {
         @trigger_error(sprintf('Calling "getSource" on "%s" is deprecated since 1.27. Use getSourceContext() instead.', \get_class($this)), E_USER_DEPRECATED);
 
-        $name = (string)$name;
+        $name = (string) $name;
         if (!isset($this->templates[$name])) {
             throw new LoaderError(sprintf('Template "%s" is not defined.', $name));
         }
@@ -65,7 +65,7 @@ class ArrayLoader implements LoaderInterface, ExistsLoaderInterface, SourceConte
 
     public function getSourceContext($name)
     {
-        $name = (string)$name;
+        $name = (string) $name;
         if (!isset($this->templates[$name])) {
             throw new LoaderError(sprintf('Template "%s" is not defined.', $name));
         }
@@ -75,22 +75,22 @@ class ArrayLoader implements LoaderInterface, ExistsLoaderInterface, SourceConte
 
     public function exists($name)
     {
-        return isset($this->templates[(string)$name]);
+        return isset($this->templates[(string) $name]);
     }
 
     public function getCacheKey($name)
     {
-        $name = (string)$name;
+        $name = (string) $name;
         if (!isset($this->templates[$name])) {
             throw new LoaderError(sprintf('Template "%s" is not defined.', $name));
         }
 
-        return $name . ':' . $this->templates[$name];
+        return $name.':'.$this->templates[$name];
     }
 
     public function isFresh($name, $time)
     {
-        $name = (string)$name;
+        $name = (string) $name;
         if (!isset($this->templates[$name])) {
             throw new LoaderError(sprintf('Template "%s" is not defined.', $name));
         }

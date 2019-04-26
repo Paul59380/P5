@@ -39,7 +39,8 @@ class SandboxNode extends Node
             ->indent()
             ->write("\$this->sandbox->disableSandbox();\n")
             ->outdent()
-            ->write("}\n");
+            ->write("}\n")
+        ;
     }
 }
 

@@ -38,18 +38,6 @@ class Profile implements \IteratorAggregate, \Serializable
         $this->enter();
     }
 
-    /**
-     * Starts the profiling.
-     */
-    public function enter()
-    {
-        $this->starts = [
-            'wt' => microtime(true),
-            'mu' => memory_get_usage(),
-            'pmu' => memory_get_peak_usage(),
-        ];
-    }
-
     public function getTemplate()
     {
         return $this->template;
@@ -63,6 +51,11 @@ class Profile implements \IteratorAggregate, \Serializable
     public function getName()
     {
         return $this->name;
+    }
+
+    public function isRoot()
+    {
+        return self::ROOT === $this->type;
     }
 
     public function isTemplate()
@@ -110,11 +103,6 @@ class Profile implements \IteratorAggregate, \Serializable
         return isset($this->ends['wt']) && isset($this->starts['wt']) ? $this->ends['wt'] - $this->starts['wt'] : 0;
     }
 
-    public function isRoot()
-    {
-        return self::ROOT === $this->type;
-    }
-
     /**
      * Returns the memory usage in bytes.
      *
@@ -133,6 +121,18 @@ class Profile implements \IteratorAggregate, \Serializable
     public function getPeakMemoryUsage()
     {
         return isset($this->ends['pmu']) && isset($this->starts['pmu']) ? $this->ends['pmu'] - $this->starts['pmu'] : 0;
+    }
+
+    /**
+     * Starts the profiling.
+     */
+    public function enter()
+    {
+        $this->starts = [
+            'wt' => microtime(true),
+            'mu' => memory_get_usage(),
+            'pmu' => memory_get_peak_usage(),
+        ];
     }
 
     /**

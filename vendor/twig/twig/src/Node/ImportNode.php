@@ -33,7 +33,8 @@ class ImportNode extends Node
             ->addDebugInfo($this)
             ->write('')
             ->subcompile($this->getNode('var'))
-            ->raw(' = ');
+            ->raw(' = ')
+        ;
 
         if ($this->getNode('expr') instanceof NameExpression && '_self' === $this->getNode('expr')->getAttribute('name')) {
             $compiler->raw('$this');
@@ -45,7 +46,8 @@ class ImportNode extends Node
                 ->repr($this->getTemplateName())
                 ->raw(', ')
                 ->repr($this->getTemplateLine())
-                ->raw(')');
+                ->raw(')')
+            ;
         }
 
         $compiler->raw(";\n");

@@ -53,14 +53,14 @@ class SandboxTokenParser extends AbstractTokenParser
         return new SandboxNode($body, $token->getLine(), $this->getTag());
     }
 
-    public function getTag()
-    {
-        return 'sandbox';
-    }
-
     public function decideBlockEnd(Token $token)
     {
         return $token->test('endsandbox');
+    }
+
+    public function getTag()
+    {
+        return 'sandbox';
     }
 }
 

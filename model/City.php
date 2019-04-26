@@ -28,19 +28,14 @@ class City
         }
     }
 
-    function getId()
-    {
-        return $this->id;
-    }
-
     public function setId($id)
     {
         $this->id = $id;
     }
 
-    public function getName()
+    function getId()
     {
-        return $this->name;
+        return $this->id;
     }
 
     public function setName($name)
@@ -48,9 +43,9 @@ class City
         $this->name = $name;
     }
 
-    public function getLat()
+    public function getName()
     {
-        return $this->lat;
+        return $this->name;
     }
 
     public function setLat($lat)
@@ -58,13 +53,18 @@ class City
         $this->lat = $lat;
     }
 
-    public function getLon()
+    public function getLat()
     {
-        return $this->lon;
+        return $this->lat;
     }
 
     public function setLon($lon)
     {
         $this->lon = $lon;
+    }
+
+    public function getLon()
+    {
+        return $this->lon;
     }
 }

@@ -30,8 +30,8 @@ class TokenStream
     private $source;
 
     /**
-     * @param array $tokens An array of tokens
-     * @param string|null $name The name of the template which tokens are associated with
+     * @param array       $tokens An array of tokens
+     * @param string|null $name   The name of the template which tokens are associated with
      * @param string|null $source The source code associated with the tokens
      */
     public function __construct(array $tokens, $name = null, $source = null)
@@ -62,18 +62,6 @@ class TokenStream
     }
 
     /**
-     * Tests a token, sets the pointer to the next one and returns it or throws a syntax error.
-     *
-     * @return Token|null The next token if the condition is true, null otherwise
-     */
-    public function nextIf($primary, $secondary = null)
-    {
-        if ($this->tokens[$this->current]->test($primary, $secondary)) {
-            return $this->next();
-        }
-    }
-
-    /**
      * Sets the pointer to the next token and returns the old one.
      *
      * @return Token
@@ -88,6 +76,18 @@ class TokenStream
     }
 
     /**
+     * Tests a token, sets the pointer to the next one and returns it or throws a syntax error.
+     *
+     * @return Token|null The next token if the condition is true, null otherwise
+     */
+    public function nextIf($primary, $secondary = null)
+    {
+        if ($this->tokens[$this->current]->test($primary, $secondary)) {
+            return $this->next();
+        }
+    }
+
+    /**
      * Tests a token and returns it or throws a syntax error.
      *
      * @return Token
@@ -98,7 +98,7 @@ class TokenStream
         if (!$token->test($type, $value)) {
             $line = $token->getLine();
             throw new SyntaxError(sprintf('%sUnexpected token "%s" of value "%s" ("%s" expected%s).',
-                $message ? $message . '. ' : '',
+                $message ? $message.'. ' : '',
                 Token::typeToEnglish($token->getType()), $token->getValue(),
                 Token::typeToEnglish($type), $value ? sprintf(' with value "%s"', $value) : ''),
                 $line,

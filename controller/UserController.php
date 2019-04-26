@@ -14,6 +14,10 @@ class UserController
         $this->userManager = UserManager::getInstance();
     }
 
+    protected function __clone()
+    {
+    }
+
     public static function getInstance()
     {
         if (!isset(self::$instance)) {
@@ -52,9 +56,5 @@ class UserController
     public function getUser($name, $firstName)
     {
         return $this->userManager->getUser($name, $firstName);
-    }
-
-    protected function __clone()
-    {
     }
 }

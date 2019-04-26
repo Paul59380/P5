@@ -1,13 +1,14 @@
 class ShowCity {
-    constructor() {
+    constructor()
+    {
         $('#city').hide();
         $('#hideAddCity').hide();
 
         ShowCity.showCity();
         ShowCity.hideCity();
     }
-
-    static showCity() {
+    static showCity()
+    {
         $('#showAddCity').on('click', function () {
             $('#showAddCity').hide();
             $('#hideAddCity').fadeIn();
@@ -16,7 +17,8 @@ class ShowCity {
         });
     }
 
-    static hideCity() {
+    static hideCity()
+    {
         $('#hideAddCity').on('click', function () {
             $('#hideAddCity').hide();
             $('#showAddCity').fadeIn(700);

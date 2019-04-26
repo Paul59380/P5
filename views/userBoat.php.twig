@@ -5,8 +5,33 @@
 
 {% block content %}
     {% include 'navigations/userNav.php.twig' %}
-    <p style="font-size: 35px; text-align: center; margin-top: 50px">Ajouter votre <span
-                style="color: coral">bateau</span></p> <br/>
+    <button id="showAddCity">
+        Ajouter ma position
+    </button>
+
+    <button id="hideAddCity">
+        Replier le formulaire
+    </button>
+
+    <div id="city">
+
+        <div id="addCity">
+            <form action="index.php?action=updatePosition&idUser={{ session.id }}" method="POST">
+                <div class="left">
+                    <label>Nom de la ville :<input type="text" name="city_position" placeholder="Ex : Dunkerque" required></label>
+                </div>
+                <div class="center">
+                    <label>Latitude :<input type="number" step="0.00000000001" placeholder="Ex : 51,0344" name="lat_position" required></label>
+                </div>
+                <div class="right">
+                    <label>Longitude :<input type="number" step="0.000000000001" placeholder="Ex : 2,37678" name="lon_position" required></label>
+                    <input type="submit" name="send_trip" value="Ajouter la ville"><br/>
+                </div>
+            </form>
+        </div>
+    </div>
+    <p style="font-size: 35px; text-align: center; margin-top: 70px">Ajouter votre <span
+                style="color: #8c6bf9">bateau</span></p> <br/>
     <div id="ligne_point">
         <div class="ligne_1">
             <hr>
@@ -20,12 +45,12 @@
     </div>
     <fieldset id="addBoat">
         <legend>Mes bateaux</legend>
-        {% for boat in boats %}
-            <p>Nom : <span style="color: coral;">{{ boat.name }}</span> <i
-                        class="fas fa-arrow-circle-right fa-1x"></i> Capacité :<span
-                        style="color: coral"> {{ boat.capacity }}</span> Tonnes
-                <a href="index.php?action=deleteBoat&idBoat={{ boat.id }}" style="color: red;">
-                    <i class="far fa-trash-alt" title="Supprimer le bateau"></i></a></p>
+        Ma localisation actuelle : <span>{{ position.city_position }}</span>
+    {% for boat in boats %}
+        <p>Nom : <span>{{ boat.name }}</span> <i
+                    class="fas fa-arrow-circle-right fa-1x"></i> Capacité :<span> {{ boat.capacity }}</span> Tonnes
+            <a href="index.php?action=deleteBoat&idBoat={{ boat.id }}" style="color: red;">
+               <i class="far fa-trash-alt" title="Supprimer le bateau"></i></a></p>
         {% endfor %}
     </fieldset>
 

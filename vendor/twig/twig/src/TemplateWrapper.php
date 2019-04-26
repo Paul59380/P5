@@ -62,8 +62,8 @@ final class TemplateWrapper
     /**
      * Checks if a block is defined.
      *
-     * @param string $name The block name
-     * @param array $context An array of parameters to pass to the template
+     * @param string $name    The block name
+     * @param array  $context An array of parameters to pass to the template
      *
      * @return bool
      */
@@ -87,8 +87,8 @@ final class TemplateWrapper
     /**
      * Renders a template block.
      *
-     * @param string $name The block name to render
-     * @param array $context An array of parameters to pass to the template
+     * @param string $name    The block name to render
+     * @param array  $context An array of parameters to pass to the template
      *
      * @return string The rendered block
      */
@@ -119,8 +119,8 @@ final class TemplateWrapper
     /**
      * Displays a template block.
      *
-     * @param string $name The block name to render
-     * @param array $context An array of parameters to pass to the template
+     * @param string $name    The block name to render
+     * @param array  $context An array of parameters to pass to the template
      */
     public function displayBlock($name, $context = [])
     {

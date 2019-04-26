@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 require('vendor/autoload.php');
 require('ControllerIndex.php');
@@ -43,4 +44,6 @@ if (!isset($_GET['action'])) {
     $controller->updateTrip();
 } elseif ($_GET['action'] == "deleteTrip") {
     $controller->deleteTrip();
+} elseif ($_GET['action'] == "updatePosition") {
+    $controller->updatePosition($_GET['idUser'], $_POST['city_position'], $_POST['lat_position'], $_POST['lon_position']);
 }

@@ -66,14 +66,14 @@ class BlockTokenParser extends AbstractTokenParser
         return new BlockReferenceNode($name, $lineno, $this->getTag());
     }
 
-    public function getTag()
-    {
-        return 'block';
-    }
-
     public function decideBlockEnd(Token $token)
     {
         return $token->test('endblock');
+    }
+
+    public function getTag()
+    {
+        return 'block';
     }
 }
 

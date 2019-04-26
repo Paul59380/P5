@@ -23,8 +23,9 @@ class Boat
 
     public function hydrate(array $data)
     {
-        foreach ($data as $key => $value) {
-            $method = 'set' . ucfirst($key);
+        foreach ($data as $key => $value)
+        {
+            $method = 'set' .ucfirst($key);
             $this->$method($value);
         }
 
@@ -32,14 +33,10 @@ class Boat
         $this->user = new User($userManager->getUserById($this->id_user));
     }
 
+
     public function getUser()
     {
         return $this->user;
-    }
-
-    public function getId()
-    {
-        return $this->id;
     }
 
     public function setId($id)
@@ -47,9 +44,9 @@ class Boat
         $this->id = $id;
     }
 
-    public function getId_user()
+    public function getId()
     {
-        return $this->id_user;
+        return $this->id;
     }
 
     public function setId_user($id_user)
@@ -57,9 +54,9 @@ class Boat
         $this->id_user = $id_user;
     }
 
-    public function getName()
+    public function getId_user()
     {
-        return $this->name;
+        return $this->id_user;
     }
 
     public function setName($name)
@@ -67,13 +64,18 @@ class Boat
         $this->name = $name;
     }
 
-    public function getCapacity()
+    public function getName()
     {
-        return $this->capacity;
+        return $this->name;
     }
 
     public function setCapacity($capacity)
     {
         $this->capacity = $capacity;
+    }
+
+    public function getCapacity()
+    {
+        return $this->capacity;
     }
 }

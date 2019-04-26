@@ -21,6 +21,10 @@ class UserManager
         $this->db = PDOFactory::connectedAtDataBase();
     }
 
+    public function __clone()
+    {
+    }
+
     public static function getInstance()
     {
         if (!isset(self::$instance)) {
@@ -28,10 +32,6 @@ class UserManager
         }
 
         return self::$instance;
-    }
-
-    public function __clone()
-    {
     }
 
     public function getListUsers()
@@ -81,6 +81,21 @@ class UserManager
         ));
     }
 
+    public function existUser($info, $infoFirstName)
+    {
+        if (is_int($info)) {
+            return (bool)$this->db->query('SELECT * FROM user WHERE id =' . $info)->fetchColumn();
+        } else {
+            $q = $this->db->prepare('SELECT * FROM user WHERE name = :name AND firstname = :firstName');
+            $q->execute(array(
+                ':name' => $info,
+                ':firstName' => $infoFirstName
+            ));
+
+            return (bool)$q->fetchColumn();
+        }
+    }
+
     /**
      * @param $id
      * @param $name
@@ -97,21 +112,6 @@ class UserManager
             ));
         } else {
             throw new Exception("Le compte à supprimer n'existe pas");
-        }
-    }
-
-    public function existUser($info, $infoFirstName)
-    {
-        if (is_int($info)) {
-            return (bool)$this->db->query('SELECT * FROM user WHERE id =' . $info)->fetchColumn();
-        } else {
-            $q = $this->db->prepare('SELECT * FROM user WHERE name = :name AND firstname = :firstName');
-            $q->execute(array(
-                ':name' => $info,
-                ':firstName' => $infoFirstName
-            ));
-
-            return (bool)$q->fetchColumn();
         }
     }
 }

@@ -36,6 +36,7 @@ class CheckToStringNode extends AbstractExpression
         $compiler
             ->raw('$this->sandbox->ensureToStringAllowed(')
             ->subcompile($this->getNode('expr'))
-            ->raw(')');
+            ->raw(')')
+        ;
     }
 }

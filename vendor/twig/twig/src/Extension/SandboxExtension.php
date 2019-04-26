@@ -50,6 +50,11 @@ class SandboxExtension extends AbstractExtension
         $this->sandboxed = false;
     }
 
+    public function isSandboxed()
+    {
+        return $this->sandboxedGlobally || $this->sandboxed;
+    }
+
     public function isSandboxedGlobally()
     {
         return $this->sandboxedGlobally;
@@ -70,11 +75,6 @@ class SandboxExtension extends AbstractExtension
         if ($this->isSandboxed()) {
             $this->policy->checkSecurity($tags, $filters, $functions);
         }
-    }
-
-    public function isSandboxed()
-    {
-        return $this->sandboxedGlobally || $this->sandboxed;
     }
 
     public function checkMethodAllowed($obj, $method)

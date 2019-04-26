@@ -16,8 +16,8 @@ class User
     protected $firstname;
     protected $pass;
     protected $phone;
-
-    //protected $boat;
+    protected $mail;
+    protected $position;
 
     public function __construct($data)
     {
@@ -30,9 +30,22 @@ class User
             $method = 'set' . ucfirst($key);
             $this->$method($value);
         }
+        $positionManager = PositionManager::getInstance();
+        $this->position = $positionManager->getPosition($this->id);
+    }
 
-        //$boatManager = BoatManager::getInstance();
-        //$this->boat = $boatManager->getOwnerBoat($this->id);
+    public function getMail()
+    {
+        return $this->mail;
+    }
+
+    public function setMail($mail)
+    {
+        $this->mail = $mail;
+    }
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 
     public function getId()
@@ -40,9 +53,9 @@ class User
         return $this->id;
     }
 
-    public function setId($id)
+    public function setName($name)
     {
-        $this->id = $id;
+        $this->name = $name;
     }
 
     public function getName()
@@ -50,9 +63,9 @@ class User
         return $this->name;
     }
 
-    public function setName($name)
+    public function setFirstname($firstname)
     {
-        $this->name = $name;
+        $this->firstname = $firstname;
     }
 
     public function getFirstname()
@@ -60,9 +73,9 @@ class User
         return $this->firstname;
     }
 
-    public function setFirstname($firstname)
+    public function setId_role($id_role)
     {
-        $this->firstname = $firstname;
+        $this->id_role = $id_role;
     }
 
     public function getId_role()
@@ -70,9 +83,9 @@ class User
         return $this->id_role;
     }
 
-    public function setId_role($id_role)
+    public function setPass($pass)
     {
-        $this->id_role = $id_role;
+        $this->pass = $pass;
     }
 
     public function getPass()
@@ -80,9 +93,9 @@ class User
         return $this->pass;
     }
 
-    public function setPass($pass)
+    public function setPhone($phone)
     {
-        $this->pass = $pass;
+        $this->phone = $phone;
     }
 
     public function getPhone()
@@ -90,8 +103,13 @@ class User
         return $this->phone;
     }
 
-    public function setPhone($phone)
+    public function getPosition()
     {
-        $this->phone = $phone;
+        return $this->position;
+    }
+
+    public function setPosition($position)
+    {
+        $this->position = $position;
     }
 }

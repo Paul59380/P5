@@ -23,8 +23,8 @@ use Twig\Source;
  */
 class ChainLoader implements LoaderInterface, ExistsLoaderInterface, SourceContextLoaderInterface
 {
-    protected $loaders = [];
     private $hasSourceCache = [];
+    protected $loaders = [];
 
     /**
      * @param LoaderInterface[] $loaders
@@ -67,7 +67,7 @@ class ChainLoader implements LoaderInterface, ExistsLoaderInterface, SourceConte
             }
         }
 
-        throw new LoaderError(sprintf('Template "%s" is not defined%s.', $name, $exceptions ? ' (' . implode(', ', $exceptions) . ')' : ''));
+        throw new LoaderError(sprintf('Template "%s" is not defined%s.', $name, $exceptions ? ' ('.implode(', ', $exceptions).')' : ''));
     }
 
     public function getSourceContext($name)
@@ -89,12 +89,12 @@ class ChainLoader implements LoaderInterface, ExistsLoaderInterface, SourceConte
             }
         }
 
-        throw new LoaderError(sprintf('Template "%s" is not defined%s.', $name, $exceptions ? ' (' . implode(', ', $exceptions) . ')' : ''));
+        throw new LoaderError(sprintf('Template "%s" is not defined%s.', $name, $exceptions ? ' ('.implode(', ', $exceptions).')' : ''));
     }
 
     public function exists($name)
     {
-        $name = (string)$name;
+        $name = (string) $name;
 
         if (isset($this->hasSourceCache[$name])) {
             return $this->hasSourceCache[$name];
@@ -135,11 +135,11 @@ class ChainLoader implements LoaderInterface, ExistsLoaderInterface, SourceConte
             try {
                 return $loader->getCacheKey($name);
             } catch (LoaderError $e) {
-                $exceptions[] = \get_class($loader) . ': ' . $e->getMessage();
+                $exceptions[] = \get_class($loader).': '.$e->getMessage();
             }
         }
 
-        throw new LoaderError(sprintf('Template "%s" is not defined%s.', $name, $exceptions ? ' (' . implode(', ', $exceptions) . ')' : ''));
+        throw new LoaderError(sprintf('Template "%s" is not defined%s.', $name, $exceptions ? ' ('.implode(', ', $exceptions).')' : ''));
     }
 
     public function isFresh($name, $time)
@@ -153,11 +153,11 @@ class ChainLoader implements LoaderInterface, ExistsLoaderInterface, SourceConte
             try {
                 return $loader->isFresh($name, $time);
             } catch (LoaderError $e) {
-                $exceptions[] = \get_class($loader) . ': ' . $e->getMessage();
+                $exceptions[] = \get_class($loader).': '.$e->getMessage();
             }
         }
 
-        throw new LoaderError(sprintf('Template "%s" is not defined%s.', $name, $exceptions ? ' (' . implode(', ', $exceptions) . ')' : ''));
+        throw new LoaderError(sprintf('Template "%s" is not defined%s.', $name, $exceptions ? ' ('.implode(', ', $exceptions).')' : ''));
     }
 }
 

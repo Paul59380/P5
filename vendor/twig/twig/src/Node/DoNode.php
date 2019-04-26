@@ -32,7 +32,8 @@ class DoNode extends Node
             ->addDebugInfo($this)
             ->write('')
             ->subcompile($this->getNode('expr'))
-            ->raw(";\n");
+            ->raw(";\n")
+        ;
     }
 }
 

@@ -45,14 +45,14 @@ class FilterTokenParser extends AbstractTokenParser
         return new PrintNode($filter, $token->getLine(), $this->getTag());
     }
 
-    public function getTag()
-    {
-        return 'filter';
-    }
-
     public function decideBlockEnd(Token $token)
     {
         return $token->test('endfilter');
+    }
+
+    public function getTag()
+    {
+        return 'filter';
     }
 }
 

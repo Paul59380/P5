@@ -34,19 +34,14 @@ class FluvialTrip
         }
     }
 
-    public function getId()
-    {
-        return $this->id;
-    }
-
     public function setId($id)
     {
         $this->id = $id;
     }
 
-    public function getDeparture_city()
+    public function getId()
     {
-        return $this->departure_city;
+        return $this->id;
     }
 
     public function setDeparture_city($departure_city)
@@ -54,9 +49,9 @@ class FluvialTrip
         $this->departure_city = $departure_city;
     }
 
-    public function getLat_departure()
+    public function getDeparture_city()
     {
-        return $this->lat_departure;
+        return $this->departure_city;
     }
 
     public function setLat_departure($lat_departure)
@@ -64,9 +59,9 @@ class FluvialTrip
         $this->lat_departure = $lat_departure;
     }
 
-    public function getLon_departure()
+    public function getLat_departure()
     {
-        return $this->lon_departure;
+        return $this->lat_departure;
     }
 
     public function setLon_departure($lon_departure)
@@ -74,9 +69,9 @@ class FluvialTrip
         $this->lon_departure = $lon_departure;
     }
 
-    public function getFinishing_city()
+    public function getLon_departure()
     {
-        return $this->finishing_city;
+        return $this->lon_departure;
     }
 
     public function setFinishing_city($finishing_city)
@@ -84,9 +79,9 @@ class FluvialTrip
         $this->finishing_city = $finishing_city;
     }
 
-    public function getLat_finishing()
+    public function getFinishing_city()
     {
-        return $this->lat_finishing;
+        return $this->finishing_city;
     }
 
     public function setLat_finishing($lat_finishing)
@@ -94,9 +89,9 @@ class FluvialTrip
         $this->lat_finishing = $lat_finishing;
     }
 
-    public function getLon_finishing()
+    public function getLat_finishing()
     {
-        return $this->lon_finishing;
+        return $this->lat_finishing;
     }
 
     public function setLon_finishing($lon_finishing)
@@ -104,9 +99,9 @@ class FluvialTrip
         $this->lon_finishing = $lon_finishing;
     }
 
-    public function getPrice_ton()
+    public function getLon_finishing()
     {
-        return $this->price_ton;
+        return $this->lon_finishing;
     }
 
     public function setPrice_ton($price_ton)
@@ -114,9 +109,9 @@ class FluvialTrip
         $this->price_ton = $price_ton;
     }
 
-    public function getWeight()
+    public function getPrice_ton()
     {
-        return $this->weight;
+        return $this->price_ton;
     }
 
     public function setWeight($weight)
@@ -124,13 +119,18 @@ class FluvialTrip
         $this->weight = $weight;
     }
 
-    public function getDate_transport()
+    public function getWeight()
     {
-        return $this->date_transport;
+        return $this->weight;
     }
 
     public function setDate_transport($date_transport)
     {
         $this->date_transport = $date_transport;
+    }
+
+    public function getDate_transport()
+    {
+        return $this->date_transport;
     }
 }

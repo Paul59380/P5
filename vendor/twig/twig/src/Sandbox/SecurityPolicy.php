@@ -37,14 +37,6 @@ class SecurityPolicy implements SecurityPolicyInterface
         $this->allowedFunctions = $allowedFunctions;
     }
 
-    public function setAllowedMethods(array $methods)
-    {
-        $this->allowedMethods = [];
-        foreach ($methods as $class => $m) {
-            $this->allowedMethods[$class] = array_map('strtolower', \is_array($m) ? $m : [$m]);
-        }
-    }
-
     public function setAllowedTags(array $tags)
     {
         $this->allowedTags = $tags;
@@ -53,6 +45,14 @@ class SecurityPolicy implements SecurityPolicyInterface
     public function setAllowedFilters(array $filters)
     {
         $this->allowedFilters = $filters;
+    }
+
+    public function setAllowedMethods(array $methods)
+    {
+        $this->allowedMethods = [];
+        foreach ($methods as $class => $m) {
+            $this->allowedMethods[$class] = array_map('strtolower', \is_array($m) ? $m : [$m]);
+        }
     }
 
     public function setAllowedProperties(array $properties)

@@ -32,17 +32,20 @@ class SandboxedPrintNode extends PrintNode
     {
         $compiler
             ->addDebugInfo($this)
-            ->write('echo ');
+            ->write('echo ')
+        ;
         $expr = $this->getNode('expr');
         if ($expr instanceof ConstantExpression) {
             $compiler
                 ->subcompile($expr)
-                ->raw(";\n");
+                ->raw(";\n")
+            ;
         } else {
             $compiler
                 ->write('$this->env->getExtension(\'\Twig\Extension\SandboxExtension\')->ensureToStringAllowed(')
                 ->subcompile($expr)
-                ->raw(");\n");
+                ->raw(");\n")
+            ;
         }
     }
 

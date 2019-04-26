@@ -34,10 +34,10 @@ class Node implements \Twig_NodeInterface
      * The nodes are automatically made available as properties ($this->node).
      * The attributes are automatically made available as array items ($this['name']).
      *
-     * @param array $nodes An array of named nodes
-     * @param array $attributes An array of attributes (should not be nodes)
-     * @param int $lineno The line number
-     * @param string $tag The tag name associated with the Node
+     * @param array  $nodes      An array of named nodes
+     * @param array  $attributes An array of attributes (should not be nodes)
+     * @param int    $lineno     The line number
+     * @param string $tag        The tag name associated with the Node
      */
     public function __construct(array $nodes = [], array $attributes = [], $lineno = 0, $tag = null)
     {
@@ -59,14 +59,14 @@ class Node implements \Twig_NodeInterface
             $attributes[] = sprintf('%s: %s', $name, str_replace("\n", '', var_export($value, true)));
         }
 
-        $repr = [\get_class($this) . '(' . implode(', ', $attributes)];
+        $repr = [\get_class($this).'('.implode(', ', $attributes)];
 
         if (\count($this->nodes)) {
             foreach ($this->nodes as $name => $node) {
                 $len = \strlen($name) + 4;
                 $noderepr = [];
-                foreach (explode("\n", (string)$node) as $line) {
-                    $noderepr[] = str_repeat(' ', $len) . $line;
+                foreach (explode("\n", (string) $node) as $line) {
+                    $noderepr[] = str_repeat(' ', $len).$line;
                 }
 
                 $repr[] = sprintf('  %s: %s', $name, ltrim(implode("\n", $noderepr)));
@@ -132,7 +132,7 @@ class Node implements \Twig_NodeInterface
      */
     public function getLine()
     {
-        @trigger_error('The ' . __METHOD__ . ' method is deprecated since version 1.27 and will be removed in 2.0. Use getTemplateLine() instead.', E_USER_DEPRECATED);
+        @trigger_error('The '.__METHOD__.' method is deprecated since version 1.27 and will be removed in 2.0. Use getTemplateLine() instead.', E_USER_DEPRECATED);
 
         return $this->lineno;
     }
@@ -164,7 +164,7 @@ class Node implements \Twig_NodeInterface
 
     /**
      * @param string $name
-     * @param mixed $value
+     * @param mixed  $value
      */
     public function setAttribute($name, $value)
     {
@@ -220,21 +220,6 @@ class Node implements \Twig_NodeInterface
         return new \ArrayIterator($this->nodes);
     }
 
-    public function getTemplateName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @deprecated since 1.27 (to be removed in 2.0)
-     */
-    public function setFilename($name)
-    {
-        @trigger_error('The ' . __METHOD__ . ' method is deprecated since version 1.27 and will be removed in 2.0. Use setTemplateName() instead.', E_USER_DEPRECATED);
-
-        $this->setTemplateName($name);
-    }
-
     public function setTemplateName($name)
     {
         $this->name = $name;
@@ -245,12 +230,27 @@ class Node implements \Twig_NodeInterface
         }
     }
 
+    public function getTemplateName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @deprecated since 1.27 (to be removed in 2.0)
+     */
+    public function setFilename($name)
+    {
+        @trigger_error('The '.__METHOD__.' method is deprecated since version 1.27 and will be removed in 2.0. Use setTemplateName() instead.', E_USER_DEPRECATED);
+
+        $this->setTemplateName($name);
+    }
+
     /**
      * @deprecated since 1.27 (to be removed in 2.0)
      */
     public function getFilename()
     {
-        @trigger_error('The ' . __METHOD__ . ' method is deprecated since version 1.27 and will be removed in 2.0. Use getTemplateName() instead.', E_USER_DEPRECATED);
+        @trigger_error('The '.__METHOD__.' method is deprecated since version 1.27 and will be removed in 2.0. Use getTemplateName() instead.', E_USER_DEPRECATED);
 
         return $this->name;
     }

@@ -1,53 +1,56 @@
-{% extends 'templates/template.php.twig' %}
+{% extends 'templates/templateMapSearchBoat.php.twig' %}
 {% block title %}
     Trouver un bateau
 {% endblock %}
 
 {% block content %}
     {% include 'navigations/adminNav.php.twig' %}
-    <p style="font-size: 35px; text-align: center; margin-top: 50px">Bateaux trouvés pour <span style="color: coral">ce voyage</span>
-    </p> <br/>
-    <div id="ligne_point">
-        <div class="ligne_1">
-            <hr>
+<p style="font-size: 35px; text-align: center; margin-top: 50px">Bateaux trouvés pour <span style="color: #8c6bf9">ce voyage</span> </p> <br/>
+<div id="ligne_point">
+    <div class="ligne_1"> <hr> </div>
+    <div class="cercle">
+        <div class="point"></div></div>
+    <div class="ligne_2"> <hr> </div>
+</div>
+<p>
+    <a class="return" href="index.php?action=searchBoat">Retour</a>
+</p>
+<div id="ContentMapAndTrip">
+    {% if trip is defined %}
+        <div id="infoTrip">
+            <p style="font-size: 30px"> {{ trip.departure_city }} <i id="displayTrip" class="far fa-arrow-alt-circle-right fa-1x"></i> {{ trip.finishing_city }}</p>
+            <br/>
+            <p>Prévu le : <span style="color: #8c6bf9">{{ trip.date_transport }}</span></p>
+            <p>Charge à transporter : <span style="color: #8c6bf9;">{{ trip.weight }} </span>Tonnes</p>
+            <p>Prix de la tonne : <span style="color: #8c6bf9;">{{ trip.price_ton }} </span>€/T HT</p>
+            <p>Capacité minimum requise : <span style="color: #8c6bf9;">{{ trip.weight }} </span>Tonnes
+            </p>
+            <p>Voyage payé : <span
+                    style="color: #8c6bf9;">{{ trip.weight * trip.price_ton }} </span>€
+            </p>
+            <br/><br/>
         </div>
-        <div class="cercle">
-            <div class="point"></div>
+
+        <div id="map">
         </div>
-        <div class="ligne_2">
-            <hr>
-        </div>
-    </div>
-    <p>
-        <a class="return" href="index.php?action=searchBoat">Retour</a>
-    </p>
-    <div id="ContentMapAndTrip">
-        {% if trip is defined %}
-            <div id="infoTrip">
-                <p style="font-size: 30px"> {{ trip.departure_city }} <i id="displayTrip"
-                                                                         class="far fa-arrow-alt-circle-right fa-1x"></i> {{ trip.finishing_city }}
-                </p>
-                <br/>
-                <p>Prévu le : <span style="color: coral">{{ trip.date_transport }}</span></p>
-                <p>Charge à transporter : <span style="color: coral;">{{ trip.weight }} </span>Tonnes</p>
-                <p>Prix de la tonne : <span style="color: coral;">{{ trip.price_ton }} </span>€/T HT</p>
-                <p>Capacité minimum requise : <span style="color: coral;">{{ trip.weight }} </span>Tonnes
-                </p>
-                <p>Voyage payé : <span
-                            style="color: coral;">{{ trip.weight * trip.price_ton }} </span>€
-                </p>
-                <br/><br/>
+
+    {% endif %}
+    <div id="userBoat">
+        {% for boat in boats %}
+            <div class="boat">
+                <fieldset style="border-radius: 5px;border: 1px solid white; margin-bottom: 40px">
+                    <legend><span>{{ boat.user.name }} {{ boat.user.firstname }}</span></legend>
+                Nom du Bateau : <span>{{ boat.name }}</span><br/>
+                Capacité du bateau : <span>{{ boat.capacity }}</span> Tonnes<br/>
+                Numéro de téléphone : <span>{{ boat.user.phone }}</span><br/>
+                Adresse mail : <span>{{ boat.user.mail }}</span><br/>
+                Acutellement localisé à : <span>{{ boat.user.position.city_position }}</span><br/>
+                    <div style="text-align: right; margin-bottom: -7px">
+                        <a href="index.php?action=adminSearchBoat&capacity={{ trip.weight }}&idTrip={{ trip.id }}&d_city={{ trip.departure_city }}&d_lat={{ trip.lat_departure }}&d_lon={{ trip.lon_departure }}&f_city={{ trip.finishing_city }}&f_lat={{ trip.lat_finishing }}&f_lon={{ trip.lon_finishing }}&u_name={{ boat.user.name }}&u_lat={{ boat.user.position.lat_position }}&u_lon={{ boat.user.position.lon_position }}"><i style="color: green" class="fas fa-map-marker-alt fa-1x"></i></a>
+                    </div>
+                </fieldset>
             </div>
-        {% endif %}
-        <div id="userBoat">
-            {% for boat in boats %}
-                <div class="boat">
-                    <p>Propriétaire : <span>{{ boat.user.name }} {{ boat.user.firstname }}</span></p>
-                    <p>Nom du Bateau : <span>{{ boat.name }}</span></p>
-                    <p>Capacité du bateau : <span>{{ boat.capacity }}</span> Tonnes</p>
-                    <p>Numéro de téléphone : <span>{{ boat.user.phone }}</span></p>
-                </div> <br/>
-            {% endfor %}
-        </div>
+        {% endfor %}
     </div>
+</div>
 {% endblock %}

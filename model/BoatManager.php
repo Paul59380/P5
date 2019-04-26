@@ -12,12 +12,16 @@ use PDO;
 
 class BoatManager
 {
-    protected static $instance;
     protected $db;
+    protected static $instance;
 
     protected function __construct()
     {
         $this->db = PDOFactory::connectedAtDataBase();
+    }
+
+    protected function __clone()
+    {
     }
 
     public static function getInstance()
@@ -49,7 +53,7 @@ class BoatManager
         $boats = [];
         $q = $this->db->prepare('SELECT * FROM boat WHERE id_user =' . $idUser);
         $q->execute();
-        while ($data = $q->fetch(PDO::FETCH_ASSOC)) {
+        while($data = $q->fetch(PDO::FETCH_ASSOC)){
             $boats[] = new Boat($data);
         }
 
@@ -102,9 +106,5 @@ class BoatManager
             ":name" => $newName,
             ":capacity" => $capacity
         ));
-    }
-
-    protected function __clone()
-    {
     }
 }

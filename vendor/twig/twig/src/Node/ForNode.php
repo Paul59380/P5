@@ -48,7 +48,8 @@ class ForNode extends Node
             ->write("\$context['_parent'] = \$context;\n")
             ->write("\$context['_seq'] = twig_ensure_traversable(")
             ->subcompile($this->getNode('seq'))
-            ->raw(");\n");
+            ->raw(");\n")
+        ;
 
         if ($this->hasNode('else')) {
             $compiler->write("\$context['_iterated'] = false;\n");
@@ -61,7 +62,8 @@ class ForNode extends Node
                 ->write("  'index0' => 0,\n")
                 ->write("  'index'  => 1,\n")
                 ->write("  'first'  => true,\n")
-                ->write("];\n");
+                ->write("];\n")
+            ;
 
             if (!$this->getAttribute('ifexpr')) {
                 $compiler
@@ -73,7 +75,8 @@ class ForNode extends Node
                     ->write("\$context['loop']['length'] = \$length;\n")
                     ->write("\$context['loop']['last'] = 1 === \$length;\n")
                     ->outdent()
-                    ->write("}\n");
+                    ->write("}\n")
+                ;
             }
         }
 
@@ -90,7 +93,8 @@ class ForNode extends Node
             ->indent()
             ->subcompile($this->getNode('body'))
             ->outdent()
-            ->write("}\n");
+            ->write("}\n")
+        ;
 
         if ($this->hasNode('else')) {
             $compiler
@@ -98,13 +102,14 @@ class ForNode extends Node
                 ->indent()
                 ->subcompile($this->getNode('else'))
                 ->outdent()
-                ->write("}\n");
+                ->write("}\n")
+            ;
         }
 
         $compiler->write("\$_parent = \$context['_parent'];\n");
 
         // remove some "private" loop variables (needed for nested loops)
-        $compiler->write('unset($context[\'_seq\'], $context[\'_iterated\'], $context[\'' . $this->getNode('key_target')->getAttribute('name') . '\'], $context[\'' . $this->getNode('value_target')->getAttribute('name') . '\'], $context[\'_parent\'], $context[\'loop\']);' . "\n");
+        $compiler->write('unset($context[\'_seq\'], $context[\'_iterated\'], $context[\''.$this->getNode('key_target')->getAttribute('name').'\'], $context[\''.$this->getNode('value_target')->getAttribute('name').'\'], $context[\'_parent\'], $context[\'loop\']);'."\n");
 
         // keep the values set in the inner context for variables defined in the outer context
         $compiler->write("\$context = array_intersect_key(\$context, \$_parent) + \$_parent;\n");

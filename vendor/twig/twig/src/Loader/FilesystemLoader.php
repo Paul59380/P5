@@ -31,14 +31,14 @@ class FilesystemLoader implements LoaderInterface, ExistsLoaderInterface, Source
     private $rootPath;
 
     /**
-     * @param string|array $paths A path or an array of paths where to look for templates
-     * @param string|null $rootPath The root path common to all relative paths (null for getcwd())
+     * @param string|array $paths    A path or an array of paths where to look for templates
+     * @param string|null  $rootPath The root path common to all relative paths (null for getcwd())
      */
     public function __construct($paths = [], $rootPath = null)
     {
-        $this->rootPath = (null === $rootPath ? getcwd() : $rootPath) . \DIRECTORY_SEPARATOR;
+        $this->rootPath = (null === $rootPath ? getcwd() : $rootPath).\DIRECTORY_SEPARATOR;
         if (false !== $realPath = realpath($rootPath)) {
-            $this->rootPath = $realPath . \DIRECTORY_SEPARATOR;
+            $this->rootPath = $realPath.\DIRECTORY_SEPARATOR;
         }
 
         if ($paths) {
@@ -59,10 +59,22 @@ class FilesystemLoader implements LoaderInterface, ExistsLoaderInterface, Source
     }
 
     /**
+     * Returns the path namespaces.
+     *
+     * The main namespace is always defined.
+     *
+     * @return array The array of defined namespaces
+     */
+    public function getNamespaces()
+    {
+        return array_keys($this->paths);
+    }
+
+    /**
      * Sets the paths where templates are stored.
      *
-     * @param string|array $paths A path or an array of paths where to look for templates
-     * @param string $namespace A path namespace
+     * @param string|array $paths     A path or an array of paths where to look for templates
+     * @param string       $namespace A path namespace
      */
     public function setPaths($paths, $namespace = self::MAIN_NAMESPACE)
     {
@@ -77,21 +89,9 @@ class FilesystemLoader implements LoaderInterface, ExistsLoaderInterface, Source
     }
 
     /**
-     * Returns the path namespaces.
-     *
-     * The main namespace is always defined.
-     *
-     * @return array The array of defined namespaces
-     */
-    public function getNamespaces()
-    {
-        return array_keys($this->paths);
-    }
-
-    /**
      * Adds a path where templates are stored.
      *
-     * @param string $path A path where to look for templates
+     * @param string $path      A path where to look for templates
      * @param string $namespace A path namespace
      *
      * @throws LoaderError
@@ -101,7 +101,7 @@ class FilesystemLoader implements LoaderInterface, ExistsLoaderInterface, Source
         // invalidate the cache
         $this->cache = $this->errorCache = [];
 
-        $checkPath = $this->isAbsolutePath($path) ? $path : $this->rootPath . $path;
+        $checkPath = $this->isAbsolutePath($path) ? $path : $this->rootPath.$path;
         if (!is_dir($checkPath)) {
             throw new LoaderError(sprintf('The "%s" directory does not exist ("%s").', $path, $checkPath));
         }
@@ -112,7 +112,7 @@ class FilesystemLoader implements LoaderInterface, ExistsLoaderInterface, Source
     /**
      * Prepends a path where templates are stored.
      *
-     * @param string $path A path where to look for templates
+     * @param string $path      A path where to look for templates
      * @param string $namespace A path namespace
      *
      * @throws LoaderError
@@ -122,7 +122,7 @@ class FilesystemLoader implements LoaderInterface, ExistsLoaderInterface, Source
         // invalidate the cache
         $this->cache = $this->errorCache = [];
 
-        $checkPath = $this->isAbsolutePath($path) ? $path : $this->rootPath . $path;
+        $checkPath = $this->isAbsolutePath($path) ? $path : $this->rootPath.$path;
         if (!is_dir($checkPath)) {
             throw new LoaderError(sprintf('The "%s" directory does not exist ("%s").', $path, $checkPath));
         }
@@ -136,21 +136,51 @@ class FilesystemLoader implements LoaderInterface, ExistsLoaderInterface, Source
         }
     }
 
-    private function isAbsolutePath($file)
-    {
-        return strspn($file, '/\\', 0, 1)
-            || (\strlen($file) > 3 && ctype_alpha($file[0])
-                && ':' === substr($file, 1, 1)
-                && strspn($file, '/\\', 2, 1)
-            )
-            || null !== parse_url($file, PHP_URL_SCHEME);
-    }
-
     public function getSource($name)
     {
         @trigger_error(sprintf('Calling "getSource" on "%s" is deprecated since 1.27. Use getSourceContext() instead.', \get_class($this)), E_USER_DEPRECATED);
 
         return file_get_contents($this->findTemplate($name));
+    }
+
+    public function getSourceContext($name)
+    {
+        $path = $this->findTemplate($name);
+
+        return new Source(file_get_contents($path), $name, $path);
+    }
+
+    public function getCacheKey($name)
+    {
+        $path = $this->findTemplate($name);
+        $len = \strlen($this->rootPath);
+        if (0 === strncmp($this->rootPath, $path, $len)) {
+            return substr($path, $len);
+        }
+
+        return $path;
+    }
+
+    public function exists($name)
+    {
+        $name = $this->normalizeName($name);
+
+        if (isset($this->cache[$name])) {
+            return true;
+        }
+
+        try {
+            return false !== $this->findTemplate($name, false);
+        } catch (LoaderError $exception) {
+            @trigger_error(sprintf('In %s::findTemplate(), you must accept a second argument that when set to "false" returns "false" instead of throwing an exception. Not supporting this argument is deprecated since version 1.27.', \get_class($this)), E_USER_DEPRECATED);
+
+            return false;
+        }
+    }
+
+    public function isFresh($name, $time)
+    {
+        return filemtime($this->findTemplate($name)) < $time;
     }
 
     protected function findTemplate($name)
@@ -194,15 +224,15 @@ class FilesystemLoader implements LoaderInterface, ExistsLoaderInterface, Source
 
         foreach ($this->paths[$namespace] as $path) {
             if (!$this->isAbsolutePath($path)) {
-                $path = $this->rootPath . $path;
+                $path = $this->rootPath.$path;
             }
 
-            if (is_file($path . '/' . $shortname)) {
-                if (false !== $realpath = realpath($path . '/' . $shortname)) {
+            if (is_file($path.'/'.$shortname)) {
+                if (false !== $realpath = realpath($path.'/'.$shortname)) {
                     return $this->cache[$name] = $realpath;
                 }
 
-                return $this->cache[$name] = $path . '/' . $shortname;
+                return $this->cache[$name] = $path.'/'.$shortname;
             }
         }
 
@@ -215,9 +245,25 @@ class FilesystemLoader implements LoaderInterface, ExistsLoaderInterface, Source
         throw new LoaderError($this->errorCache[$name]);
     }
 
+    protected function parseName($name, $default = self::MAIN_NAMESPACE)
+    {
+        if (isset($name[0]) && '@' == $name[0]) {
+            if (false === $pos = strpos($name, '/')) {
+                throw new LoaderError(sprintf('Malformed namespaced template name "%s" (expecting "@namespace/template_name").', $name));
+            }
+
+            $namespace = substr($name, 1, $pos - 1);
+            $shortname = substr($name, $pos + 1);
+
+            return [$namespace, $shortname];
+        }
+
+        return [$default, $name];
+    }
+
     protected function normalizeName($name)
     {
-        return preg_replace('#/{2,}#', '/', str_replace('\\', '/', (string)$name));
+        return preg_replace('#/{2,}#', '/', str_replace('\\', '/', (string) $name));
     }
 
     protected function validateName($name)
@@ -242,60 +288,15 @@ class FilesystemLoader implements LoaderInterface, ExistsLoaderInterface, Source
         }
     }
 
-    protected function parseName($name, $default = self::MAIN_NAMESPACE)
+    private function isAbsolutePath($file)
     {
-        if (isset($name[0]) && '@' == $name[0]) {
-            if (false === $pos = strpos($name, '/')) {
-                throw new LoaderError(sprintf('Malformed namespaced template name "%s" (expecting "@namespace/template_name").', $name));
-            }
-
-            $namespace = substr($name, 1, $pos - 1);
-            $shortname = substr($name, $pos + 1);
-
-            return [$namespace, $shortname];
-        }
-
-        return [$default, $name];
-    }
-
-    public function getSourceContext($name)
-    {
-        $path = $this->findTemplate($name);
-
-        return new Source(file_get_contents($path), $name, $path);
-    }
-
-    public function getCacheKey($name)
-    {
-        $path = $this->findTemplate($name);
-        $len = \strlen($this->rootPath);
-        if (0 === strncmp($this->rootPath, $path, $len)) {
-            return substr($path, $len);
-        }
-
-        return $path;
-    }
-
-    public function exists($name)
-    {
-        $name = $this->normalizeName($name);
-
-        if (isset($this->cache[$name])) {
-            return true;
-        }
-
-        try {
-            return false !== $this->findTemplate($name, false);
-        } catch (LoaderError $exception) {
-            @trigger_error(sprintf('In %s::findTemplate(), you must accept a second argument that when set to "false" returns "false" instead of throwing an exception. Not supporting this argument is deprecated since version 1.27.', \get_class($this)), E_USER_DEPRECATED);
-
-            return false;
-        }
-    }
-
-    public function isFresh($name, $time)
-    {
-        return filemtime($this->findTemplate($name)) < $time;
+        return strspn($file, '/\\', 0, 1)
+            || (\strlen($file) > 3 && ctype_alpha($file[0])
+                && ':' === substr($file, 1, 1)
+                && strspn($file, '/\\', 2, 1)
+            )
+            || null !== parse_url($file, PHP_URL_SCHEME)
+        ;
     }
 }
 

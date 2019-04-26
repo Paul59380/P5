@@ -60,14 +60,14 @@ class EmbedTokenParser extends IncludeTokenParser
         return new EmbedNode($module->getTemplateName(), $module->getAttribute('index'), $variables, $only, $ignoreMissing, $token->getLine(), $this->getTag());
     }
 
-    public function getTag()
-    {
-        return 'embed';
-    }
-
     public function decideBlockEnd(Token $token)
     {
         return $token->test('endembed');
+    }
+
+    public function getTag()
+    {
+        return 'embed';
     }
 }
 

@@ -20,6 +20,10 @@ class FluvialTripManager
         $this->db = PDOFactory::connectedAtDataBase();
     }
 
+    protected function __clone()
+    {
+    }
+
     public static function getInstance()
     {
         if (!isset(self::$instance)) {
@@ -42,9 +46,8 @@ class FluvialTripManager
 
     public function getFluvialTrip($id)
     {
-        $q = $this->db->prepare('SELECT * FROM fluvial_trip WHERE id = ' . $id);
+        $q = $this->db->prepare('SELECT * FROM fluvial_trip WHERE id = '.$id);
         $q->execute();
-
         return new FluvialTrip($q->fetch(PDO::FETCH_ASSOC));
     }
 
@@ -69,7 +72,7 @@ class FluvialTripManager
 
     public function deleteFluvialTrip($id)
     {
-        $q = $this->db->prepare('DELETE FROM fluvial_trip WHERE id = ' . $id);
+        $q = $this->db->prepare('DELETE FROM fluvial_trip WHERE id = '.$id);
         $q->execute();
     }
 
@@ -93,9 +96,5 @@ class FluvialTripManager
             ":weight" => $weight,
             ":date_trans" => $date,
         ));
-    }
-
-    protected function __clone()
-    {
     }
 }

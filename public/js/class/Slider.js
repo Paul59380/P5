@@ -13,19 +13,21 @@ class Slider {
 
             let interval;
 
-            function startSlider() {
+            function startSlider()
+            {
                 interval = setInterval(function () {
-                    $slideContainer.animate({"margin-left": '-=' + width}, animationSpeed, function () {
+                    $slideContainer.animate({"margin-left" : '-='+width}, animationSpeed, function () {
                         currentSlide++;
-                        if (currentSlide === $slides.length) {
+                        if(currentSlide === $slides.length) {
                             currentSlide = 1;
                             $slideContainer.css('margin-left', 0);
                         }
                     });
-                }, pause);
+                },pause);
             }
 
-            function stopSlider() {
+            function stopSlider()
+            {
                 clearInterval(interval);
             }
 

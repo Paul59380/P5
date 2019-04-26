@@ -6,7 +6,7 @@
 {% block content %}
     {% include 'navigations/adminNav.php.twig' %}
     <p style="font-size: 35px; text-align: center; margin-top: 150px">Rechercher un <span
-                style="color: coral">bateau</span>
+                style="color: #8c6bf9">bateau</span>
     </p>
     <br/>
     <div id="ligne_point">
@@ -24,16 +24,15 @@
 
     <div id="TripSearch">
         {% for trip in trips %}
-            <p>
-            <span style="font-size: 20px; font-style: italic"> {{ trip.departure_city }} <i style="color:coral;"
-                                                                                            class="far fa-arrow-alt-circle-right fa-1x"></i> {{ trip.finishing_city }}
+        <p>
+            <span style="font-size: 25px"> {{ trip.departure_city }} <i style="color:#8c6bf9;" class="far fa-arrow-alt-circle-right fa-1x"></i> {{ trip.finishing_city }}
             </span> <br/>
-                <span>Le : {{ trip.date_transport }} </span> <br/>
-                <span>Charge à transporter : {{ trip.weight }}</span>
-            </p>
-            <a class="return" href="index.php?action=adminSearchBoat&capacity={{ trip.weight }}&idTrip={{ trip.id }}">Rechercher</a>
-            <br/>
-            <br/>
+            <span style="font-size: 20px">Le : {{ trip.date_transport }}  <br/>
+            Charge à transporter : {{ trip.weight }}</span>
+        </p>
+        <a class="return" href="index.php?action=adminSearchBoat&capacity={{ trip.weight }}&idTrip={{ trip.id }}&d_city={{ trip.departure_city }}&d_lat={{ trip.lat_departure }}&d_lon={{ trip.lon_departure }}&f_city={{ trip.finishing_city }}&f_lat={{ trip.lat_finishing }}&f_lon={{ trip.lon_finishing }}">Rechercher</a> <br/>
+
+        <br/>
         {% endfor %}
     </div>
 {% endblock %}

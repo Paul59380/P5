@@ -32,7 +32,8 @@ class TextNode extends Node implements NodeOutputInterface
             ->addDebugInfo($this)
             ->write('echo ')
             ->string($this->getAttribute('data'))
-            ->raw(";\n");
+            ->raw(";\n")
+        ;
     }
 }
 

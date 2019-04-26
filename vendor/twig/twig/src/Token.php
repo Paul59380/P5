@@ -21,6 +21,10 @@ namespace Twig;
  */
 class Token
 {
+    protected $value;
+    protected $type;
+    protected $lineno;
+
     const EOF_TYPE = -1;
     const TEXT_TYPE = 0;
     const BLOCK_START_TYPE = 1;
@@ -34,14 +38,11 @@ class Token
     const PUNCTUATION_TYPE = 9;
     const INTERPOLATION_START_TYPE = 10;
     const INTERPOLATION_END_TYPE = 11;
-    protected $value;
-    protected $type;
-    protected $lineno;
 
     /**
-     * @param int $type The type of the token
-     * @param string $value The token value
-     * @param int $lineno The line position in the source
+     * @param int    $type   The type of the token
+     * @param string $value  The token value
+     * @param int    $lineno The line position in the source
      */
     public function __construct($type, $value, $lineno)
     {
@@ -50,56 +51,66 @@ class Token
         $this->lineno = $lineno;
     }
 
-    /**
-     * Returns the English representation of a given type.
-     *
-     * @param int $type The type as an integer
-     *
-     * @return string The string representation
-     */
-    public static function typeToEnglish($type)
-    {
-        switch ($type) {
-            case self::EOF_TYPE:
-                return 'end of template';
-            case self::TEXT_TYPE:
-                return 'text';
-            case self::BLOCK_START_TYPE:
-                return 'begin of statement block';
-            case self::VAR_START_TYPE:
-                return 'begin of print statement';
-            case self::BLOCK_END_TYPE:
-                return 'end of statement block';
-            case self::VAR_END_TYPE:
-                return 'end of print statement';
-            case self::NAME_TYPE:
-                return 'name';
-            case self::NUMBER_TYPE:
-                return 'number';
-            case self::STRING_TYPE:
-                return 'string';
-            case self::OPERATOR_TYPE:
-                return 'operator';
-            case self::PUNCTUATION_TYPE:
-                return 'punctuation';
-            case self::INTERPOLATION_START_TYPE:
-                return 'begin of string interpolation';
-            case self::INTERPOLATION_END_TYPE:
-                return 'end of string interpolation';
-            default:
-                throw new \LogicException(sprintf('Token of type "%s" does not exist.', $type));
-        }
-    }
-
     public function __toString()
     {
         return sprintf('%s(%s)', self::typeToString($this->type, true), $this->value);
     }
 
     /**
+     * Tests the current token for a type and/or a value.
+     *
+     * Parameters may be:
+     *  * just type
+     *  * type and value (or array of possible values)
+     *  * just value (or array of possible values) (NAME_TYPE is used as type)
+     *
+     * @param array|string|int  $type   The type to test
+     * @param array|string|null $values The token value
+     *
+     * @return bool
+     */
+    public function test($type, $values = null)
+    {
+        if (null === $values && !\is_int($type)) {
+            $values = $type;
+            $type = self::NAME_TYPE;
+        }
+
+        return ($this->type === $type) && (
+            null === $values ||
+            (\is_array($values) && \in_array($this->value, $values)) ||
+            $this->value == $values
+        );
+    }
+
+    /**
+     * @return int
+     */
+    public function getLine()
+    {
+        return $this->lineno;
+    }
+
+    /**
+     * @return int
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @return string
+     */
+    public function getValue()
+    {
+        return $this->value;
+    }
+
+    /**
      * Returns the constant representation (internal) of a given type.
      *
-     * @param int $type The type as an integer
+     * @param int  $type  The type as an integer
      * @param bool $short Whether to return a short representation or not
      *
      * @return string The string representation
@@ -150,58 +161,48 @@ class Token
                 throw new \LogicException(sprintf('Token of type "%s" does not exist.', $type));
         }
 
-        return $short ? $name : 'Twig\Token::' . $name;
+        return $short ? $name : 'Twig\Token::'.$name;
     }
 
     /**
-     * Tests the current token for a type and/or a value.
+     * Returns the English representation of a given type.
      *
-     * Parameters may be:
-     *  * just type
-     *  * type and value (or array of possible values)
-     *  * just value (or array of possible values) (NAME_TYPE is used as type)
+     * @param int $type The type as an integer
      *
-     * @param array|string|int $type The type to test
-     * @param array|string|null $values The token value
-     *
-     * @return bool
+     * @return string The string representation
      */
-    public function test($type, $values = null)
+    public static function typeToEnglish($type)
     {
-        if (null === $values && !\is_int($type)) {
-            $values = $type;
-            $type = self::NAME_TYPE;
+        switch ($type) {
+            case self::EOF_TYPE:
+                return 'end of template';
+            case self::TEXT_TYPE:
+                return 'text';
+            case self::BLOCK_START_TYPE:
+                return 'begin of statement block';
+            case self::VAR_START_TYPE:
+                return 'begin of print statement';
+            case self::BLOCK_END_TYPE:
+                return 'end of statement block';
+            case self::VAR_END_TYPE:
+                return 'end of print statement';
+            case self::NAME_TYPE:
+                return 'name';
+            case self::NUMBER_TYPE:
+                return 'number';
+            case self::STRING_TYPE:
+                return 'string';
+            case self::OPERATOR_TYPE:
+                return 'operator';
+            case self::PUNCTUATION_TYPE:
+                return 'punctuation';
+            case self::INTERPOLATION_START_TYPE:
+                return 'begin of string interpolation';
+            case self::INTERPOLATION_END_TYPE:
+                return 'end of string interpolation';
+            default:
+                throw new \LogicException(sprintf('Token of type "%s" does not exist.', $type));
         }
-
-        return ($this->type === $type) && (
-                null === $values ||
-                (\is_array($values) && \in_array($this->value, $values)) ||
-                $this->value == $values
-            );
-    }
-
-    /**
-     * @return int
-     */
-    public function getLine()
-    {
-        return $this->lineno;
-    }
-
-    /**
-     * @return int
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * @return string
-     */
-    public function getValue()
-    {
-        return $this->value;
     }
 }
 
