@@ -32,9 +32,9 @@ class UserController
         return $this->userManager->getListUsers();
     }
 
-    public function addUser($name, $firstName, $phone, $pass)
+    public function addUser($name, $firstName, $phone, $pass, $mail)
     {
-        return $this->userManager->addUser($name, $firstName, $phone, $pass);
+        return $this->userManager->addUser($name, $firstName, $phone, $pass, $mail);
     }
 
     public function existUser($info, $firstName)

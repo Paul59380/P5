@@ -61,6 +61,7 @@ class ControllerIndex
             if (!$this->userController->existUser($_POST['NewName'], $_POST['NewFirstName'])) {
                 $this->userController->addUser($_POST['NewName'], $_POST['NewFirstName'], $_POST['PhoneNumber'], password_hash($_POST['NewPassword'], PASSWORD_DEFAULT), $_POST['NewMail']);
                 $user = new User($this->userController->getUser($_POST['NewName'], $_POST['NewFirstName']));
+                $this->positionManager->addPosition($user->getId());
                 $_SESSION = [
                     "name" => $user->getName(),
                     "firstName" => $user->getFirstname(),

@@ -68,17 +68,23 @@ class UserManager
         return $data;
     }
 
-    public function addUser($name, $firstName, $phone, $pass)
+    public function addUser($name, $firstName, $phone, $pass, $mail)
     {
-        $q = $this->db->prepare('INSERT INTO 
-        user (id_role, name, firstname, pass, phone) VALUE (:id_role, :name, :first_name, :pass, :phone)');
-        $q->execute(array(
-            ":id_role" => 2,
-            ":name" => $name,
-            ":first_name" => $firstName,
-            ":phone" => $phone,
-            ":pass" => $pass
-        ));
+        if (!preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $_POST['NewMail']))
+        {
+            throw new Exception("L'adresse ".$mail." n'est pas valide");
+        } else {
+            $q = $this->db->prepare('INSERT INTO 
+        user (id_role, name, firstname, pass, phone, mail) VALUE (:id_role, :name, :first_name, :pass, :phone, :mail)');
+            $q->execute(array(
+                ":id_role" => 2,
+                ":name" => $name,
+                ":first_name" => $firstName,
+                ":phone" => $phone,
+                ":pass" => $pass,
+                ":mail" => $mail
+            ));
+        }
     }
 
     public function existUser($info, $infoFirstName)

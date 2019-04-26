@@ -46,4 +46,12 @@ class PositionManager
             ":lon" => $lon
         ));
     }
+
+    public function addPosition($id_User)
+    {
+        $q = $this->db->prepare('INSERT INTO position_user (id_user) VALUE (:id_user)');
+        $q->execute(array(
+            ":id_user" => $id_User
+        ));
+    }
 }
