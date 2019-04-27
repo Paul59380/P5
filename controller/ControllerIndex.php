@@ -1,6 +1,10 @@
 <?php
 //use Exception;
+namespace controller;
+
 use model\User;
+use model\PositionManager;
+use Exception;
 
 class ControllerIndex
 {
@@ -15,13 +19,13 @@ class ControllerIndex
 
     public function __construct()
     {
-        $this->fluvialTripController = controller\FluvialTripController::getInstance();
-        $this->userController = controller\UserController::getInstance();
-        $this->cityController = controller\CityController::getInstance();
-        $this->boatController = controller\BoatController::getInstance();
-        $this->favoriteController = controller\FavoriteTransportController::getInstance();
-        $this->positionManager = model\PositionManager::getInstance();
-        $this->loader = new \Twig_Loader_Filesystem(__DIR__.'\views');
+        $this->fluvialTripController = FluvialTripController::getInstance();
+        $this->userController = UserController::getInstance();
+        $this->cityController = CityController::getInstance();
+        $this->boatController = BoatController::getInstance();
+        $this->favoriteController = FavoriteTransportController::getInstance();
+        $this->positionManager = PositionManager::getInstance();
+        $this->loader = new \Twig_Loader_Filesystem(__DIR__ . '/../views');
         $this->twig = new \Twig_Environment($this->loader, [
             'cache' => false
         ]);
@@ -40,16 +44,15 @@ class ControllerIndex
                         "role" => $user->getId_role()
                     ];
                     if($_SESSION['role'] == 2){
-                        header('Location:index.php?action=homeUser&idUser=' . $_SESSION['id']);
+                        echo '<script>document.location.href="index.php?action=homeUser&idUser= '.$_SESSION['id'].'" </script>';
                     } elseif ( $_SESSION['role'] == 1 ){
-                        header('Location:index.php?action=admin&idUser=' . $_SESSION['id']);
+                        echo '<script>document.location.href="index.php?action=admin&idUser= '.$_SESSION['id'].'" </script>';
                     }
                 } else {
-                    echo "Mot de pass incorrect";
-                    unset($user);
+                    throw new Exception("Mot de pass incorrect");
                 }
             } else {
-                echo "Compte inexistant";
+                throw new Exception("Compte inexistant");
             }
         }
     }
@@ -57,8 +60,8 @@ class ControllerIndex
     public function displayInscriptionForm()
     {
         echo $this->twig->render('inscription.php.twig');
-        if (!empty($_POST['NewName']) && !empty($_POST['NewFirstName']) && !empty($_POST['NewPassword']) && !empty($_POST['PhoneNumber']) && preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $_POST['NewMail'])) {
-            if (!$this->userController->existUser($_POST['NewName'], $_POST['NewFirstName'])) {
+        if (!empty($_POST['NewName']) && !empty($_POST['NewFirstName']) && !empty($_POST['NewPassword']) && !empty($_POST['PhoneNumber']) && isset($_POST['NewMail'])) {
+            if (!$this->userController->existUser($_POST['NewName'], $_POST['NewFirstName']) && preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $_POST['NewMail'])) {
                 $this->userController->addUser($_POST['NewName'], $_POST['NewFirstName'], $_POST['PhoneNumber'], password_hash($_POST['NewPassword'], PASSWORD_DEFAULT), $_POST['NewMail']);
                 $user = new User($this->userController->getUser($_POST['NewName'], $_POST['NewFirstName']));
                 $this->positionManager->addPosition($user->getId());
@@ -70,15 +73,15 @@ class ControllerIndex
                     "mail" => $user->getMail()
                 ];
                 if ($_SESSION['role'] == 2) {
-                    header('Location:index.php?action=homeUser&idUser=' . $_SESSION['id']);
+                    echo '<script>document.location.href="index.php?action=homeUser&idUser='. $_SESSION['id'] . '" </script>';
                 } elseif ($_SESSION['role'] == 1) {
-                    header('Location:index.php?action=admin&idUser=' . $_SESSION['id']);
+                    echo '<script>document.location.href="index.php?action=admin&idUser='. $_SESSION['id'] . '" </script>';
                 }
+            } elseif(!preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $_POST['NewMail'])) {
+                throw new Exception("Adresse mail non valide");
             } else {
-                echo "Ce compte existe déjà";
+                throw new Exception("Ce compte existe déjà");
             }
-        } elseif (!preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $_POST['NewMail'])) {
-            echo "Adresse non valide";
         }
     }
 

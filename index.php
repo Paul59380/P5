@@ -2,14 +2,22 @@
 
 session_start();
 require('vendor/autoload.php');
-require('ControllerIndex.php');
+use controller\ControllerIndex;
 
 $controller = new ControllerIndex();
 
 if (!isset($_GET['action'])) {
-    $controller->displayConnectForm();
+    try{
+        $controller->displayConnectForm();
+    } catch (Exception $e){
+        echo '<p style="font-size: 25px; text-align: center; color: red;">' . $e->getMessage() . '</p>';
+    }
 } elseif ($_GET['action'] == "inscription") {
-    $controller->displayInscriptionForm();
+    try{
+        $controller->displayInscriptionForm();
+    } catch (Exception $e) {
+        echo '<p style="font-size: 25px; text-align: center; color: red;">' . $e->getMessage() . '</p>';
+    }
 } elseif ($_GET['action'] == "deconnexion") {
     $controller->disconnection();
 } elseif ($_GET['action'] == "homeUser" && isset($_GET['idUser'])) {
